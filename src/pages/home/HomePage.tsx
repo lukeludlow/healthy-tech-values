@@ -1,7 +1,9 @@
+import HomeHero from "@/pages/home/HomeHero.tsx";
+
 export default function HomePage() {
     return (
-        <div>
-            <p>Homepage</p>
+        <div className={"w-full h-full"}>
+            <HomeHero />
         </div>
     );
 }
