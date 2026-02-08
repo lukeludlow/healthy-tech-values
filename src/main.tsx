@@ -4,10 +4,9 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import HomePage from "@/pages/home/HomePage.tsx";
 import { PrimeReactProvider } from "primereact/api";
-import Header from "@/components/Header.tsx";
+import TopNavBar from "@/components/navbar/TopNavBar.tsx";
 import QuizPage from "@/pages/quiz/QuizPage.tsx";
 import LearnPage from "@/pages/learn/LearnPage.tsx";
-import AboutPage from "@/pages/about/AboutPage.tsx";
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
@@ -15,14 +14,10 @@ createRoot(document.getElementById("root")!).render(
             <div className={"bg-E5F0FF"}>
                 <BrowserRouter>
                     <div className={"flex flex-col h-screen w-full"}>
-                        <Header />
+                        <TopNavBar />
                         <div className={"flex-1 overflow-auto"}>
                             <Routes>
                                 <Route path={"/"} element={<HomePage />} />
-                                <Route
-                                    path={"/about"}
-                                    element={<AboutPage />}
-                                />
                                 <Route
                                     path={"/learn"}
                                     element={<LearnPage />}

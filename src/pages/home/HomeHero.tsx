@@ -21,8 +21,8 @@ export default function HomeHero() {
                     </h1>
                     <p className="py-6">
                         Are you ready to discover what your true values are?
-                        Take a simple quiz to learn your values and how to honor
-                        them in healthy ways.
+                        Take a simple quiz to learn about your values and how to
+                        honor them in healthy ways.
                     </p>
                     <button
                         className="btn btn-primary"
