@@ -16,9 +16,7 @@ export default function HomeHero() {
                             className="max-w-sm w-34 rounded-lg shadow-2xl"
                         />
                     </div>
-                    <h1 className="text-5xl font-bold">
-                        Welcome to Healthy Values!
-                    </h1>
+                    <h1 className="text-5xl font-bold">Healthy Tech Values</h1>
                     <p className="py-6">
                         Are you ready to discover what your true values are?
                         Take a simple quiz to learn about your values and how to

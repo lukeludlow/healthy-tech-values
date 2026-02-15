@@ -1,10 +1,15 @@
 import { useAtom } from "jotai";
-import { isQuizInProgressAtom } from "@/state/state.ts";
+import {
+    currentQuestionIndexAtom,
+    isQuizInProgressAtom,
+} from "@/state/state.ts";
 import { useNavigate } from "react-router";
 
-export default function QuizCard() {
+export default function StartQuizCard() {
     const navigate = useNavigate();
-    const [isQuizInProgress] = useAtom(isQuizInProgressAtom);
+    const [isQuizInProgress, setIsQuizInProgress] =
+        useAtom(isQuizInProgressAtom);
+    const [, setCurrentQuestionIndex] = useAtom(currentQuestionIndexAtom);
 
     return (
         <div
@@ -28,7 +33,7 @@ export default function QuizCard() {
                     </button>
                     <button
                         className={"btn btn-primary"}
-                        onClick={() => navigate("/quiz")}
+                        onClick={handleStartQuiz}
                     >
                         {isQuizInProgress ? "Continue" : "Start"} Quiz
                     </button>
@@ -36,4 +41,9 @@ export default function QuizCard() {
             </div>
         </div>
     );
+
+    function handleStartQuiz() {
+        setIsQuizInProgress(true);
+        setCurrentQuestionIndex(0);
+    }
 }

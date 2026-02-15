@@ -5,7 +5,7 @@ export default function HealthyValuesButton() {
 
     return (
         <button className="btn btn-ghost text-xl" onClick={() => navigate("/")}>
-            Healthy Values
+            Healthy Tech Values
         </button>
     );
 }

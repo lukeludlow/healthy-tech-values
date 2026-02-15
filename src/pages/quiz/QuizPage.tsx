@@ -1,9 +1,9 @@
-import QuizCard from "@/pages/quiz/QuizCard.tsx";
+import QuizBody from "@/components/quiz/QuizBody.tsx";
 
 export default function QuizPage() {
     return (
         <div>
-            <QuizCard />
+            <QuizBody />
         </div>
     );
 }
