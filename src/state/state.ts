@@ -4,10 +4,21 @@ import {
     QUESTION_DATA,
     type QuestionData,
 } from "@/components/quiz/question/questionData.ts";
+import { atomWithStorage, createJSONStorage } from "jotai/utils";
 
-export const isQuizInProgressAtom = atom<boolean>(false);
+const storage = createJSONStorage<any>(() => sessionStorage);
 
-export const currentQuestionIndexAtom = atom<number>(0);
+export const isQuizInProgressAtom = atomWithStorage<boolean>(
+    "isQuizInProgress",
+    false,
+    storage,
+);
+
+export const currentQuestionIndexAtom = atomWithStorage<number>(
+    "currentQuestionIndex",
+    0,
+    storage,
+);
 
 export const currentQuestionAtom = atom<QuestionData>((get) => {
     const index = get(currentQuestionIndexAtom);

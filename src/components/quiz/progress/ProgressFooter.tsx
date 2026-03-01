@@ -5,8 +5,10 @@ import {
 } from "@/state/state.ts";
 import { QUESTION_DATA } from "@/components/quiz/question/questionData.ts";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 export default function ProgressFooter() {
+    const navigate = useNavigate();
     const [currentQuestionIndex, setCurrentQuestionIndex] = useAtom(
         currentQuestionIndexAtom,
     );
@@ -35,7 +37,7 @@ export default function ProgressFooter() {
                     onClick={handlePreviousQuestion}
                 >
                     <FaAngleLeft />
-                    Prev
+                    Back
                 </button>
                 <button
                     className={"join-item btn btn-primary"}
@@ -50,6 +52,10 @@ export default function ProgressFooter() {
     );
 
     function handlePreviousQuestion() {
+        if (currentQuestionIndex === 0) {
+            navigate("/");
+            return;
+        }
         setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
 
