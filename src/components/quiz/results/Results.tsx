@@ -1,38 +1,30 @@
 import { useAtom } from "jotai";
-import { selectedChoicesAtom } from "@/state/state.ts";
-import { getChoiceRank } from "@/components/quiz/getChoiceRank.ts";
+import { answersAtom } from "@/state/state.ts";
+import { HEALTHY_TECH_VALUES } from "@/data/questionData.ts";
 
 type ValueResult = {
-    healthyTechValue: string;
+    value: string;
     points: number;
 };
 
 export default function Results() {
-    const [selectedChoices] = useAtom(selectedChoicesAtom);
+    const [answers] = useAtom(answersAtom);
 
-    const valuesResults: ValueResult[] = selectedChoices
+    const valuesResults: ValueResult[] = answers
         .reduce((acc, choice) => {
-            const rank = getChoiceRank(choice, selectedChoices);
-            const points = getPointsForRank(rank);
-
-            // Skip if points are null
-            if (points === null) {
-                return acc;
-            }
-
             // Check if we already have an entry for this healthyTechValue
             const existingEntry = acc.find(
-                (item) => item.healthyTechValue === choice.healthyTechValue,
+                (item) => item.value === choice.value,
             );
 
             if (existingEntry) {
                 // If it exists, add to the existing points
-                existingEntry.points += points;
+                existingEntry.points += 1;
             } else {
                 // If not, push a new entry
                 acc.push({
-                    healthyTechValue: choice.healthyTechValue,
-                    points: points,
+                    value: choice.value,
+                    points: 1,
                 });
             }
 
@@ -45,32 +37,29 @@ export default function Results() {
             <div className={"text-4xl font-bold text-center text-primary"}>
                 Results
             </div>
-            <div>
+            <div className={"flex flex-col gap-1"}>
                 {valuesResults.map((valueResult) => (
-                    <div key={`${JSON.stringify(valueResult)}`}>
-                        <span>
-                            {valueResult.healthyTechValue}: {valueResult.points}
+                    <div
+                        key={`${JSON.stringify(valueResult)}`}
+                        className={
+                            "flex flex-col border border-primary rounded text-primary p-1"
+                        }
+                    >
+                        <span className={"font-bold"}>
+                            {valueResult.value}: {valueResult.points}
+                        </span>
+                        <span className={""}>
+                            {
+                                HEALTHY_TECH_VALUES.find(
+                                    (healthyTechValue) =>
+                                        healthyTechValue.id ===
+                                        valueResult.value,
+                                )?.description
+                            }
                         </span>
                     </div>
                 ))}
             </div>
         </div>
     );
-
-    function getPointsForRank(rank: number | null) {
-        switch (rank) {
-            case 1:
-                return 5;
-            case 2:
-                return 4;
-            case 3:
-                return 3;
-            case 4:
-                return 2;
-            case 5:
-                return 1;
-            default:
-                return null;
-        }
-    }
 }

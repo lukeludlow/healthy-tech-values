@@ -1,9 +1,9 @@
 import { atom } from "jotai";
 import {
-    type ChoiceData,
+    type AnswerOption,
     QUESTION_DATA,
     type QuestionData,
-} from "@/components/quiz/question/questionData.ts";
+} from "@/data/questionData.ts";
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
 
 const storage = createJSONStorage<any>(() => sessionStorage);
@@ -22,7 +22,11 @@ export const currentQuestionIndexAtom = atomWithStorage<number>(
 
 export const currentQuestionAtom = atom<QuestionData>((get) => {
     const index = get(currentQuestionIndexAtom);
-    return QUESTION_DATA[index];
+    return QUESTION_DATA.questions[index];
 });
 
-export const selectedChoicesAtom = atom<ChoiceData[]>([]);
+export const answersAtom = atomWithStorage<AnswerOption[]>(
+    "answers",
+    [],
+    storage,
+);

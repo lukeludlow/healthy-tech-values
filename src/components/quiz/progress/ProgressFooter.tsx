@@ -1,11 +1,9 @@
 import { useAtom } from "jotai";
-import {
-    currentQuestionIndexAtom,
-    selectedChoicesAtom,
-} from "@/state/state.ts";
-import { QUESTION_DATA } from "@/components/quiz/question/questionData.ts";
+import { answersAtom, currentQuestionIndexAtom } from "@/state/state.ts";
+import { QUESTION_DATA } from "@/data/questionData.ts";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { useNavigate } from "react-router";
+import { useMemo } from "react";
 
 export default function ProgressFooter() {
     const navigate = useNavigate();
@@ -13,18 +11,33 @@ export default function ProgressFooter() {
         currentQuestionIndexAtom,
     );
 
-    const [selectedChoices] = useAtom(selectedChoicesAtom);
+    const [selectedChoices] = useAtom(answersAtom);
 
     const progressValue = selectedChoices.length;
-    const progressMax = QUESTION_DATA.flatMap(
-        (question) => question.choices,
-    ).length;
+    const progressMax = QUESTION_DATA.questions.length;
     const progressPercentage = progressValue / progressMax;
 
+    const hasNextQuestion = currentQuestionIndex < progressMax;
+
+    const isQuestionAnswered = useMemo(
+        () =>
+            QUESTION_DATA.questions[currentQuestionIndex]?.options.some((opt) =>
+                selectedChoices.includes(opt),
+            ),
+        [currentQuestionIndex, selectedChoices],
+    );
+    // console.log(`isQuestionAnswered: ${isQuestionAnswered}`);
+    // console.log(
+    //     `a: ${JSON.stringify(QUESTION_DATA.questions[currentQuestionIndex], null, 2)}, b: ${JSON.stringify(selectedChoices, null, 2)}`,
+    // );
+
     return (
-        <div className={"flex flex-row w-full items-top gap-2"}>
+        <div className={"flex flex-row w-full items-top gap-2 pb-21 px-2"}>
             <div className={"flex flex-col w-full"}>
-                <p>Progress: {Math.round(progressPercentage * 100)}%</p>
+                <p>
+                    Progress: {Math.round(progressPercentage * 100)}% (
+                    {progressValue}/{progressMax})
+                </p>
                 <progress
                     className={"progress progress-primary"}
                     value={progressValue}
@@ -42,7 +55,7 @@ export default function ProgressFooter() {
                 <button
                     className={"join-item btn btn-primary"}
                     onClick={handleNextQuestion}
-                    disabled={currentQuestionIndex === QUESTION_DATA.length}
+                    disabled={!hasNextQuestion || !isQuestionAnswered}
                 >
                     Next
                     <FaAngleRight />
