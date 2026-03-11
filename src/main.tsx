@@ -8,6 +8,13 @@ import TopNavBar from "@/components/navbar/TopNavBar.tsx";
 import QuizPage from "@/pages/quiz/QuizPage.tsx";
 import LearnPage from "@/pages/learn/LearnPage.tsx";
 
+const CURRENT_VERSION = "0.0.1";
+
+if (localStorage.getItem("app_version") !== CURRENT_VERSION) {
+    sessionStorage.clear(); // Clears all session atoms
+    localStorage.setItem("app_version", CURRENT_VERSION);
+}
+
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
         <PrimeReactProvider value={{ ripple: true }}>

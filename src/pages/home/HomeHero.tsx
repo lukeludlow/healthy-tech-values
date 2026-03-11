@@ -24,7 +24,7 @@ export default function HomeHero() {
                             className="max-w-sm w-34 rounded-lg shadow-2xl"
                         />
                     </div>
-                    <h1 className="text-4xl font-bold">Healthy Tech Values</h1>
+                    <h1 className="text-4xl font-bold">Values Quiz</h1>
                     <p className="py-6 text-xl">
                         Taming your tech starts with getting clear on what you
                         value in life.
@@ -41,8 +41,10 @@ export default function HomeHero() {
     );
 
     function handleStartQuiz() {
-        setIsQuizInProgress(true);
-        setCurrentQuestionIndex(0);
+        if (!isQuizInProgress) {
+            setIsQuizInProgress(true);
+            setCurrentQuestionIndex(0);
+        }
         navigate("/quiz");
     }
 }

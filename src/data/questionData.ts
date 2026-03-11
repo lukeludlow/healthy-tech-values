@@ -1,6 +1,6 @@
 export type QuizData = {
-    quizTitle: string;
     instructions: string;
+    valueCategories: string[];
     questions: QuestionData[];
 };
 
@@ -15,509 +15,469 @@ export type AnswerOption = {
     value: string; // TODO maybe healthy tech value enum?
 };
 
-// export enum HealthyTechValue {
-//     Connection = "Connection",
-//     Order = "Order",
-//     Safety = "Safety",
-//     Peace = "Peace",
-//     Growth = "Growth",
-// }
-
-export const HEALTHY_TECH_VALUES = [
-    {
-        id: "Connection",
-        description:
-            "Love, family, friendship, compassion, loyalty, and acceptance.",
-    },
-    {
-        id: "Well-being",
-        description:
-            "Peace, health, security, inner harmony, forgiveness, and certainty.",
-    },
-    {
-        id: "Integrity",
-        description:
-            "Honesty, accountability, discipline, ethics, respect, and commitment.",
-    },
-    {
-        id: "Growth",
-        description:
-            "Wisdom, meaningful work, contribution, success, and intelligence.",
-    },
-    {
-        id: "Authenticity",
-        description:
-            "Tradition, religion, spirituality, uniqueness, and truthfulness.",
-    },
-    {
-        id: "Autonomy",
-        description:
-            "Freedom, independence, privacy, control, and self-reliance.",
-    },
-    {
-        id: "Joy",
-        description:
-            "Pleasure, creativity, curiosity, adventure, excitement, and passion.",
-    },
-];
-
 export const QUESTION_DATA: QuizData = {
-    quizTitle: "Healthy Tech Values Assessment",
     instructions:
         "Read each question and choose the single answer that best describes your honest feelings or desires. There are no right or wrong answers.",
+    valueCategories: [
+        "Stability & Security",
+        "Health & Harmony",
+        "Achievement & Influence",
+        "Growth & Mastery",
+        "Adventure & Exploration",
+        "Connection & Love",
+        "Integrity & Ethics",
+        "Independence & Freedom",
+        "Contribution & Service",
+        "Tradition & Spirituality",
+    ],
     questions: [
         {
             id: 1,
-            question:
-                "When the internet goes down at home, what is your first thought?",
+            question: "What is your preferred way to recharge your energy?",
             options: [
                 {
-                    text: "We can finally talk and bond as a family.",
-                    value: "Connection",
+                    text: "Engaging in prayer, faith, or quiet contemplation.",
+                    value: "Tradition & Spirituality",
                 },
                 {
-                    text: "I feel relieved to have some quiet time away from notifications.",
-                    value: "Well-being",
+                    text: "Focusing on my physical fitness and eating well.",
+                    value: "Health & Harmony",
                 },
                 {
-                    text: "I can use this time to read a book or practice a skill.",
-                    value: "Growth",
+                    text: "Diving into a hobby I am deeply passionate about.",
+                    value: "Growth & Mastery",
                 },
                 {
-                    text: "We can go outside and find a fun physical activity.",
-                    value: "Joy",
+                    text: "Taking a solo trip to enjoy complete self-sufficiency.",
+                    value: "Independence & Freedom",
                 },
             ],
         },
+
         {
             id: 2,
             question:
-                "What bothers you most about excessive phone use at the dinner table?",
+                "How do you prefer to spend a free weekend with your family?",
             options: [
                 {
-                    text: "It prevents us from having genuine, undistracted conversations.",
-                    value: "Authenticity",
+                    text: "Trying an exciting new activity we have never done before.",
+                    value: "Adventure & Exploration",
                 },
                 {
-                    text: "It feels disrespectful and breaks the rules we agreed upon.",
-                    value: "Integrity",
+                    text: "Participating in a religious or cultural community event.",
+                    value: "Tradition & Spirituality",
                 },
                 {
-                    text: "It creates an emotional barrier between family members.",
-                    value: "Connection",
+                    text: "Doing physical activities like hiking or playing sports.",
+                    value: "Health & Harmony",
                 },
                 {
-                    text: "It shows a lack of self-control over digital habits.",
-                    value: "Autonomy",
+                    text: "Volunteering for a local charity or community project.",
+                    value: "Contribution & Service",
                 },
             ],
         },
         {
             id: 3,
-            question:
-                "How do you most want to spend a completely free Saturday afternoon?",
+            question: "What makes you feel most fulfilled in your daily life?",
             options: [
                 {
-                    text: "Hiking, exploring, or trying a new creative hobby offline.",
-                    value: "Joy",
+                    text: "Reaching a difficult milestone or gaining recognition.",
+                    value: "Achievement & Influence",
                 },
                 {
-                    text: "Working on a personal project or learning something new.",
-                    value: "Growth",
+                    text: "Knowing I acted honestly and responsibly.",
+                    value: "Integrity & Ethics",
                 },
                 {
-                    text: "Enjoying uninterrupted, quality time with my spouse or children.",
-                    value: "Connection",
+                    text: "Having the autonomy to make my own choices.",
+                    value: "Independence & Freedom",
                 },
                 {
-                    text: "Resting, meditating, and recharging away from all screens.",
-                    value: "Well-being",
+                    text: "Spending quality time with my loved ones.",
+                    value: "Connection & Love",
                 },
             ],
         },
         {
             id: 4,
             question:
-                "If you found out a family member was hiding their screen time, what would worry you most?",
+                "When facing a major family decision, what is the most important factor?",
             options: [
                 {
-                    text: "The dishonesty and lack of personal accountability.",
-                    value: "Integrity",
+                    text: "Protecting our financial stability and future predictability.",
+                    value: "Stability & Security",
                 },
                 {
-                    text: "How the hidden content might be negatively affecting their mental health.",
-                    value: "Well-being",
+                    text: "Doing what is morally right and fair for everyone.",
+                    value: "Integrity & Ethics",
                 },
                 {
-                    text: "The emotional distance and secrecy it creates in our relationship.",
-                    value: "Connection",
+                    text: "Choosing the path that offers the most intellectual development.",
+                    value: "Growth & Mastery",
                 },
                 {
-                    text: "That they feel they cannot be their true selves around me.",
-                    value: "Authenticity",
+                    text: "Maintaining our independence from outside interference.",
+                    value: "Independence & Freedom",
                 },
             ],
         },
         {
             id: 5,
             question:
-                "What is the main reason you want to reduce video game time in your home?",
+                "How should technology be used in your children's education?",
             options: [
                 {
-                    text: "To encourage more independence and self-directed offline play.",
-                    value: "Autonomy",
+                    text: "To achieve excellence and master complex subjects.",
+                    value: "Growth & Mastery",
                 },
                 {
-                    text: "To make room for real-world adventures and hands-on hobbies.",
-                    value: "Joy",
+                    text: "To learn about our cultural heritage and traditions.",
+                    value: "Tradition & Spirituality",
                 },
                 {
-                    text: "To establish better discipline and follow through on household chores.",
-                    value: "Integrity",
+                    text: "To foster empathy and collaborate with peers.",
+                    value: "Connection & Love",
                 },
                 {
-                    text: "To lower stress levels and create a calmer, quieter household.",
-                    value: "Well-being",
+                    text: "To explore the world and satisfy their curiosity.",
+                    value: "Adventure & Exploration",
                 },
             ],
         },
         {
             id: 6,
-            question:
-                "When you set boundaries around technology, what is your primary goal?",
+            question: "What do you value most in a long-term career?",
             options: [
                 {
-                    text: "Protecting our family's privacy and independence from outside influence.",
-                    value: "Autonomy",
+                    text: "Knowing my job is safe and my income is predictable.",
+                    value: "Stability & Security",
                 },
                 {
-                    text: "Staying true to our family's core traditions and spiritual beliefs.",
-                    value: "Authenticity",
+                    text: "Climbing the ladder and gaining authority in my field.",
+                    value: "Achievement & Influence",
                 },
                 {
-                    text: "Ensuring everyone is developing their real-world talents.",
-                    value: "Growth",
+                    text: "Making a positive impact on other people's lives.",
+                    value: "Contribution & Service",
                 },
                 {
-                    text: "Keeping everyone physically rested and mentally healthy.",
-                    value: "Well-being",
+                    text: "Having the flexibility to set my own schedule.",
+                    value: "Independence & Freedom",
                 },
             ],
         },
         {
             id: 7,
-            question:
-                "What feels most rewarding after a day of being completely unplugged?",
+            question: "How do you approach financial planning for your family?",
             options: [
                 {
-                    text: "Feeling deeply connected to the people around me.",
-                    value: "Connection",
+                    text: "Building a safety net to protect against emergencies.",
+                    value: "Stability & Security",
                 },
                 {
-                    text: "Feeling a sense of peace and inner harmony.",
-                    value: "Well-being",
+                    text: "Investing to afford a luxurious and successful lifestyle.",
+                    value: "Achievement & Influence",
                 },
                 {
-                    text: "Knowing I had the self-control to stay offline all day.",
-                    value: "Autonomy",
+                    text: "Achieving enough wealth to never rely on anyone else.",
+                    value: "Independence & Freedom",
                 },
                 {
-                    text: "Having experienced genuine fun and laughter without needing a screen.",
-                    value: "Joy",
+                    text: "Setting aside money to donate to important causes.",
+                    value: "Contribution & Service",
                 },
             ],
         },
         {
             id: 8,
             question:
-                "How do you approach your own smartphone use around your family?",
+                "What is the best way to handle a conflict within the family?",
             options: [
                 {
-                    text: "I try to model honesty and take responsibility for my own habits.",
-                    value: "Integrity",
+                    text: "Restoring peace and calm as quickly as possible.",
+                    value: "Health & Harmony",
                 },
                 {
-                    text: "I put it away to ensure I am fully present and genuine with them.",
-                    value: "Authenticity",
+                    text: "Having a frank, honest discussion about the issue.",
+                    value: "Integrity & Ethics",
                 },
                 {
-                    text: "I limit my use to make sure I am focusing on personal development.",
-                    value: "Growth",
+                    text: "Deferring to the wisdom of elder family members.",
+                    value: "Tradition & Spirituality",
                 },
                 {
-                    text: "I keep it out of sight so I can focus purely on loving my family.",
-                    value: "Connection",
+                    text: "Showing empathy and forgiving each other.",
+                    value: "Connection & Love",
                 },
             ],
         },
         {
             id: 9,
-            question: "What concerns you most about social media?",
+            question: "When traveling for vacation, what do you look for?",
             options: [
                 {
-                    text: "It promotes fake, curated lifestyles instead of real life.",
-                    value: "Authenticity",
+                    text: "Thrilling experiences and going off the beaten path.",
+                    value: "Adventure & Exploration",
                 },
                 {
-                    text: "It steals precious time that could be used for learning or working.",
-                    value: "Growth",
+                    text: "Relaxing at a spa or wellness retreat to recharge.",
+                    value: "Health & Harmony",
                 },
                 {
-                    text: "It can cause anxiety, comparison, and disrupt inner peace.",
-                    value: "Well-being",
+                    text: "Visiting museums and learning about local history.",
+                    value: "Growth & Mastery",
                 },
                 {
-                    text: "It tracks our data and takes away our personal privacy.",
-                    value: "Autonomy",
+                    text: "Creating lasting memories with my family and friends.",
+                    value: "Connection & Love",
                 },
             ],
         },
         {
             id: 10,
-            question:
-                "When a spouse or child chooses a screen over a family outing, how do you react?",
+            question: "How do you evaluate the success of a personal project?",
             options: [
                 {
-                    text: "I feel sad that we are missing out on bonding time.",
-                    value: "Connection",
+                    text: "By how perfectly I executed the necessary skills.",
+                    value: "Growth & Mastery",
                 },
                 {
-                    text: "I feel frustrated that they are missing out on a real adventure.",
-                    value: "Joy",
+                    text: "By how many people praised or recognized my work.",
+                    value: "Achievement & Influence",
                 },
                 {
-                    text: "I worry that they are becoming too dependent on the device.",
-                    value: "Autonomy",
+                    text: "By how much inner peace and satisfaction it brought me.",
+                    value: "Health & Harmony",
                 },
                 {
-                    text: "I feel upset because we had agreed to spend time together.",
-                    value: "Integrity",
+                    text: "By how much it helped my community or team.",
+                    value: "Contribution & Service",
                 },
             ],
         },
         {
             id: 11,
             question:
-                "What is the best way to handle tech-free zones in the house, like bedrooms?",
+                "What role should social media play in your family's life?",
             options: [
                 {
-                    text: "They should be places of ultimate rest, safety, and security.",
-                    value: "Well-being",
+                    text: "A tool to build influence and a strong personal brand.",
+                    value: "Achievement & Influence",
                 },
                 {
-                    text: "They should be respected as a firm rule that everyone follows.",
-                    value: "Integrity",
+                    text: "A way to stay in touch with distant relatives and friends.",
+                    value: "Connection & Love",
                 },
                 {
-                    text: "They should encourage independent activities like reading or journaling.",
-                    value: "Autonomy",
+                    text: "A resource for discovering new ideas and learning.",
+                    value: "Growth & Mastery",
                 },
                 {
-                    text: "They should be spaces where we can be our true selves without distraction.",
-                    value: "Authenticity",
+                    text: "We limit it strictly to protect our privacy.",
+                    value: "Independence & Freedom",
                 },
             ],
         },
         {
             id: 12,
             question:
-                "If an adult child living at home is constantly online, what is your main hope for them?",
+                "What principle do you most want to instill in your children?",
             options: [
                 {
-                    text: "That they find a meaningful career or passion to pursue offline.",
-                    value: "Growth",
+                    text: "Always tell the truth and take responsibility for your actions.",
+                    value: "Integrity & Ethics",
                 },
                 {
-                    text: "That they build strong, face-to-face friendships in the real world.",
-                    value: "Connection",
+                    text: "Be brave and never fear trying new things.",
+                    value: "Adventure & Exploration",
                 },
                 {
-                    text: "That they discover activities that bring them genuine happiness.",
-                    value: "Joy",
+                    text: "Show sympathy and care for everyone you meet.",
+                    value: "Connection & Love",
                 },
                 {
-                    text: "That they learn to manage their own time and responsibilities.",
-                    value: "Integrity",
+                    text: "Work hard to become successful and powerful.",
+                    value: "Achievement & Influence",
                 },
             ],
         },
         {
             id: 13,
-            question: "Why is it important to you to have screen-free meals?",
+            question: "How do you prefer to manage your household routines?",
             options: [
                 {
-                    text: "To practice our family traditions and say grace together.",
-                    value: "Authenticity",
+                    text: "With strict discipline and orderly schedules.",
+                    value: "Integrity & Ethics",
                 },
                 {
-                    text: "To show basic respect and listen to each other about our day.",
-                    value: "Integrity",
+                    text: "With flexibility so we can change plans freely.",
+                    value: "Independence & Freedom",
                 },
                 {
-                    text: "To focus on enjoying our food and relaxing our minds.",
-                    value: "Joy",
+                    text: "By following customs passed down from our parents.",
+                    value: "Tradition & Spirituality",
                 },
                 {
-                    text: "To foster love and empathy through meaningful conversation.",
-                    value: "Connection",
+                    text: "By utilizing smart tools for maximum efficiency.",
+                    value: "Growth & Mastery",
                 },
             ],
         },
         {
             id: 14,
-            question: "How do you want your family to view technology?",
+            question:
+                "When choosing a neighborhood to live in, what is the priority?",
             options: [
                 {
-                    text: "As a tool for learning, creating, and advancing in life.",
-                    value: "Growth",
+                    text: "Low crime rates and a predictable environment.",
+                    value: "Stability & Security",
                 },
                 {
-                    text: "As something we have complete control over, rather than it controlling us.",
-                    value: "Autonomy",
+                    text: "A tight-knit community where neighbors help each other.",
+                    value: "Contribution & Service",
                 },
                 {
-                    text: "As something that should never compromise our mental or physical health.",
-                    value: "Well-being",
+                    text: "High-end amenities and an exclusive reputation.",
+                    value: "Achievement & Influence",
                 },
                 {
-                    text: "As something we use honestly without hiding our activities from each other.",
-                    value: "Integrity",
+                    text: "Access to parks, trails, and wellness centers.",
+                    value: "Health & Harmony",
                 },
             ],
         },
         {
             id: 15,
-            question:
-                "When you see someone successfully balance their tech use, what do you admire most?",
+            question: "How do you respond to unexpected changes in your plans?",
             options: [
                 {
-                    text: "Their self-reliance and complete freedom from digital addiction.",
-                    value: "Autonomy",
+                    text: "I try to regain control of the situation immediately.",
+                    value: "Stability & Security",
                 },
                 {
-                    text: "Their ability to stay grounded in their spiritual or personal truths.",
-                    value: "Authenticity",
+                    text: "I embrace the variety and look for a new adventure.",
+                    value: "Adventure & Exploration",
                 },
                 {
-                    text: "Their rich, exciting life full of offline hobbies and adventures.",
-                    value: "Joy",
+                    text: "I focus on keeping my emotions balanced and calm.",
+                    value: "Health & Harmony",
                 },
                 {
-                    text: "Their consistent pursuit of excellence and wisdom.",
-                    value: "Growth",
+                    text: "I treat it as a challenge to test my problem-solving skills.",
+                    value: "Growth & Mastery",
                 },
             ],
         },
         {
             id: 16,
-            question: "What is the biggest benefit of doing a digital detox?",
+            question:
+                "What is the most important aspect of a romantic relationship?",
             options: [
                 {
-                    text: "Rebuilding trust and intimacy with your loved ones.",
-                    value: "Connection",
+                    text: "Complete transparency and unwavering trust.",
+                    value: "Integrity & Ethics",
                 },
                 {
-                    text: "Giving your mind and body a chance to truly heal.",
-                    value: "Well-being",
+                    text: "Deep affection and emotional intimacy.",
+                    value: "Connection & Love",
                 },
                 {
-                    text: "Remembering how to have pure fun in the physical world.",
-                    value: "Joy",
+                    text: "Supporting each other's ambitions and career goals.",
+                    value: "Achievement & Influence",
                 },
                 {
-                    text: "Reconnecting with your true, unfiltered self.",
-                    value: "Authenticity",
+                    text: "Respecting each other's need for personal space.",
+                    value: "Independence & Freedom",
                 },
             ],
         },
         {
             id: 17,
-            question:
-                "If a teenager breaks a rule about late-night gaming, what is the core issue?",
+            question: "How do you define a life well-lived?",
             options: [
                 {
-                    text: "The lack of sleep that will inevitably affect their health.",
-                    value: "Well-being",
+                    text: "Leaving behind a legacy of helping others.",
+                    value: "Contribution & Service",
                 },
                 {
-                    text: "The breach of trust and breaking of established family rules.",
-                    value: "Integrity",
+                    text: "Achieving significant wealth and public recognition.",
+                    value: "Achievement & Influence",
                 },
                 {
-                    text: "The loss of their ability to self-regulate and make independent choices.",
-                    value: "Autonomy",
+                    text: "Remaining faithful to my religious or spiritual beliefs.",
+                    value: "Tradition & Spirituality",
                 },
                 {
-                    text: "The missed opportunity to study and prepare for their future.",
-                    value: "Growth",
+                    text: "Constantly developing my intellect and wisdom.",
+                    value: "Growth & Mastery",
                 },
             ],
         },
         {
             id: 18,
-            question:
-                "What is your favorite alternative to watching TV together in the evening?",
+            question: "What kind of apps do you use most frequently?",
             options: [
                 {
-                    text: "Playing a loud, highly competitive, and fun board game.",
-                    value: "Joy",
+                    text: "Banking and home security monitors.",
+                    value: "Stability & Security",
                 },
                 {
-                    text: "Having a deep, genuine discussion about our beliefs and our day.",
-                    value: "Authenticity",
+                    text: "Messaging apps to chat with loved ones.",
+                    value: "Connection & Love",
                 },
                 {
-                    text: "Working together on a puzzle or a household improvement project.",
-                    value: "Growth",
+                    text: "Educational platforms and skill-building tools.",
+                    value: "Growth & Mastery",
                 },
                 {
-                    text: "Cuddling on the couch and talking about our feelings.",
-                    value: "Connection",
+                    text: "Fitness trackers and meditation guides.",
+                    value: "Health & Harmony",
                 },
             ],
         },
         {
             id: 19,
-            question: "How should a family decide on their tech rules?",
+            question: "How do you prefer to solve a difficult problem?",
             options: [
                 {
-                    text: "By focusing on what keeps everyone safe and emotionally secure.",
-                    value: "Well-being",
+                    text: "By collaborating with a team to find a fair solution.",
+                    value: "Contribution & Service",
                 },
                 {
-                    text: "By agreeing on ethical guidelines that everyone respects and follows.",
-                    value: "Integrity",
+                    text: "By relying on my own logical thinking and expertise.",
+                    value: "Growth & Mastery",
                 },
                 {
-                    text: "By prioritizing rules that foster family unity and deep love.",
-                    value: "Connection",
+                    text: "By looking at how things were done in the past.",
+                    value: "Tradition & Spirituality",
                 },
                 {
-                    text: "By ensuring everyone has enough freedom to make their own choices.",
-                    value: "Autonomy",
+                    text: "By experimenting with unusual and creative approaches.",
+                    value: "Adventure & Exploration",
                 },
             ],
         },
         {
             id: 20,
             question:
-                "What do you hope your family will remember about your home in ten years?",
+                "When adopting a new technology at home, what is your primary goal?",
             options: [
                 {
-                    text: "The laughter, creativity, and incredible adventures we shared.",
-                    value: "Joy",
+                    text: "Ensuring our home network is safe and reliable.",
+                    value: "Stability & Security",
                 },
                 {
-                    text: "The strong morals, discipline, and honesty we practiced.",
-                    value: "Integrity",
+                    text: "Bringing the family together for shared activities.",
+                    value: "Connection & Love",
                 },
                 {
-                    text: "The deep bonds and unwavering emotional support we had for each other.",
-                    value: "Connection",
+                    text: "Learning new skills and expanding our capabilities.",
+                    value: "Growth & Mastery",
                 },
                 {
-                    text: "The environment that helped everyone learn and reach their full potential.",
-                    value: "Growth",
+                    text: "Automating tasks to give us more free time.",
+                    value: "Independence & Freedom",
                 },
             ],
         },

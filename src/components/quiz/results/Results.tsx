@@ -1,6 +1,5 @@
 import { useAtom } from "jotai";
 import { answersAtom } from "@/state/state.ts";
-import { HEALTHY_TECH_VALUES } from "@/data/questionData.ts";
 
 type ValueResult = {
     value: string;
@@ -45,18 +44,14 @@ export default function Results() {
                             "flex flex-col border border-primary rounded text-primary p-1"
                         }
                     >
-                        <span className={"font-bold"}>
-                            {valueResult.value}: {valueResult.points}
-                        </span>
-                        <span className={""}>
-                            {
-                                HEALTHY_TECH_VALUES.find(
-                                    (healthyTechValue) =>
-                                        healthyTechValue.id ===
-                                        valueResult.value,
-                                )?.description
-                            }
-                        </span>
+                        <div className={"flex flex-row justify-between p-3"}>
+                            <span className={"font-bold"}>
+                                {valueResult.value}
+                            </span>
+                            <span className={"font-bold"}>
+                                {valueResult.points}
+                            </span>
+                        </div>
                     </div>
                 ))}
             </div>

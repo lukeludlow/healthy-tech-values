@@ -20,9 +20,9 @@ export default function QuizQuestion() {
                 <>
                     <Scenario />
                     <AnswerOptions />
-                    <div className={"italic mt-2 text-primary"}>
-                        {QUESTION_DATA.instructions}
-                    </div>
+                    {/*<div className={"italic mt-2 text-primary"}>*/}
+                    {/*    {QUESTION_DATA.instructions}*/}
+                    {/*</div>*/}
                 </>
             )}
         </div>

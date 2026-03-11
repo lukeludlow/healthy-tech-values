@@ -22,14 +22,10 @@ export default function ProgressFooter() {
     const isQuestionAnswered = useMemo(
         () =>
             QUESTION_DATA.questions[currentQuestionIndex]?.options.some((opt) =>
-                selectedChoices.includes(opt),
+                selectedChoices.some((choice) => choice.text === opt.text),
             ),
         [currentQuestionIndex, selectedChoices],
     );
-    // console.log(`isQuestionAnswered: ${isQuestionAnswered}`);
-    // console.log(
-    //     `a: ${JSON.stringify(QUESTION_DATA.questions[currentQuestionIndex], null, 2)}, b: ${JSON.stringify(selectedChoices, null, 2)}`,
-    // );
 
     return (
         <div className={"flex flex-row w-full items-top gap-2 pb-21 px-2"}>
