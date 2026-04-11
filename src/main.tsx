@@ -20,7 +20,7 @@ createRoot(document.getElementById("root")!).render(
         <PrimeReactProvider value={{ ripple: true }}>
             <div className={"bg-E5F0FF"}>
                 <BrowserRouter>
-                    <div className={"flex flex-col h-screen w-full"}>
+                    <div className={"flex flex-col h-dvh w-full"}>
                         <TopNavBar />
                         <div className={"flex-1 overflow-auto"}>
                             <Routes>
