@@ -102,37 +102,36 @@ export const QUESTION_DATA: QuizData = {
         {
             id: 4,
             question:
-                "When facing a major family decision, what is the most important factor?",
+                "When facing a major decision, what is the most important factor?",
             options: [
                 {
-                    text: "Protecting our financial stability and future predictability.",
+                    text: "Protecting my financial stability and future predictability.",
                     value: "Stability & Security",
                 },
                 {
-                    text: "Doing what is morally right and fair for everyone.",
+                    text: "Doing what is morally right and fair.",
                     value: "Integrity & Ethics",
                 },
                 {
-                    text: "Choosing the path that offers the most intellectual development.",
+                    text: "Choosing the path that offers the most personal growth.",
                     value: "Growth & Mastery",
                 },
                 {
-                    text: "Maintaining our independence from outside interference.",
+                    text: "Maintaining my independence from outside interference.",
                     value: "Independence & Freedom",
                 },
             ],
         },
         {
             id: 5,
-            question:
-                "How should technology be used in your children's education?",
+            question: "How should technology be used in your life?",
             options: [
                 {
                     text: "To achieve excellence and master complex subjects.",
                     value: "Growth & Mastery",
                 },
                 {
-                    text: "To learn about our cultural heritage and traditions.",
+                    text: "To learn about my cultural heritage and traditions.",
                     value: "Tradition & Spirituality",
                 },
                 {
@@ -140,7 +139,7 @@ export const QUESTION_DATA: QuizData = {
                     value: "Connection & Love",
                 },
                 {
-                    text: "To explore the world and satisfy their curiosity.",
+                    text: "To explore the world and satisfy my curiosity.",
                     value: "Adventure & Exploration",
                 },
             ],
@@ -169,7 +168,7 @@ export const QUESTION_DATA: QuizData = {
         },
         {
             id: 7,
-            question: "How do you approach financial planning for your family?",
+            question: "How do you approach financial planning?",
             options: [
                 {
                     text: "Building a safety net to protect against emergencies.",
@@ -258,8 +257,7 @@ export const QUESTION_DATA: QuizData = {
         },
         {
             id: 11,
-            question:
-                "What role should social media play in your family's life?",
+            question: "What role should social media play in your life?",
             options: [
                 {
                     text: "A tool to build influence and a strong personal brand.",
@@ -274,7 +272,7 @@ export const QUESTION_DATA: QuizData = {
                     value: "Growth & Mastery",
                 },
                 {
-                    text: "We limit it strictly to protect our privacy.",
+                    text: "I limit it strictly to protect my privacy.",
                     value: "Independence & Freedom",
                 },
             ],
@@ -293,7 +291,7 @@ export const QUESTION_DATA: QuizData = {
                     value: "Adventure & Exploration",
                 },
                 {
-                    text: "Show sympathy and care for everyone you meet.",
+                    text: "Show empathy and care for everyone you meet.",
                     value: "Connection & Love",
                 },
                 {
@@ -319,7 +317,7 @@ export const QUESTION_DATA: QuizData = {
                     value: "Tradition & Spirituality",
                 },
                 {
-                    text: "By utilizing smart tools for maximum efficiency.",
+                    text: "By utilizing tools for maximum efficiency.",
                     value: "Growth & Mastery",
                 },
             ],
@@ -372,7 +370,7 @@ export const QUESTION_DATA: QuizData = {
         {
             id: 16,
             question:
-                "What is the most important aspect of a romantic relationship?",
+                "What do you feel is the most important aspect of a romantic relationship?",
             options: [
                 {
                     text: "Complete transparency and unwavering trust.",
