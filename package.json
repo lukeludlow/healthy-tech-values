@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "@tailwindcss/vite": "^4.1.18",
+        "@vercel/analytics": "^2.0.1",
         "clsx": "^2.1.1",
         "jotai": "^2.16.1",
         "primeicons": "^7.0.0",
@@ -35,6 +36,6 @@
         "prettier": "^3.7.4",
         "typescript": "~5.9.3",
         "typescript-eslint": "^8.46.4",
-        "vite": "^7.2.4"
+        "vite": "^7.3.2"
     }
 }

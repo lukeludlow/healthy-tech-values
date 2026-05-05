@@ -7,6 +7,7 @@ import { PrimeReactProvider } from "primereact/api";
 import TopNavBar from "@/components/navbar/TopNavBar.tsx";
 import QuizPage from "@/pages/quiz/QuizPage.tsx";
 import LearnPage from "@/pages/learn/LearnPage.tsx";
+import { Analytics } from "@vercel/analytics/react";
 
 const CURRENT_VERSION = "0.0.1";
 
@@ -33,6 +34,7 @@ createRoot(document.getElementById("root")!).render(
                             </Routes>
                         </div>
                     </div>
+                    <Analytics />
                 </BrowserRouter>
             </div>
         </PrimeReactProvider>
