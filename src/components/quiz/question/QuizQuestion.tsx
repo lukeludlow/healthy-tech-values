@@ -11,7 +11,7 @@ export default function QuizQuestion() {
         currentQuestionIndex === QUESTION_DATA.questions.length;
 
     return (
-        <div className={"flex flex-col gap-2 p-3 md:px-5"}>
+        <div className="flex flex-col gap-4 p-4 md:px-6 max-w-xl mx-auto w-full">
             {shouldShowResults ? (
                 <div>
                     <Results />
@@ -19,7 +19,7 @@ export default function QuizQuestion() {
             ) : (
                 <>
                     <Scenario />
-                    <div className={"italic mt-2 text-primary text-center"}>
+                    <div className="italic text-sm text-primary/60 text-center">
                         {QUESTION_DATA.instructions}
                     </div>
                     <AnswerOptions />

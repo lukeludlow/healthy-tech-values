@@ -29,39 +29,40 @@ export default function ProgressFooter() {
     );
 
     return (
-        <div className={"flex flex-row w-full items-top gap-2 pb-21 px-2"}>
-            <div className={"flex flex-col w-full"}>
-                <p>
-                    Progress: {Math.round(progressPercentage * 100)}% (
-                    {progressValue}/{progressMax})
-                </p>
-                <div className="w-full h-2 rounded-full bg-base-200 overflow-hidden">
-                    <div
-                        className="h-full bg-primary rounded-full transition-all"
-                        style={{
-                            width: `${Math.round(progressPercentage * 100)}%`,
-                        }}
-                    />
+        <div className="flex flex-row w-full items-center justify-center gap-2 pb-21 px-2">
+            <div className="flex flex-row w-full max-w-xl items-center gap-2">
+                <div className="flex flex-col w-full gap-1">
+                    <p className="text-sm text-primary/70 font-medium">
+                        {progressValue} of {progressMax} questions
+                    </p>
+                    <div className="w-full h-2 rounded-full bg-base-200 overflow-hidden">
+                        <div
+                            className="h-full bg-primary rounded-full transition-all"
+                            style={{
+                                width: `${Math.round(progressPercentage * 100)}%`,
+                            }}
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className={"flex flex-row"}>
-                <Button
-                    color="primary"
-                    className="!rounded-r-none items-center"
-                    onClick={handlePreviousQuestion}
-                >
-                    <FaAngleLeft />
-                    Back
-                </Button>
-                <Button
-                    color="primary"
-                    className="!rounded-l-none items-center"
-                    onClick={handleNextQuestion}
-                    disabled={!hasNextQuestion || !isQuestionAnswered}
-                >
-                    Next
-                    <FaAngleRight />
-                </Button>
+                <div className="flex flex-row">
+                    <Button
+                        color="primary"
+                        className="!rounded-r-none items-center"
+                        onClick={handlePreviousQuestion}
+                    >
+                        <FaAngleLeft />
+                        Back
+                    </Button>
+                    <Button
+                        color="primary"
+                        className="!rounded-l-none items-center"
+                        onClick={handleNextQuestion}
+                        disabled={!hasNextQuestion || !isQuestionAnswered}
+                    >
+                        Next
+                        <FaAngleRight />
+                    </Button>
+                </div>
             </div>
         </div>
     );

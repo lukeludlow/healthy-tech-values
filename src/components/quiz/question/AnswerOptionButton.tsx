@@ -26,7 +26,7 @@ export default function AnswerOptionButton({ option }: Props) {
         <Button
             color={isSelected ? "primary" : undefined}
             outline={!isSelected || undefined}
-            className="rounded-full h-auto w-full p-3"
+            className="rounded-2xl h-auto w-full p-3"
             onClick={handleButtonClick}
         >
             <span className={"px-5 py-2"}>{option.text}</span>
