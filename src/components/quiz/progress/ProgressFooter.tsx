@@ -4,6 +4,7 @@ import { QUESTION_DATA } from "@/data/questionData.ts";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { useMemo } from "react";
+import { Button } from "@/components/catalyst-ui-kit/button.tsx";
 
 export default function ProgressFooter() {
     const navigate = useNavigate();
@@ -34,28 +35,33 @@ export default function ProgressFooter() {
                     Progress: {Math.round(progressPercentage * 100)}% (
                     {progressValue}/{progressMax})
                 </p>
-                <progress
-                    className={"progress progress-primary"}
-                    value={progressValue}
-                    max={progressMax}
-                />
+                <div className="w-full h-2 rounded-full bg-base-200 overflow-hidden">
+                    <div
+                        className="h-full bg-primary rounded-full transition-all"
+                        style={{
+                            width: `${Math.round(progressPercentage * 100)}%`,
+                        }}
+                    />
+                </div>
             </div>
-            <div className={"join"}>
-                <button
-                    className={"join-item btn btn-primary btn-outline"}
+            <div className={"flex flex-row"}>
+                <Button
+                    color="primary"
+                    className="!rounded-r-none items-center"
                     onClick={handlePreviousQuestion}
                 >
                     <FaAngleLeft />
                     Back
-                </button>
-                <button
-                    className={"join-item btn btn-primary"}
+                </Button>
+                <Button
+                    color="primary"
+                    className="!rounded-l-none items-center"
                     onClick={handleNextQuestion}
                     disabled={!hasNextQuestion || !isQuestionAnswered}
                 >
                     Next
                     <FaAngleRight />
-                </button>
+                </Button>
             </div>
         </div>
     );

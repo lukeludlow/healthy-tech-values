@@ -5,6 +5,7 @@ import {
     currentQuestionIndexAtom,
     isQuizInProgressAtom,
 } from "@/state/state.ts";
+import { Button } from "@/components/catalyst-ui-kit/button.tsx";
 
 export default function HomeHero() {
     const navigate = useNavigate();
@@ -14,8 +15,8 @@ export default function HomeHero() {
     const [, setCurrentQuestionIndex] = useAtom(currentQuestionIndexAtom);
 
     return (
-        <div className="hero bg-base-200 h-full pb-21">
-            <div className="hero-content text-center flex flex-col">
+        <div className="flex items-center justify-center bg-base-200 h-full pb-21">
+            <div className="text-center flex flex-col items-center">
                 <div className="max-w-md">
                     <div className={"flex justify-center mb-5"}>
                         <img
@@ -29,12 +30,9 @@ export default function HomeHero() {
                         Taming your tech starts with getting clear on what you
                         value in life.
                     </p>
-                    <button
-                        className="btn btn-primary btn-lg"
-                        onClick={handleStartQuiz}
-                    >
+                    <Button color="primary" className="px-8 py-3 text-base" onClick={handleStartQuiz}>
                         {isQuizInProgress ? "Continue" : "Take"} the Quiz
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>

@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { useAtom } from "jotai";
 import { answersAtom, currentQuestionIndexAtom } from "@/state/state.ts";
 import {
@@ -6,6 +5,7 @@ import {
     QUESTION_DATA,
     type QuestionData,
 } from "@/data/questionData.ts";
+import { Button } from "@/components/catalyst-ui-kit/button.tsx";
 
 type Props = {
     option: AnswerOption;
@@ -23,17 +23,14 @@ export default function AnswerOptionButton({ option }: Props) {
     );
 
     return (
-        <div
-            className={clsx(
-                "btn",
-                { "btn-primary": isSelected },
-                { "btn-soft": !isSelected },
-                "h-auto rounded-full p-3 w-full indicator",
-            )}
+        <Button
+            color={isSelected ? "primary" : undefined}
+            outline={!isSelected || undefined}
+            className="rounded-full h-auto w-full p-3"
             onClick={handleButtonClick}
         >
-            <span className={"px-5"}>{option.text}</span>
-        </div>
+            <span className={"px-5 py-2"}>{option.text}</span>
+        </Button>
     );
 
     function handleButtonClick() {

@@ -4,7 +4,7 @@ import HealthyValuesButton from "@/components/navbar/HealthyValuesButton.tsx";
 
 export default function TopNavBar() {
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="flex flex-row items-center justify-between w-full bg-base-100 shadow-sm px-4 min-h-16">
             <div className={"flex flex-row justify-between w-full"}>
                 <div className="flex-none">
                     <HealthyTechBalanceButton />

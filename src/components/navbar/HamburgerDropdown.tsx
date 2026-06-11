@@ -1,43 +1,28 @@
-import HamburgerMenuSvg from "@/components/navbar/HamburgerMenuSvg.tsx";
 import { useNavigate } from "react-router";
+import {
+    Dropdown,
+    DropdownButton,
+    DropdownItem,
+    DropdownMenu,
+} from "@/components/catalyst-ui-kit/dropdown.tsx";
+import { Bars3Icon } from "@heroicons/react/16/solid";
 
 export default function HamburgerDropdown() {
     const navigate = useNavigate();
 
     return (
-        <div className="dropdown dropdown-end">
-            <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-square"
-            >
-                <HamburgerMenuSvg />
-            </div>
-            <ul
-                tabIndex={-1}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-            >
-                <li>
-                    <div className={"flex"}>
-                        <button
-                            className={"btn btn-ghost w-full"}
-                            onClick={() => navigate("/quiz")}
-                        >
-                            Quiz
-                        </button>
-                    </div>
-                </li>
-                <li>
-                    <div className={"flex"}>
-                        <button
-                            className={"btn btn-ghost w-full"}
-                            onClick={() => navigate("/learn")}
-                        >
-                            Learn
-                        </button>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <Dropdown>
+            <DropdownButton outline aria-label="Open menu">
+                <Bars3Icon />
+            </DropdownButton>
+            <DropdownMenu anchor="bottom end">
+                <DropdownItem onClick={() => navigate("/quiz")}>
+                    Quiz
+                </DropdownItem>
+                <DropdownItem onClick={() => navigate("/learn")}>
+                    Learn
+                </DropdownItem>
+            </DropdownMenu>
+        </Dropdown>
     );
 }

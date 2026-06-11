@@ -17,7 +17,7 @@ export type AnswerOption = {
 
 export const QUESTION_DATA: QuizData = {
     instructions:
-        "Read each question and choose the single answer that best describes your honest feelings or desires. There are no right or wrong answers.",
+        "Read each question and choose all answers that best describe your honest feelings or desires. There are no right or wrong answers.",
     valueCategories: [
         "Stability & Security",
         "Health & Harmony",
