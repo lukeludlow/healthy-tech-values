@@ -1,4 +1,6 @@
 import "@/App.css";
+// @ts-expect-error inter is CSS only
+import "@fontsource-variable/inter";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
