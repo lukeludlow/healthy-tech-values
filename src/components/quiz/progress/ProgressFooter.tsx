@@ -84,6 +84,10 @@ export default function ProgressFooter() {
     }
 
     function handleNextQuestion() {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        if (currentQuestionIndex === progressMax - 1) {
+            navigate("/results");
+        } else {
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
+        }
     }
 }

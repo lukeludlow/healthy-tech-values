@@ -9,6 +9,7 @@ import { PrimeReactProvider } from "primereact/api";
 import TopNavBar from "@/components/navbar/TopNavBar.tsx";
 import QuizPage from "@/pages/quiz/QuizPage.tsx";
 import LearnPage from "@/pages/learn/LearnPage.tsx";
+import ResultsPage from "@/pages/results/ResultsPage.tsx";
 import { Analytics } from "@vercel/analytics/react";
 
 const CURRENT_VERSION = "0.0.1";
@@ -33,6 +34,7 @@ createRoot(document.getElementById("root")!).render(
                                     element={<LearnPage />}
                                 />
                                 <Route path={"/quiz"} element={<QuizPage />} />
+                                <Route path={"/results"} element={<ResultsPage />} />
                             </Routes>
                         </div>
                     </div>
