@@ -16,6 +16,7 @@ export default function AnswerOptionButton({ option }: Props) {
     );
 
     return (
+        // @ts-expect-error ignore plain
         <Button
             color={isSelected ? "primary" : undefined}
             outline={!isSelected || undefined}

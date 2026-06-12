@@ -33,22 +33,22 @@ export const QUESTION_DATA: QuizData = {
     questions: [
         {
             id: 1,
-            question: "What is your preferred way to recharge your energy?",
+            question: "How do you recharge your energy?",
             options: [
                 {
-                    text: "Engaging in prayer, faith, or quiet contemplation.",
+                    text: "Quiet contemplation, meditation, or prayer.",
                     value: "Tradition & Spirituality",
                 },
                 {
-                    text: "Focusing on my physical fitness and eating well.",
+                    text: "Taking care of my body with a nap, a snack, or exercise.",
                     value: "Health & Harmony",
                 },
                 {
-                    text: "Diving into a hobby I am deeply passionate about.",
+                    text: "Spending time on a hobby.",
                     value: "Growth & Mastery",
                 },
                 {
-                    text: "Taking a solo trip to enjoy complete self-sufficiency.",
+                    text: "Working on a project or repair.",
                     value: "Independence & Freedom",
                 },
             ],
@@ -56,37 +56,36 @@ export const QUESTION_DATA: QuizData = {
 
         {
             id: 2,
-            question:
-                "How do you prefer to spend a free weekend with your family?",
+            question: "What would you want to do with a free weekend?",
             options: [
                 {
-                    text: "Trying an exciting new activity we have never done before.",
+                    text: "Try something new.",
                     value: "Adventure & Exploration",
                 },
                 {
-                    text: "Participating in a religious or cultural community event.",
+                    text: "Participate in a community event.",
                     value: "Tradition & Spirituality",
                 },
                 {
-                    text: "Doing physical activities like hiking or playing sports.",
+                    text: "Do something physical like hiking for playing sports.",
                     value: "Health & Harmony",
                 },
                 {
-                    text: "Volunteering for a local charity or community project.",
+                    text: "Volunteer for a local charity or community project.",
                     value: "Contribution & Service",
                 },
             ],
         },
         {
             id: 3,
-            question: "What makes you feel most fulfilled in your daily life?",
+            question: "What makes you feel most fulfilled?",
             options: [
                 {
-                    text: "Reaching a difficult milestone or gaining recognition.",
+                    text: "Accomplishing something hard.",
                     value: "Achievement & Influence",
                 },
                 {
-                    text: "Knowing I acted honestly and responsibly.",
+                    text: "Being honest and/or responsible.",
                     value: "Integrity & Ethics",
                 },
                 {
@@ -94,7 +93,7 @@ export const QUESTION_DATA: QuizData = {
                     value: "Independence & Freedom",
                 },
                 {
-                    text: "Spending quality time with my loved ones.",
+                    text: "Spending quality time with the people I love.",
                     value: "Connection & Love",
                 },
             ],
@@ -105,29 +104,29 @@ export const QUESTION_DATA: QuizData = {
                 "When facing a major decision, what is the most important factor?",
             options: [
                 {
-                    text: "Protecting my financial stability and future predictability.",
+                    text: "My financial future.",
                     value: "Stability & Security",
                 },
                 {
-                    text: "Doing what is morally right and fair.",
+                    text: "Doing what's morally right and fair.",
                     value: "Integrity & Ethics",
                 },
                 {
-                    text: "Choosing the path that offers the most personal growth.",
+                    text: "Opportunity for personal growth.",
                     value: "Growth & Mastery",
                 },
                 {
-                    text: "Maintaining my independence from outside interference.",
+                    text: "Maintaining independence.",
                     value: "Independence & Freedom",
                 },
             ],
         },
         {
             id: 5,
-            question: "How should technology be used in your life?",
+            question: "How do you WANT technology to be used in your life?",
             options: [
                 {
-                    text: "To achieve excellence and master complex subjects.",
+                    text: "To help figure out how to do specific tasks.",
                     value: "Growth & Mastery",
                 },
                 {
@@ -135,7 +134,7 @@ export const QUESTION_DATA: QuizData = {
                     value: "Tradition & Spirituality",
                 },
                 {
-                    text: "To foster empathy and collaborate with peers.",
+                    text: "To collaborate with peers and foster empathy.",
                     value: "Connection & Love",
                 },
                 {
@@ -146,14 +145,14 @@ export const QUESTION_DATA: QuizData = {
         },
         {
             id: 6,
-            question: "What do you value most in a long-term career?",
+            question: "What do you value most in a career?",
             options: [
                 {
-                    text: "Knowing my job is safe and my income is predictable.",
+                    text: "Predictable income.",
                     value: "Stability & Security",
                 },
                 {
-                    text: "Climbing the ladder and gaining authority in my field.",
+                    text: "Being really good at it.",
                     value: "Achievement & Influence",
                 },
                 {
@@ -161,7 +160,7 @@ export const QUESTION_DATA: QuizData = {
                     value: "Contribution & Service",
                 },
                 {
-                    text: "Having the flexibility to set my own schedule.",
+                    text: "Being able to set my own schedule.",
                     value: "Independence & Freedom",
                 },
             ],
@@ -171,104 +170,104 @@ export const QUESTION_DATA: QuizData = {
             question: "How do you approach financial planning?",
             options: [
                 {
-                    text: "Building a safety net to protect against emergencies.",
+                    text: "Being ready for emergencies.",
                     value: "Stability & Security",
                 },
                 {
-                    text: "Investing to afford a luxurious and successful lifestyle.",
+                    text: "Being able to afford nice things.",
                     value: "Achievement & Influence",
                 },
                 {
-                    text: "Achieving enough wealth to never rely on anyone else.",
+                    text: "Being completely independent.",
                     value: "Independence & Freedom",
                 },
                 {
-                    text: "Setting aside money to donate to important causes.",
+                    text: "Being able to donate to important causes.",
                     value: "Contribution & Service",
                 },
             ],
         },
         {
             id: 8,
-            question:
-                "What is the best way to handle a conflict within the family?",
+            question: "How do you prefer to handle conflict?",
             options: [
                 {
-                    text: "Restoring peace and calm as quickly as possible.",
+                    text: "Restore peace and calm as quickly as possible.",
                     value: "Health & Harmony",
                 },
                 {
-                    text: "Having a frank, honest discussion about the issue.",
+                    text: "Have a frank, honest discussion about the issue.",
                     value: "Integrity & Ethics",
                 },
                 {
-                    text: "Deferring to the wisdom of elder family members.",
+                    text: "Defer to the wisdom of experts or elders.",
                     value: "Tradition & Spirituality",
                 },
                 {
-                    text: "Showing empathy and forgiving each other.",
+                    text: "Show empathy and forgiveness.",
                     value: "Connection & Love",
                 },
             ],
         },
         {
             id: 9,
-            question: "When traveling for vacation, what do you look for?",
+            question: "Your dream vacation would include...",
             options: [
                 {
-                    text: "Thrilling experiences and going off the beaten path.",
+                    text: "Exciting adventures.",
                     value: "Adventure & Exploration",
                 },
                 {
-                    text: "Relaxing at a spa or wellness retreat to recharge.",
+                    text: "Relaxing at a spa.",
                     value: "Health & Harmony",
                 },
                 {
-                    text: "Visiting museums and learning about local history.",
+                    text: "Visiting a museum.",
                     value: "Growth & Mastery",
                 },
                 {
-                    text: "Creating lasting memories with my family and friends.",
+                    text: "Creating memories with loved ones.",
                     value: "Connection & Love",
                 },
             ],
         },
         {
             id: 10,
-            question: "How do you evaluate the success of a personal project?",
+            question: "A project is successful if...",
             options: [
                 {
-                    text: "By how perfectly I executed the necessary skills.",
+                    text: "It was executed perfectly.",
                     value: "Growth & Mastery",
                 },
                 {
-                    text: "By how many people praised or recognized my work.",
+                    text: "People recognized and appreciated my work.",
                     value: "Achievement & Influence",
                 },
                 {
-                    text: "By how much inner peace and satisfaction it brought me.",
+                    text: "It brought me satisfaction and inner peace.",
                     value: "Health & Harmony",
                 },
                 {
-                    text: "By how much it helped my community or team.",
+                    text: "It helped my team or community.",
                     value: "Contribution & Service",
                 },
             ],
         },
         {
             id: 11,
-            question: "What role should social media play in your life?",
+            question:
+                "What role do you want social media to play in your life?",
             options: [
                 {
-                    text: "A tool to build influence and a strong personal brand.",
+                    text: "A tool to build influence and express myself.",
                     value: "Achievement & Influence",
                 },
                 {
-                    text: "A way to stay in touch with distant relatives and friends.",
+                    text: "A way to connect with distant friends and family.",
                     value: "Connection & Love",
                 },
                 {
-                    text: "A resource for discovering new ideas and learning.",
+                    text: "A resource for discovering new ideas, skills, and perspectives.",
                     value: "Growth & Mastery",
                 },
                 {
@@ -280,22 +279,22 @@ export const QUESTION_DATA: QuizData = {
         {
             id: 12,
             question:
-                "What principle do you most want to instill in your children?",
+                "What principles would you want to instill most in your children?",
             options: [
                 {
                     text: "Always tell the truth and take responsibility for your actions.",
                     value: "Integrity & Ethics",
                 },
                 {
-                    text: "Be brave and never fear trying new things.",
+                    text: "Be brave and willing to try new things.",
                     value: "Adventure & Exploration",
                 },
                 {
-                    text: "Show empathy and care for everyone you meet.",
+                    text: "Show empathy and care for others.",
                     value: "Connection & Love",
                 },
                 {
-                    text: "Work hard to become successful and powerful.",
+                    text: "Work hard to become successful.",
                     value: "Achievement & Influence",
                 },
             ],
@@ -305,64 +304,63 @@ export const QUESTION_DATA: QuizData = {
             question: "How do you prefer to manage your household routines?",
             options: [
                 {
-                    text: "With strict discipline and orderly schedules.",
+                    text: "With regular, organized schedules.",
                     value: "Integrity & Ethics",
                 },
                 {
-                    text: "With flexibility so we can change plans freely.",
+                    text: "With flexibility so we can adapt to other plans.",
                     value: "Independence & Freedom",
                 },
                 {
-                    text: "By following customs passed down from our parents.",
+                    text: "Exactly how our parents did.",
                     value: "Tradition & Spirituality",
                 },
                 {
-                    text: "By utilizing tools for maximum efficiency.",
+                    text: "By utilizing the best tools for max efficiency.",
                     value: "Growth & Mastery",
                 },
             ],
         },
         {
             id: 14,
-            question:
-                "When choosing a neighborhood to live in, what is the priority?",
+            question: "When choosing a place to live, my ideal neighborhood...",
             options: [
                 {
-                    text: "Low crime rates and a predictable environment.",
+                    text: "Has the lowest crime rates.",
                     value: "Stability & Security",
                 },
                 {
-                    text: "A tight-knit community where neighbors help each other.",
+                    text: "Is a tight-knit community.",
                     value: "Contribution & Service",
                 },
                 {
-                    text: "High-end amenities and an exclusive reputation.",
+                    text: "Has high-end amenities and reputation.",
                     value: "Achievement & Influence",
                 },
                 {
-                    text: "Access to parks, trails, and wellness centers.",
+                    text: "Is near parks, trails, and gyms.",
                     value: "Health & Harmony",
                 },
             ],
         },
         {
             id: 15,
-            question: "How do you respond to unexpected changes in your plans?",
+            question: "When plans change unexpectedly, I...",
             options: [
                 {
-                    text: "I try to regain control of the situation immediately.",
+                    text: "Try to regain control of the situation immediately.",
                     value: "Stability & Security",
                 },
                 {
-                    text: "I embrace the variety and look for a new adventure.",
+                    text: "Embrace the variety and look for a new adventure.",
                     value: "Adventure & Exploration",
                 },
                 {
-                    text: "I focus on keeping my emotions balanced and calm.",
+                    text: "Focus on staying calm and balanced.",
                     value: "Health & Harmony",
                 },
                 {
-                    text: "I treat it as a challenge to test my problem-solving skills.",
+                    text: "Treat it as a problem-solving skill builder.",
                     value: "Growth & Mastery",
                 },
             ],
@@ -370,10 +368,10 @@ export const QUESTION_DATA: QuizData = {
         {
             id: 16,
             question:
-                "What do you feel is the most important aspect of a romantic relationship?",
+                "In a romantic relationship, the most important thing is...",
             options: [
                 {
-                    text: "Complete transparency and unwavering trust.",
+                    text: "Complete transparency and trust.",
                     value: "Integrity & Ethics",
                 },
                 {
@@ -381,7 +379,7 @@ export const QUESTION_DATA: QuizData = {
                     value: "Connection & Love",
                 },
                 {
-                    text: "Supporting each other's ambitions and career goals.",
+                    text: "Supporting each other's ambitions and goals.",
                     value: "Achievement & Influence",
                 },
                 {
@@ -399,7 +397,7 @@ export const QUESTION_DATA: QuizData = {
                     value: "Contribution & Service",
                 },
                 {
-                    text: "Achieving significant wealth and public recognition.",
+                    text: "Achieving significant wealth, influence, or recognition.",
                     value: "Achievement & Influence",
                 },
                 {
@@ -407,25 +405,25 @@ export const QUESTION_DATA: QuizData = {
                     value: "Tradition & Spirituality",
                 },
                 {
-                    text: "Constantly developing my intellect and wisdom.",
+                    text: "Continually developing my intellect and wisdom.",
                     value: "Growth & Mastery",
                 },
             ],
         },
         {
             id: 18,
-            question: "What kind of apps do you use most frequently?",
+            question: "What kind of apps do you use most?",
             options: [
                 {
-                    text: "Banking and home security monitors.",
+                    text: "Banking and home security.",
                     value: "Stability & Security",
                 },
                 {
-                    text: "Messaging apps to chat with loved ones.",
+                    text: "Communicating with loved ones.",
                     value: "Connection & Love",
                 },
                 {
-                    text: "Educational platforms and skill-building tools.",
+                    text: "Educational and skill-building.",
                     value: "Growth & Mastery",
                 },
                 {
@@ -458,23 +456,22 @@ export const QUESTION_DATA: QuizData = {
         },
         {
             id: 20,
-            question:
-                "When adopting a new technology at home, what is your primary goal?",
+            question: "When adopting new tech at home, my primary goal is...",
             options: [
                 {
-                    text: "Ensuring our home network is safe and reliable.",
+                    text: "Ensuring my systems/networks are safe and reliable.",
                     value: "Stability & Security",
                 },
                 {
-                    text: "Bringing the family together for shared activities.",
+                    text: "Bringing people together for shared activities.",
                     value: "Connection & Love",
                 },
                 {
-                    text: "Learning new skills and expanding our capabilities.",
+                    text: "Learning new skills and expanding capabilities.",
                     value: "Growth & Mastery",
                 },
                 {
-                    text: "Automating tasks to give us more free time.",
+                    text: "Automating tasks to give me more free time.",
                     value: "Independence & Freedom",
                 },
             ],

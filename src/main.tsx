@@ -12,7 +12,7 @@ import LearnPage from "@/pages/learn/LearnPage.tsx";
 import ResultsPage from "@/pages/results/ResultsPage.tsx";
 import { Analytics } from "@vercel/analytics/react";
 
-const CURRENT_VERSION = "0.0.1";
+const CURRENT_VERSION = "0.0.2";
 
 if (localStorage.getItem("app_version") !== CURRENT_VERSION) {
     sessionStorage.clear(); // Clears all session atoms
@@ -36,7 +36,10 @@ createRoot(document.getElementById("root")!).render(
                                     element={<LearnPage />}
                                 />
                                 <Route path={"/quiz"} element={<QuizPage />} />
-                                <Route path={"/results"} element={<ResultsPage />} />
+                                <Route
+                                    path={"/results"}
+                                    element={<ResultsPage />}
+                                />
                             </Routes>
                         </div>
                     </div>
