@@ -25,7 +25,9 @@ createRoot(document.getElementById("root")!).render(
             <div className={"bg-E5F0FF"}>
                 <BrowserRouter>
                     <div className={"flex flex-col h-screen w-full"}>
-                        <TopNavBar />
+                        <div className="print:hidden">
+                            <TopNavBar />
+                        </div>
                         <div className={"flex-1 overflow-auto"}>
                             <Routes>
                                 <Route path={"/"} element={<HomePage />} />
