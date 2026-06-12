@@ -48,7 +48,7 @@ export default function Results() {
                         key={valueResult.value}
                         className={[
                             "flex flex-col rounded-xl p-4 gap-2 text-primary",
-                            index === 0
+                            valueResult.points === maxScore
                                 ? "border-2 border-primary bg-base-200"
                                 : "border border-primary",
                         ].join(" ")}

@@ -14,7 +14,15 @@ export default function ProgressFooter() {
 
     const [selectedChoices] = useAtom(answersAtom);
 
-    const progressValue = selectedChoices.length;
+    const progressValue = useMemo(
+        () =>
+            QUESTION_DATA.questions.filter((q) =>
+                q.options.some((opt) =>
+                    selectedChoices.some((c) => c.text === opt.text),
+                ),
+            ).length,
+        [selectedChoices],
+    );
     const progressMax = QUESTION_DATA.questions.length;
     const progressPercentage = progressValue / progressMax;
 

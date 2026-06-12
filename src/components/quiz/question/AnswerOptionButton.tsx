@@ -1,10 +1,6 @@
 import { useAtom } from "jotai";
-import { answersAtom, currentQuestionIndexAtom } from "@/state/state.ts";
-import {
-    type AnswerOption,
-    QUESTION_DATA,
-    type QuestionData,
-} from "@/data/questionData.ts";
+import { answersAtom } from "@/state/state.ts";
+import { type AnswerOption } from "@/data/questionData.ts";
 import { Button } from "@/components/catalyst-ui-kit/button.tsx";
 
 type Props = {
@@ -14,9 +10,6 @@ type Props = {
 export default function AnswerOptionButton({ option }: Props) {
     const [selectedChoices, setSelectedChoices] =
         useAtom<AnswerOption[]>(answersAtom);
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useAtom(
-        currentQuestionIndexAtom,
-    );
 
     const isSelected = selectedChoices.some(
         (selectedChoice) => selectedChoice.text === option.text,
@@ -34,41 +27,12 @@ export default function AnswerOptionButton({ option }: Props) {
     );
 
     function handleButtonClick() {
-        const isNowSelected = !isSelected;
-        if (isNowSelected) {
-            removeAnswersForQuestion();
-            addChoice();
-            goToNextQuestion();
+        if (isSelected) {
+            setSelectedChoices((prev) =>
+                prev.filter((c) => c.text !== option.text),
+            );
         } else {
-            removeChoice(option.text);
+            setSelectedChoices((prev) => [...prev, option]);
         }
-    }
-
-    function addChoice() {
-        setSelectedChoices((prev) => [...prev, option]);
-    }
-
-    function goToNextQuestion() {
-        setTimeout(() => {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-        }, 200);
-    }
-
-    function removeChoice(choiceText: string) {
-        setSelectedChoices((prev) =>
-            prev.filter((selectedChoice) => selectedChoice.text !== choiceText),
-        );
-    }
-
-    function removeAnswersForQuestion() {
-        const answerOptions: QuestionData = QUESTION_DATA.questions.find(
-            (question) =>
-                question.options.some(
-                    (answerOption) => answerOption.text === option.text,
-                ),
-        )!;
-        answerOptions.options.forEach((answerOption) => {
-            removeChoice(answerOption.text);
-        });
     }
 }
