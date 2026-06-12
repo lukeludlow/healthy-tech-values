@@ -16,8 +16,12 @@ export default function HamburgerDropdown() {
                 <Bars3Icon />
             </DropdownButton>
             <DropdownMenu anchor="bottom end">
+                <DropdownItem onClick={() => navigate("/")}>Home</DropdownItem>
                 <DropdownItem onClick={() => navigate("/quiz")}>
                     Quiz
+                </DropdownItem>
+                <DropdownItem onClick={() => navigate("/results")}>
+                    Results
                 </DropdownItem>
                 <DropdownItem onClick={() => navigate("/learn")}>
                     Learn

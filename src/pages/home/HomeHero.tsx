@@ -30,13 +30,22 @@ export default function HomeHero() {
                         Taming your tech starts with getting clear on what you
                         value in life.
                     </p>
-                    <Button
-                        color="primary"
-                        className="px-8 py-3 text-base"
-                        onClick={handleStartQuiz}
-                    >
-                        {isQuizInProgress ? "Continue" : "Take"} the Quiz
-                    </Button>
+                    <div className="flex flex-wrap justify-center gap-3">
+                        <Button
+                            color="primary"
+                            className="px-8 py-3 text-base"
+                            onClick={handleStartQuiz}
+                        >
+                            {isQuizInProgress ? "Continue" : "Take"} the Quiz
+                        </Button>
+                        <Button
+                            outline
+                            href="/learn"
+                            className="px-8 py-3 text-base"
+                        >
+                            Learn More
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>
