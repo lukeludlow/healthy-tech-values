@@ -8,10 +8,10 @@ export default function HealthyValuesButton() {
     return (
         <Button
             plain
-            className="text-xl font-medium"
+            className="text-xl font-medium shadow-md"
             onClick={() => navigate("/")}
         >
-            <Heading>Values Quiz</Heading>
+            <Heading>Core Values Quiz</Heading>
         </Button>
     );
 }

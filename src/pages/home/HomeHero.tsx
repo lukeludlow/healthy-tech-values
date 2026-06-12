@@ -15,7 +15,7 @@ export default function HomeHero() {
     const [, setCurrentQuestionIndex] = useAtom(currentQuestionIndexAtom);
 
     return (
-        <div className="flex items-center justify-center bg-base-200 h-full pb-21">
+        <div className="flex items-center justify-center bg-base-200 min-h-[calc(80vh-4rem)]">
             <div className="text-center flex flex-col items-center">
                 <div className="max-w-md">
                     <div className={"flex justify-center mb-5"}>
@@ -25,12 +25,16 @@ export default function HomeHero() {
                             className="max-w-sm w-34 rounded-lg shadow-2xl"
                         />
                     </div>
-                    <h1 className="text-4xl font-bold">Values Quiz</h1>
+                    <h1 className="text-4xl font-bold">Core Values Quiz</h1>
                     <p className="py-6 text-xl">
                         Taming your tech starts with getting clear on what you
                         value in life.
                     </p>
-                    <Button color="primary" className="px-8 py-3 text-base" onClick={handleStartQuiz}>
+                    <Button
+                        color="primary"
+                        className="px-8 py-3 text-base"
+                        onClick={handleStartQuiz}
+                    >
                         {isQuizInProgress ? "Continue" : "Take"} the Quiz
                     </Button>
                 </div>
