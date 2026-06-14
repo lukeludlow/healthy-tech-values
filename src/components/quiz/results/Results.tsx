@@ -1,10 +1,16 @@
 import { useAtom } from "jotai";
 import { answersAtom } from "@/state/state.ts";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { toPng } from "html-to-image";
 import { Button } from "@/components/catalyst-ui-kit/button.tsx";
-import { FaDownload, FaPrint } from "react-icons/fa";
+import {
+    FaChevronDown,
+    FaChevronUp,
+    FaDownload,
+    FaPrint,
+} from "react-icons/fa";
 import { useNavigate } from "react-router";
+import ValueDetails from "@/components/quiz/results/ValueDetails.tsx";
 
 type ValueResult = {
     value: string;
@@ -15,6 +21,21 @@ export default function Results() {
     const [answers] = useAtom(answersAtom);
     const cardRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+    const [expandedValues, setExpandedValues] = useState<Set<string>>(
+        new Set(),
+    );
+
+    function handleValueClick(value: string) {
+        setExpandedValues((prev) => {
+            const next = new Set(prev);
+            if (next.has(value)) {
+                next.delete(value);
+            } else {
+                next.add(value);
+            }
+            return next;
+        });
+    }
 
     const valuesResults: ValueResult[] = answers
         .reduce((acc, choice) => {
@@ -54,8 +75,11 @@ export default function Results() {
     }
 
     return (
-        <div className="flex flex-col gap-6 py-6 max-w-xl mx-auto w-full px-4">
-            <div ref={cardRef} className="flex flex-col gap-6 p-4">
+        <div className="flex flex-col gap-6 py-6 max-w-xl mx-auto w-full px-4 print:block">
+            <div
+                ref={cardRef}
+                className="flex flex-col gap-6 p-4 print:block print:space-y-6"
+            >
                 <div className="text-center flex flex-col gap-2 mb-2">
                     <h1 className="text-4xl font-bold text-primary">
                         Your Core Values
@@ -66,39 +90,65 @@ export default function Results() {
                     </p>
                 </div>
 
-                <div className="flex flex-col gap-3">
-                    {valuesResults.map((valueResult, index) => (
-                        <div
-                            key={valueResult.value}
-                            className={[
-                                "flex flex-col rounded-xl p-4 gap-2 text-primary",
-                                valueResult.points === maxScore
-                                    ? "border-2 border-primary bg-base-200"
-                                    : "border border-primary",
-                            ].join(" ")}
-                        >
-                            <div className="flex flex-row items-center gap-3">
-                                <span className="w-8 h-8 rounded-full bg-primary text-primary-content flex items-center justify-center text-sm font-bold shrink-0">
-                                    {index + 1}
-                                </span>
-                                <span className="flex-1 font-bold text-base">
-                                    {valueResult.value}
-                                </span>
-                                <span className="text-sm font-semibold shrink-0 text-primary/80">
-                                    {valueResult.points} pts
-                                </span>
-                            </div>
+                <div className="flex flex-col gap-3 print:block print:space-y-3">
+                    {valuesResults.map((valueResult, index) => {
+                        const isExpanded = expandedValues.has(
+                            valueResult.value,
+                        );
+                        return (
+                            <div
+                                key={valueResult.value}
+                                className={[
+                                    "flex flex-col rounded-xl p-4 gap-2 text-primary cursor-pointer select-none print:break-inside-avoid",
+                                    valueResult.points === maxScore
+                                        ? "border-2 border-primary bg-base-200"
+                                        : "border border-primary",
+                                ].join(" ")}
+                                onClick={() =>
+                                    handleValueClick(valueResult.value)
+                                }
+                            >
+                                <div className="flex flex-row items-center gap-3">
+                                    <span className="w-8 h-8 rounded-full bg-primary text-primary-content flex items-center justify-center text-sm font-bold shrink-0">
+                                        {index + 1}
+                                    </span>
+                                    <span className="flex-1 font-bold text-base">
+                                        {valueResult.value}
+                                    </span>
+                                    <span className="text-sm font-semibold shrink-0 text-primary/80">
+                                        {valueResult.points} pts
+                                    </span>
+                                    <span className="text-primary/60 shrink-0">
+                                        {isExpanded ? (
+                                            <FaChevronUp size={12} />
+                                        ) : (
+                                            <FaChevronDown size={12} />
+                                        )}
+                                    </span>
+                                </div>
 
-                            <div className="w-full h-2 rounded-full bg-base-300 overflow-hidden">
-                                <div
-                                    className="h-full bg-primary rounded-full transition-all"
-                                    style={{
-                                        width: `${Math.round((valueResult.points / maxScore) * 100)}%`,
-                                    }}
-                                />
+                                <div className="w-full h-2 rounded-full bg-base-300 overflow-hidden">
+                                    <div
+                                        className="h-full bg-primary rounded-full transition-all"
+                                        style={{
+                                            width: `${Math.round((valueResult.points / maxScore) * 100)}%`,
+                                        }}
+                                    />
+                                </div>
+
+                                {isExpanded && (
+                                    <div>
+                                        <p className="text-xs font-semibold text-primary/60 uppercase tracking-wide mt-1 mb-0.5">
+                                            Suggested goals
+                                        </p>
+                                        <ValueDetails
+                                            value={valueResult.value}
+                                        />
+                                    </div>
+                                )}
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
 
@@ -122,9 +172,9 @@ export default function Results() {
             </div>
 
             <Button
-                color="secondary"
+                outline
                 className="w-full print:hidden"
-                onClick={() => navigate('/learn#core-values')}
+                onClick={() => navigate("/learn#core-values")}
             >
                 Next Step: Understand Your Values →
             </Button>

@@ -2,6 +2,18 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 2cm;
+    }
+
+    html, body, #root {
+        height: auto !important;
+        overflow: visible !important;
+    }
+}
+
 @theme {
     --font-sans: Inter, sans-serif;
     --font-sans--font-feature-settings: 'cv11';

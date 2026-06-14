@@ -24,11 +24,11 @@ createRoot(document.getElementById("root")!).render(
         <PrimeReactProvider value={{ ripple: true }}>
             <div className={"bg-E5F0FF"}>
                 <BrowserRouter>
-                    <div className={"flex flex-col h-screen w-full"}>
+                    <div className={"flex flex-col h-screen w-full print:h-auto"}>
                         <div className="print:hidden">
                             <TopNavBar />
                         </div>
-                        <div className={"flex-1 overflow-auto"}>
+                        <div className={"flex-1 overflow-auto print:overflow-visible"}>
                             <Routes>
                                 <Route path={"/"} element={<HomePage />} />
                                 <Route
