@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
+import { useEffect } from "react";
 import { useAtom } from "jotai";
 import {
     currentQuestionIndexAtom,
@@ -139,8 +140,15 @@ const steps = [
 
 export default function LearnPage() {
     const navigate = useNavigate();
+    const { hash } = useLocation();
     const [isQuizInProgress, setIsQuizInProgress] = useAtom(isQuizInProgressAtom);
     const [, setCurrentQuestionIndex] = useAtom(currentQuestionIndexAtom);
+
+    useEffect(() => {
+        if (!hash) return;
+        const el = document.querySelector(hash);
+        el?.scrollIntoView({ behavior: "smooth" });
+    }, [hash]);
 
     function handleStartQuiz() {
         if (!isQuizInProgress) {
@@ -226,7 +234,7 @@ export default function LearnPage() {
             </section>
 
             {/* Section 4 — The 10 Core Values */}
-            <section className="bg-white py-16 px-6">
+            <section id="core-values" className="bg-white py-16 px-6">
                 <div className="max-w-5xl mx-auto">
                     <h2 className="text-3xl font-bold text-center mb-3">
                         The 10 Core Values

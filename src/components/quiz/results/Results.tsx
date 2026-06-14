@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { toPng } from "html-to-image";
 import { Button } from "@/components/catalyst-ui-kit/button.tsx";
 import { FaDownload, FaPrint } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 type ValueResult = {
     value: string;
@@ -13,6 +14,7 @@ type ValueResult = {
 export default function Results() {
     const [answers] = useAtom(answersAtom);
     const cardRef = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
 
     const valuesResults: ValueResult[] = answers
         .reduce((acc, choice) => {
@@ -118,6 +120,14 @@ export default function Results() {
                     Print
                 </Button>
             </div>
+
+            <Button
+                color="secondary"
+                className="w-full print:hidden"
+                onClick={() => navigate('/learn#core-values')}
+            >
+                Next Step: Understand Your Values →
+            </Button>
         </div>
     );
 }
