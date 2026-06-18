@@ -95,34 +95,31 @@ export default function HomeSections() {
                     >
                         Learn more about consulting at Healthy Tech Balance →
                     </a>
-                    <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-2xl mx-auto text-left">
-                        <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
-                            <img
-                                src="/images/Screen Time Guidelines.png"
-                                alt="Screen Time Guidelines"
-                                className="w-full"
-                            />
-                            <div className="p-5">
-                                <h3 className="font-semibold text-lg mb-1">
-                                    Screen Time Guidelines
-                                </h3>
-                                <p className="text-sm text-gray-600 mb-4">
-                                    Age-appropriate daily screen time recommendations from the WHO, CDC, and APA.
-                                </p>
-                                <Button href="/learn#screen-time-guidelines" outline className="text-sm">
-                                    View &amp; Download →
-                                </Button>
-                            </div>
-                        </div>
-                        <div className="rounded-2xl border border-primary bg-white shadow-sm flex flex-col p-5">
-                            <span className="text-3xl mb-3">📚</span>
-                            <h3 className="font-semibold text-lg mb-2">
+                    <div className="mt-10 max-w-2xl mx-auto text-left">
+                        <img
+                            src="/images/Screen Time Guidelines.png"
+                            alt="Screen Time Guidelines chart showing recommended daily screen time by age group"
+                            className="w-full rounded-2xl shadow-md"
+                        />
+                        <a
+                            href="/learn#screen-time-guidelines"
+                            className="block text-center text-lg font-bold text-gray-900 mt-4 mb-10 hover:text-primary"
+                        >
+                            Printable Download
+                        </a>
+
+                        <div className="border-l-4 border-primary pl-6">
+                            <h3 className="text-2xl font-bold mb-3">
                                 Resource Library
                             </h3>
-                            <p className="text-sm text-gray-600 mb-5 flex-1">
+                            <p className="text-gray-600 mb-6">
                                 Orgs, articles, books, podcasts, and documentaries curated to help every family navigate technology with intention.
                             </p>
-                            <Button href="/resources" color="primary" className="text-sm">
+                            <Button
+                                href="/resources"
+                                color="primary"
+                                className="w-full justify-center text-sm"
+                            >
                                 Browse Resources →
                             </Button>
                         </div>
