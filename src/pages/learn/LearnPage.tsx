@@ -6,6 +6,7 @@ import {
     isQuizInProgressAtom,
 } from "@/state/state.ts";
 import { Button } from "@/components/catalyst-ui-kit/button.tsx";
+import { FaDownload, FaPrint } from "react-icons/fa";
 
 const whyValues = [
     {
@@ -150,6 +151,29 @@ export default function LearnPage() {
         el?.scrollIntoView({ behavior: "smooth" });
     }, [hash]);
 
+    function handlePrint() {
+        const img = document.querySelector(
+            ".screen-time-guidelines-printable img"
+        ) as HTMLImageElement;
+        if (!img) return;
+        const win = window.open("", "_blank", "width=800,height=600");
+        if (!win) return;
+        win.document.write(`<!DOCTYPE html>
+<html>
+<head>
+<style>
+  @page { margin: 1cm; }
+  body { margin: 0; }
+  img { width: 100%; height: auto; display: block; }
+</style>
+</head>
+<body>
+<img src="${img.src}" onload="window.print(); window.close();" />
+</body>
+</html>`);
+        win.document.close();
+    }
+
     function handleStartQuiz() {
         if (!isQuizInProgress) {
             setIsQuizInProgress(true);
@@ -271,7 +295,43 @@ export default function LearnPage() {
                 </div>
             </section>
 
-            {/* Section 5 — How to Start */}
+            {/* Section 5 — Screen Time Guidelines */}
+            <section id="screen-time-guidelines" className="bg-base-200 py-16 px-6">
+                <div className="max-w-3xl mx-auto text-center">
+                    <h2 className="text-3xl font-bold mb-3">
+                        Screen Time Guidelines
+                    </h2>
+                    <p className="text-lg text-gray-600 mb-10">
+                        Age-appropriate recommendations from the WHO, CDC, and APA — a practical reference for every family.
+                    </p>
+                    <div className="screen-time-guidelines-printable">
+                        <img
+                            src="/images/Screen Time Guidelines.png"
+                            alt="Screen Time Guidelines chart showing recommended daily screen time by age group"
+                            className="w-full rounded-2xl shadow-md mb-8"
+                        />
+                    </div>
+                    <div className="flex flex-wrap justify-center gap-4 print:hidden">
+                        <a
+                            href="/images/Screen Time Guidelines.png"
+                            download="Screen Time Guidelines.png"
+                            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg border border-primary text-primary font-semibold text-sm hover:bg-primary hover:text-white transition-colors"
+                        >
+                            <FaDownload />
+                            Download
+                        </a>
+                        <button
+                            onClick={handlePrint}
+                            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg border border-gray-300 text-gray-700 font-semibold text-sm hover:bg-gray-50 transition-colors"
+                        >
+                            <FaPrint />
+                            Print
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            {/* Section 6 — How to Start */}
             <section className="bg-base-200 py-16 px-6">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl font-bold mb-3">How to Start</h2>
@@ -295,7 +355,7 @@ export default function LearnPage() {
                 </div>
             </section>
 
-            {/* Section 6 — Quiz CTA */}
+            {/* Section 7 — Quiz CTA */}
             <section className="bg-primary py-16 px-6">
                 <div className="max-w-2xl mx-auto text-center">
                     <h2 className="text-3xl font-bold text-white mb-6">

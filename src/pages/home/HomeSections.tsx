@@ -95,6 +95,24 @@ export default function HomeSections() {
                     >
                         Learn more about consulting at Healthy Tech Balance →
                     </a>
+                    <div className="mt-10 max-w-md mx-auto rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden text-left">
+                        <img
+                            src="/images/Screen Time Guidelines.png"
+                            alt="Screen Time Guidelines"
+                            className="w-full"
+                        />
+                        <div className="p-5">
+                            <h3 className="font-semibold text-lg mb-1">
+                                Screen Time Guidelines
+                            </h3>
+                            <p className="text-sm text-gray-600 mb-4">
+                                Age-appropriate daily screen time recommendations from the WHO, CDC, and APA.
+                            </p>
+                            <Button href="/learn#screen-time-guidelines" outline className="text-sm">
+                                View &amp; Download →
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </section>
 
