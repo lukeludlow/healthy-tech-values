@@ -14,43 +14,6 @@ export default function HomeHero() {
         useAtom(isQuizInProgressAtom);
     const [, setCurrentQuestionIndex] = useAtom(currentQuestionIndexAtom);
 
-    return (
-        <div className="flex items-center justify-center bg-base-200 min-h-[calc(80vh-4rem)]">
-            <div className="text-center flex flex-col items-center">
-                <div className="max-w-md">
-                    <div className={"flex justify-center mb-5"}>
-                        <img
-                            src={logoIcon}
-                            alt="Healthy Values Logo"
-                            className="max-w-sm w-34 rounded-lg shadow-2xl"
-                        />
-                    </div>
-                    <h1 className="text-4xl font-bold">Core Values Quiz</h1>
-                    <p className="py-6 text-xl">
-                        Taming your tech starts with getting clear on what you
-                        value in life.
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-3">
-                        <Button
-                            color="primary"
-                            className="px-8 py-3 text-base"
-                            onClick={handleStartQuiz}
-                        >
-                            {isQuizInProgress ? "Continue" : "Take"} the Quiz
-                        </Button>
-                        <Button
-                            outline
-                            href="/learn"
-                            className="px-8 py-3 text-base"
-                        >
-                            Learn More
-                        </Button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-
     function handleStartQuiz() {
         if (!isQuizInProgress) {
             setIsQuizInProgress(true);
@@ -58,4 +21,48 @@ export default function HomeHero() {
         }
         navigate("/quiz");
     }
+
+    return (
+        <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+            {/* Background photo */}
+            <img
+                src="/images/htb-image-asset.webp"
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full object-cover"
+            />
+            {/* Green brand overlay */}
+            <div className="absolute inset-0 bg-primary/40" />
+            {/* Content */}
+            <div className="relative z-10 text-center py-20 px-6 flex flex-col items-center">
+                <h1 className="text-5xl font-bold text-white drop-shadow-md">
+                    Healthy Tech Balance
+                </h1>
+                <img
+                    src={logoIcon}
+                    alt="Healthy Tech Balance logo"
+                    className="h-20 w-20 rounded-xl shadow-2xl my-6 object-contain"
+                />
+                <p className="text-2xl font-semibold text-white drop-shadow-md max-w-lg">
+                    Take back your relationships, your joy, and your life.
+                </p>
+                <div className="flex flex-wrap justify-center gap-3 mt-10">
+                    <Button
+                        color="white"
+                        className="px-8 py-3 text-base"
+                        onClick={handleStartQuiz}
+                    >
+                        {isQuizInProgress ? "Continue" : "Take"} the Quiz
+                    </Button>
+                    <Button
+                        outline
+                        href="/learn"
+                        className="px-8 py-3 text-base text-white border-white hover:bg-white/10"
+                    >
+                        Learn More
+                    </Button>
+                </div>
+            </div>
+        </div>
+    );
 }

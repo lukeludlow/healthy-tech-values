@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { Button } from "@/components/catalyst-ui-kit/button.tsx";
-import { Heading } from "@/components/catalyst-ui-kit/heading.tsx";
+import { Subheading } from "@/components/catalyst-ui-kit/heading.tsx";
 
 export default function HealthyValuesButton() {
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ export default function HealthyValuesButton() {
             className="text-xl font-medium shadow-md"
             onClick={() => navigate("/")}
         >
-            <Heading>Healthy Tech Balance</Heading>
+            <Subheading>Healthy Tech Balance</Subheading>
         </Button>
     );
 }
