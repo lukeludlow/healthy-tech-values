@@ -393,6 +393,23 @@ const lightSteps = [
     { letter: "T", word: "Transform", description: "Use tech to turn goals into reality." },
 ];
 
+const secondaryQuizzes = [
+    {
+        emoji: "❤️",
+        name: "Love Languages Quiz",
+        description:
+            "Discover your primary love language and how you best give and receive love.",
+        url: "https://5lovelanguages.com/quizzes/love-language",
+    },
+    {
+        emoji: "🤝",
+        name: "Apology Languages Quiz",
+        description:
+            "Learn which type of apology resonates most deeply with you and the people you love.",
+        url: "https://5lovelanguages.com/quizzes/apology-language",
+    },
+];
+
 function OrgCard({
     name,
     url,
@@ -494,7 +511,60 @@ export default function ResourcesPage() {
                 </div>
             </section>
 
-            {/* Section 2 — Organizations & Websites */}
+            {/* Section 2 — Quizzes */}
+            <section className="bg-base-200 py-16 px-6">
+                <div className="max-w-3xl mx-auto">
+                    <h2 className="text-3xl font-bold text-center mb-3">
+                        Quizzes &amp; Self-Assessments
+                    </h2>
+                    <p className="text-lg text-gray-600 text-center mb-10">
+                        Free tools to help you and your family understand yourselves and each other better.
+                    </p>
+
+                    {/* Featured: Core Values Quiz */}
+                    <div className="rounded-2xl bg-primary p-8 mb-6 text-center">
+                        <span className="inline-block text-xs font-semibold text-white/70 uppercase tracking-widest mb-3">
+                            Available right here
+                        </span>
+                        <h3 className="text-2xl font-bold text-white mb-3">
+                            Core Values Quiz
+                        </h3>
+                        <p className="text-primary-content text-base leading-relaxed mb-6 max-w-lg mx-auto">
+                            Discover the values that drive your decisions, shape your relationships, and
+                            define how technology should — and shouldn't — fit into your life.
+                        </p>
+                        <Button color="white" className="px-8 py-3 text-base" onClick={handleStartQuiz}>
+                            {isQuizInProgress ? "Continue" : "Take"} the Core Values Quiz
+                        </Button>
+                    </div>
+
+                    {/* Secondary quizzes */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        {secondaryQuizzes.map((quiz) => (
+                            <div
+                                key={quiz.name}
+                                className="flex flex-col p-6 rounded-2xl border border-gray-100 shadow-sm"
+                            >
+                                <span className="text-3xl mb-3">{quiz.emoji}</span>
+                                <h3 className="font-bold text-base mb-1">{quiz.name}</h3>
+                                <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-1">
+                                    {quiz.description}
+                                </p>
+                                <a
+                                    href={quiz.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-sm text-primary font-medium hover:underline"
+                                >
+                                    Take the quiz →
+                                </a>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Section 3 — Organizations & Websites */}
             <section className="bg-white py-16 px-6">
                 <div className="max-w-5xl mx-auto">
                     <h2 className="text-3xl font-bold text-center mb-12">
