@@ -10,6 +10,7 @@ import TopNavBar from "@/components/navbar/TopNavBar.tsx";
 import QuizPage from "@/pages/quiz/QuizPage.tsx";
 import LearnPage from "@/pages/learn/LearnPage.tsx";
 import ResultsPage from "@/pages/results/ResultsPage.tsx";
+import ResourcesPage from "@/pages/resources/ResourcesPage.tsx";
 import { Analytics } from "@vercel/analytics/react";
 
 const CURRENT_VERSION = "0.0.2";
@@ -39,6 +40,10 @@ createRoot(document.getElementById("root")!).render(
                                 <Route
                                     path={"/results"}
                                     element={<ResultsPage />}
+                                />
+                                <Route
+                                    path={"/resources"}
+                                    element={<ResourcesPage />}
                                 />
                             </Routes>
                         </div>

@@ -26,6 +26,9 @@ export default function HamburgerDropdown() {
                 <DropdownItem onClick={() => navigate("/learn")}>
                     Learn
                 </DropdownItem>
+                <DropdownItem onClick={() => navigate("/resources")}>
+                    Resources
+                </DropdownItem>
             </DropdownMenu>
         </Dropdown>
     );
