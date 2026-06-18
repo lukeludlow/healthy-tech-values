@@ -48,18 +48,18 @@ export default function HomeHero() {
                 </p>
                 <div className="flex flex-wrap justify-center gap-3 mt-10">
                     <Button
-                        color="primary"
-                        className="px-8 py-3 text-base"
-                        onClick={handleStartQuiz}
-                    >
-                        {isQuizInProgress ? "Continue" : "Take"} the Quiz
-                    </Button>
-                    <Button
                         color={"white"}
                         href="/learn"
                         className="px-8 py-3 text-base text-white border-white hover:bg-white/10"
                     >
                         Learn More
+                    </Button>
+                    <Button
+                        color="primary"
+                        className="px-8 py-3 text-base"
+                        onClick={handleStartQuiz}
+                    >
+                        Start Here
                     </Button>
                 </div>
             </div>
