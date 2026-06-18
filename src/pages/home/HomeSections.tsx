@@ -74,17 +74,17 @@ export default function HomeSections() {
                 </div>
             </section>
 
-            {/* Section 2 — Free Resources / Mission */}
+            {/* Section 2 — Accessible Resources / Mission */}
             <section className="bg-base-200 py-16 px-6">
                 <div className="max-w-2xl mx-auto text-center">
                     <h2 className="text-3xl font-bold mb-6">
-                        Helpful Resources, For Free
+                        Helpful Resources, Easily Accessible
                     </h2>
                     <p className="text-lg text-gray-700 mb-8">
                         As a parent, I know what it feels like to be overwhelmed
                         and not know where to turn. That's why I'm committed to
-                        offering resources that are genuinely helpful — for
-                        free. Because it's what I needed, and every family
+                        offering resources that are genuinely helpful and easily
+                        accessible. Because it's what I needed, and every family
                         deserves a real starting point.
                     </p>
                     <a
