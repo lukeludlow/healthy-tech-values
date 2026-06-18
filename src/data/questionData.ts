@@ -67,7 +67,7 @@ export const QUESTION_DATA: QuizData = {
                     value: "Tradition & Spirituality",
                 },
                 {
-                    text: "Do something physical like hiking for playing sports.",
+                    text: "Do something physical like hiking or playing sports.",
                     value: "Health & Harmony",
                 },
                 {
@@ -312,7 +312,7 @@ export const QUESTION_DATA: QuizData = {
                     value: "Independence & Freedom",
                 },
                 {
-                    text: "Exactly how our parents did.",
+                    text: "Exactly how your parents did.",
                     value: "Tradition & Spirituality",
                 },
                 {
