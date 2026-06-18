@@ -7,6 +7,7 @@ import {
 } from "@/state/state.ts";
 import { Button } from "@/components/catalyst-ui-kit/button.tsx";
 import { FaDownload, FaPrint } from "react-icons/fa";
+import Seo from "@/components/seo/Seo.tsx";
 
 const whyValues = [
     {
@@ -184,6 +185,11 @@ export default function LearnPage() {
 
     return (
         <div className="w-full">
+            <Seo
+                title="What Are Core Values? A Guide to Tech Balance | HTB"
+                description="Learn what core values are, why they matter, explore the 10 core values, and see age-based screen time guidelines from the WHO, CDC, and APA."
+                path="/learn"
+            />
             {/* Section 1 — Hero */}
             <section className="bg-base-200 py-20 px-6">
                 <div className="max-w-2xl mx-auto text-center">

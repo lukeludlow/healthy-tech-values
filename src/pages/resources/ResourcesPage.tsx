@@ -5,6 +5,7 @@ import {
     isQuizInProgressAtom,
 } from "@/state/state.ts";
 import { Button } from "@/components/catalyst-ui-kit/button.tsx";
+import Seo from "@/components/seo/Seo.tsx";
 
 const orgs = [
     {
@@ -481,6 +482,11 @@ export default function ResourcesPage() {
 
     return (
         <div className="w-full">
+            <Seo
+                title="Resources | Screen Time & Tech Balance for Families"
+                description="A curated library of organizations, articles, books, podcasts, and documentaries to help families navigate screen time and technology with intention."
+                path="/resources"
+            />
             {/* Section 1 — Hero */}
             <section className="bg-base-200 py-20 px-6">
                 <div className="max-w-2xl mx-auto text-center">
