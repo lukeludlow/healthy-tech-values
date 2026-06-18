@@ -11,7 +11,7 @@ export default function HealthyValuesButton() {
             className="text-xl font-medium shadow-md"
             onClick={() => navigate("/")}
         >
-            <Heading>Core Values Quiz</Heading>
+            <Heading>Healthy Tech Balance</Heading>
         </Button>
     );
 }
