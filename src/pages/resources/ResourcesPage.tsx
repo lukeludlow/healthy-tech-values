@@ -26,6 +26,8 @@ const orgs = [
         url: "https://screenstrong.org/",
         description:
             "Nonprofit. Great resources tab, Facebook parent support group, and podcast.",
+        extraUrl: "https://drive.google.com/file/d/1KKCETTmzi7JkRGsWsLCiL4cbEsefD3zf/view?usp=sharing",
+        extraLabel: "Free 5-tip one-sheeter",
     },
     {
         name: "ScreenTimeNetwork.org",
@@ -77,11 +79,31 @@ const mentalHealthOrgs = [
         url: "https://parentguidance.org/",
         description:
             "Nonprofit. Phenomenal and FREE mental health and relationship resources.",
+        extraUrl: "https://parentguidance.org/mhs-topic/effects-of-screen-time-childrens-mental-health/",
+        extraLabel: "Course: Effects of Screen Time & Children's Mental Health",
     },
     {
         name: "HelpGuide.org — Smartphone Addiction",
         url: "https://www.helpguide.org/articles/addictions/smartphone-addiction.htm",
         description: "Mental health facts and resources.",
+    },
+    {
+        name: "AACAP",
+        url: "https://www.aacap.org/AACAP/Families_and_Youth/Facts_for_Families/FFF-Guide/Children-And-Watching-TV-054.aspx",
+        description:
+            "Science-based resources on children, teens, and screen use from the American Academy of Child & Adolescent Psychiatry.",
+    },
+    {
+        name: "HealthyChildren.org (AAP)",
+        url: "https://www.healthychildren.org/English/family-life/Media/Pages/default.aspx",
+        description:
+            "The American Academy of Pediatrics' official family resource for media and screen use guidance.",
+    },
+    {
+        name: "BetterScreenTime.com",
+        url: "http://betterscreentime.com",
+        description:
+            "A balanced approach to screen time with printable guides and practical resources.",
     },
 ];
 
@@ -171,6 +193,41 @@ const articles = [
         source: "Psychology Today",
         url: "https://www.psychologytoday.com/us/blog/mental-wealth/201511/going-screenfree-sheer-madness-or-sheer-genius",
     },
+    {
+        title: "Screen Time Linked to Language Delays in Children (2020 Meta-Analysis)",
+        source: "EdWeek / JAMA",
+        url: "http://blogs.edweek.org/edweek/inside-school-research/2020/03/new_warnings_on_screen_time_language_delays.html",
+    },
+    {
+        title: "Screen Time Associated with Myopia in Children",
+        source: "PubMed",
+        url: "https://pubmed.ncbi.nlm.nih.gov/31943280/",
+    },
+    {
+        title: "Social Media Use and Depression and Suicide Risk in Adolescents (2017)",
+        source: "Clinical Psychological Science",
+        url: "https://journals.sagepub.com/doi/abs/10.1177/2167702617723376",
+    },
+    {
+        title: "WHO Guidelines: Children Ages 2–5 Should Have No More Than 1 Hour of Screen Time Per Day (April 2019)",
+        source: "World Health Organization",
+        url: "https://apps.who.int/iris/bitstream/handle/10665/311664/9789241550536-eng.pdf",
+    },
+    {
+        title: "Heavy Screen Time Linked to Lower Cognitive Skills in Pre-Adolescents",
+        source: "EdWeek Digital Education",
+        url: "https://blogs.edweek.org/edweek/DigitalEducation/2018/12/early_results_of_study_show_sc.html",
+    },
+    {
+        title: "Six Facts About Screens and Teen Mental Health That a Recent New York Times Article Ignores",
+        source: "Jean Twenge — Institute for Family Studies",
+        url: "https://ifstudies.org/blog/six-facts-about-screens-and-teen-mental-health-that%20a-recent-new-york-times-article-ignores",
+    },
+    {
+        title: "Screen Time and Insomnia for Teens",
+        source: "Sleep Foundation",
+        url: "https://www.sleepfoundation.org/teens-and-sleep/screen-time-and-insomnia-for-teens",
+    },
 ];
 
 const books = [
@@ -188,6 +245,16 @@ const books = [
         title: "The Collapse of Parenting",
         url: "https://a.co/d/7KcipGQ",
         note: "Read this after Glow Kids or Breaking the Trance.",
+    },
+    {
+        title: "Boys Adrift",
+        url: "https://a.co/d/2y6fe2L",
+        note: "By Leonard Sax. Essential reading for understanding why boys are disengaging from real life.",
+    },
+    {
+        title: "Girls On the Edge",
+        url: "https://a.co/d/bxjmX38",
+        note: "By Leonard Sax. Explores the factors driving the epidemic of anxiety and depression in girls.",
     },
     {
         title: "Reset Your Child's Brain",
@@ -332,12 +399,16 @@ function OrgCard({
     description,
     featured = false,
     featuredLabel,
+    extraUrl,
+    extraLabel,
 }: {
     name: string;
     url: string;
     description: string;
     featured?: boolean;
     featuredLabel?: string;
+    extraUrl?: string;
+    extraLabel?: string;
 }) {
     return (
         <div
@@ -364,6 +435,16 @@ function OrgCard({
             >
                 Visit site →
             </a>
+            {extraUrl && extraLabel && (
+                <a
+                    href={extraUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-primary font-medium hover:underline mt-2"
+                >
+                    {extraLabel} →
+                </a>
+            )}
         </div>
     );
 }
@@ -387,7 +468,7 @@ export default function ResourcesPage() {
             <section className="bg-base-200 py-20 px-6">
                 <div className="max-w-2xl mx-auto text-center">
                     <h1 className="text-4xl font-bold mb-6">Resources</h1>
-                    <p className="text-xl text-gray-700 leading-relaxed">
+                    <p className="text-xl text-gray-700 leading-relaxed mb-5">
                         A curated collection of organizations, articles, books, podcasts, and
                         documentaries from{" "}
                         <a
@@ -399,6 +480,16 @@ export default function ResourcesPage() {
                             Healthy Tech Balance
                         </a>{" "}
                         to help families navigate technology with intention.
+                    </p>
+                    <p className="text-lg text-gray-600 leading-relaxed">
+                        The latest studies show that until nearly age 25, even{" "}
+                        <strong className="text-gray-800">20 minutes a day</strong> of screen
+                        activity produces visible physical changes in the brain. We are seeing
+                        record numbers of young people suffering from decreased resilience,
+                        depression, anxiety, ADHD, self-harm, and suicide as a result of
+                        unhealthy technology use. We have compiled these resources to educate
+                        and empower families to create the healthiest possible environment for
+                        their children.
                     </p>
                 </div>
             </section>
@@ -449,9 +540,30 @@ export default function ResourcesPage() {
             <section className="bg-base-200 py-16 px-6">
                 <div className="max-w-3xl mx-auto">
                     <h2 className="text-3xl font-bold text-center mb-3">Articles</h2>
-                    <p className="text-lg text-gray-600 text-center mb-12">
+                    <p className="text-lg text-gray-600 text-center mb-10">
                         Research and perspectives from leading health, education, and science publications.
                     </p>
+                    <div className="rounded-2xl border border-primary bg-white p-5 flex flex-col sm:flex-row items-center gap-4 mb-10">
+                        <img
+                            src="/images/Screen Time Guidelines.png"
+                            alt="Screen Time Guidelines"
+                            className="w-32 rounded-lg shrink-0"
+                        />
+                        <div>
+                            <p className="font-semibold text-gray-800 mb-1">
+                                Screen Time Guidelines (WHO, CDC, APA)
+                            </p>
+                            <p className="text-sm text-gray-600 mb-3">
+                                Quick-reference chart of age-appropriate daily screen time recommendations — printable and downloadable.
+                            </p>
+                            <a
+                                href="/learn#screen-time-guidelines"
+                                className="text-sm text-primary font-medium hover:underline"
+                            >
+                                View, download &amp; print →
+                            </a>
+                        </div>
+                    </div>
                     <ul className="space-y-5">
                         {articles.map((article) => (
                             <li
