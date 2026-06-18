@@ -13,10 +13,12 @@ import ResultsPage from "@/pages/results/ResultsPage.tsx";
 import ResourcesPage from "@/pages/resources/ResourcesPage.tsx";
 import { Analytics } from "@vercel/analytics/react";
 
-const CURRENT_VERSION = "0.0.2";
+const CURRENT_VERSION = "0.0.3";
 
 if (localStorage.getItem("app_version") !== CURRENT_VERSION) {
-    sessionStorage.clear(); // Clears all session atoms
+    localStorage.removeItem("isQuizInProgress");
+    localStorage.removeItem("currentQuestionIndex");
+    localStorage.removeItem("answers");
     localStorage.setItem("app_version", CURRENT_VERSION);
 }
 
@@ -25,11 +27,13 @@ createRoot(document.getElementById("root")!).render(
         <PrimeReactProvider value={{ ripple: true }}>
             <div className={"bg-E5F0FF"}>
                 <BrowserRouter>
-                    <div className={"flex flex-col h-screen w-full print:h-auto"}>
+                    <div
+                        className={"flex flex-col min-h-screen w-full"}
+                    >
                         <div className="print:hidden">
                             <TopNavBar />
                         </div>
-                        <div className={"flex-1 overflow-auto print:overflow-visible"}>
+                        <div className={"flex-1"}>
                             <Routes>
                                 <Route path={"/"} element={<HomePage />} />
                                 <Route

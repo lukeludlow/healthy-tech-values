@@ -6,7 +6,7 @@ import {
 } from "@/data/questionData.ts";
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
 
-const storage = createJSONStorage<any>(() => sessionStorage);
+const storage = createJSONStorage<any>(() => localStorage);
 
 export const isQuizInProgressAtom = atomWithStorage<boolean>(
     "isQuizInProgress",
