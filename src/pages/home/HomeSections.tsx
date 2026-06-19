@@ -43,8 +43,38 @@ export default function HomeSections() {
 
     return (
         <>
-            {/* Section 1 — 3-Step Process */}
+            {/* Section 3 — Families in Crisis */}
             <section className="bg-white py-16 px-6">
+                <div className="max-w-2xl mx-auto text-center">
+                    <h2 className="text-3xl font-bold mb-6">
+                        When It Feels Like You're Losing Them
+                    </h2>
+                    <p className="text-lg text-gray-700 mb-6">
+                        If someone in your home — a child, teenager, or adult —
+                        is so consumed by their device that they're missing real
+                        life, missing family connections, and missing personal
+                        development, it's time for something different.
+                    </p>
+                    <p className="text-lg text-gray-700 mb-8">
+                        This isn't about tips and tricks. It's about tackling
+                        the roots: avoidance, dependency, and the deeper
+                        patterns that keep people disconnected. I have
+                        experience working with individuals and families through
+                        crisis and trauma, and I'm here to help.
+                    </p>
+                    <a
+                        href="https://healthytechbalance.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary font-medium hover:underline"
+                    >
+                        Work with me →
+                    </a>
+                </div>
+            </section>
+
+            {/* Section 1 — 3-Step Process */}
+            <section className="bg-base-200 py-16 px-6">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl font-bold mb-3">
                         A Three-Step Approach
@@ -57,7 +87,7 @@ export default function HomeSections() {
                         {steps.map((step) => (
                             <div
                                 key={step.number}
-                                className="flex flex-col items-center text-center p-6 rounded-2xl border border-gray-100 shadow-sm"
+                                className="flex flex-col items-center text-center p-6 bg-white rounded-2xl border border-gray-100 shadow-sm"
                             >
                                 <span className="text-5xl font-bold text-primary mb-4">
                                     {step.number}
@@ -75,7 +105,7 @@ export default function HomeSections() {
             </section>
 
             {/* Section 2 — Accessible Resources / Mission */}
-            <section className="bg-base-200 py-16 px-6">
+            <section className="bg-white py-16 px-6">
                 <div className="max-w-2xl mx-auto text-center">
                     <h2 className="text-3xl font-bold mb-6">
                         Helpful Resources, Easily Accessible
@@ -113,7 +143,9 @@ export default function HomeSections() {
                                 Resource Library
                             </h3>
                             <p className="text-gray-600 mb-6">
-                                Orgs, articles, books, podcasts, and documentaries curated to help every family navigate technology with intention.
+                                Orgs, articles, books, podcasts, and
+                                documentaries curated to help every family
+                                navigate technology with intention.
                             </p>
                             <Button
                                 href="/resources"
@@ -124,36 +156,6 @@ export default function HomeSections() {
                             </Button>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            {/* Section 3 — Families in Crisis */}
-            <section className="bg-white py-16 px-6">
-                <div className="max-w-2xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold mb-6">
-                        When It Feels Like You're Losing Them
-                    </h2>
-                    <p className="text-lg text-gray-700 mb-6">
-                        If someone in your home — a child, teenager, or adult —
-                        is so consumed by their device that they're missing real
-                        life, missing family connections, and missing personal
-                        connections, it's time for something different.
-                    </p>
-                    <p className="text-lg text-gray-700 mb-8">
-                        This isn't about tips and tricks. It's about tackling
-                        the roots: avoidance, dependency, and the deeper
-                        patterns that keep people disconnected. I have
-                        experience working with individuals and families through
-                        crisis and trauma, and I'm here to help.
-                    </p>
-                    <a
-                        href="https://healthytechbalance.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary font-medium hover:underline"
-                    >
-                        Work with me →
-                    </a>
                 </div>
             </section>
 
