@@ -51,9 +51,9 @@ export default function HomeSections() {
                     </h2>
                     <p className="text-lg text-gray-700 mb-6">
                         If someone in your home — a child, teenager, or adult —
-                        is so consumed by their device that they're missing real
-                        life, missing family connections, and missing personal
-                        development, it's time for something different.
+                        is so consumed by screens that they are sacrificing
+                        relationship connections and personal development, it's
+                        time for a reboot.
                     </p>
                     <p className="text-lg text-gray-700 mb-8">
                         This isn't about tips and tricks. It's about tackling
