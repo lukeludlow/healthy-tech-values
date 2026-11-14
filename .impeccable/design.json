@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-14T00:00:00Z",
+  "title": "Design System: Healthy Tech Balance",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Sage Green", "canonical": "#60815f", "tonalRamp": ["#1d271c", "#304030", "#486147", "#60815f", "#90a78f", "#b7c6b7", "#d7e0d7", "#eff2ef"] },
+      "light-green": { "role": "neutral", "displayName": "Leaf Wash", "canonical": "#edf8ea", "tonalRamp": ["#304030", "#486147", "#90a78f", "#c9dcc5", "#dcebd8", "#edf8ea", "#f5fbf3", "#fbfdfa"] },
+      "white": { "role": "neutral", "displayName": "Paper White", "canonical": "#ffffff", "tonalRamp": ["#1b211b", "#3b443b", "#6b736b", "#a3aaa3", "#d0d5d0", "#edf8ea", "#f7fbf6", "#ffffff"] },
+      "ink": { "role": "neutral", "displayName": "Deep Ink", "canonical": "#1b211b", "tonalRamp": ["#080a08", "#0e100e", "#141914", "#1b211b", "#5f645f", "#989b98", "#c6c8c6", "#e8e9e8"] },
+      "ink-soft": { "role": "neutral", "displayName": "Soft Ink", "canonical": "#2c342c" },
+      "ink-muted": { "role": "neutral", "displayName": "Muted Ink", "canonical": "#3b443b" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page titles on Learn and Resources and the hero brand name." },
+      "headline": { "displayName": "Headline", "purpose": "Every section heading; a larger white step heads the Quiz Callout." },
+      "headline-question": { "displayName": "Headline Question", "purpose": "The quiz question, h1 of the quiz sheet." },
+      "title": { "displayName": "Title", "purpose": "Card, step, value and group headings at 21px to 22px." },
+      "lead": { "displayName": "Lead", "purpose": "First paragraph of a story section, Deep Ink." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs in Muted Ink, 58 to 62ch columns." },
+      "body-on-green": { "displayName": "Body on Green", "purpose": "The only body style allowed on a green field (large-text contrast)." },
+      "label": { "displayName": "Label", "purpose": "Captions, counts, secondary pill labels, sentence case." },
+      "button": { "displayName": "Button", "purpose": "Primary and on-green pill labels; 19px bold keeps white on green at large-text contrast." }
+    },
+    "shadows": [
+      { "name": "sheet", "value": "0 24px 48px -28px rgb(27 33 27 / 0.35)", "purpose": "White quiz and results sheet; hamburger menu panel." },
+      { "name": "panel", "value": "0 30px 60px -30px rgb(27 33 27 / 0.6)", "purpose": "Green hero panel floating over the photo." },
+      { "name": "photo", "value": "0 18px 40px -18px rgb(27 33 27 / 0.4)", "purpose": "Portrait and the screen-time guidelines chart." },
+      { "name": "inset-ring", "value": "inset 0 0 0 1px var(--color-primary)", "purpose": "Selected answers and the top value row (2px on featured link cards)." }
+    ],
+    "motion": [
+      { "name": "ease-gentle", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "All hover, menu and state transitions." },
+      { "name": "duration-hover", "value": "160ms", "purpose": "Colour changes on links, pills, answer options, menu scale-in." },
+      { "name": "duration-on-green", "value": "180ms", "purpose": "White pill hover on green surfaces." },
+      { "name": "duration-disclosure", "value": "200ms", "purpose": "Value-row chevron rotation." },
+      { "name": "duration-progress", "value": "300ms", "purpose": "Progress segment fill." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "split", "value": "900px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Sage green pill with a 19px bold white label; the one main action per view.",
+      "html": "<button class=\"ds-btn-primary\">Next Question <svg viewBox=\"0 0 16 16\" fill=\"currentColor\" width=\"18\" height=\"18\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z\" clip-rule=\"evenodd\"/></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 52px; padding: 12px 26px; border: 0; border-radius: 9999px; background: var(--color-primary, #60815f); color: #fff; font-family: 'Inter Variable', Inter, sans-serif; font-size: 19px; font-weight: 700; cursor: pointer; } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-primary, #60815f); outline-offset: 3px; } .ds-btn-primary:disabled { background: var(--color-base-200, #edf8ea); color: rgb(59 68 59 / 0.6); cursor: not-allowed; }"
+    },
+    {
+      "name": "Secondary Pill",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "White pill with a 1.5px green border for secondary actions and outbound links.",
+      "html": "<a class=\"ds-pill\" href=\"#\">Work with me<span class=\"ds-ext\">&nbsp;<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" width=\"14\" height=\"14\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z\" clip-rule=\"evenodd\"/></svg></span></a>",
+      "css": ".ds-pill { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 10px 20px; border-radius: 9999px; border: 1.5px solid var(--color-primary, #60815f); background: #fff; color: var(--color-ink, #1b211b); font-family: 'Inter Variable', Inter, sans-serif; font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-pill:hover { background: var(--color-base-200, #edf8ea); } .ds-pill:focus-visible { outline: 2px solid var(--color-primary, #60815f); outline-offset: 3px; } .ds-ext svg { color: var(--color-primary, #60815f); vertical-align: -2px; }"
+    },
+    {
+      "name": "On-Green Button",
+      "kind": "button",
+      "refersTo": "button-on-green",
+      "description": "White pill used on green fields such as the Quiz Callout and hero panel.",
+      "html": "<div class=\"ds-green-field\"><button class=\"ds-btn-on-green\">Take the Core Values Quiz</button></div>",
+      "css": ".ds-green-field { padding: 32px; background: var(--color-primary, #60815f); } .ds-btn-on-green { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 12px 26px; border: 0; border-radius: 9999px; background: #fff; color: var(--color-ink, #1b211b); font-family: 'Inter Variable', Inter, sans-serif; font-size: 19px; font-weight: 700; cursor: pointer; transition: background-color 180ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-on-green:hover { background: var(--color-base-200, #edf8ea); } .ds-btn-on-green:focus-visible { outline: 3px solid #fff; outline-offset: 3px; } .ds-btn-on-green:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Text Link",
+      "kind": "custom",
+      "refersTo": "body",
+      "description": "Deep Ink semibold link with a green underline that thickens on hover; never green text.",
+      "html": "<p class=\"ds-body\">Read the <a class=\"ds-link\" href=\"#\">printable guidelines</a> before you start.</p>",
+      "css": ".ds-body { font-family: 'Inter Variable', Inter, sans-serif; font-size: 17px; line-height: 1.65; color: var(--color-ink-muted, #3b443b); } .ds-link { border-radius: 3px; font-weight: 600; color: var(--color-ink, #1b211b); text-decoration: underline; text-decoration-color: var(--color-primary, #60815f); text-decoration-thickness: 1.5px; text-underline-offset: 5px; } .ds-link:hover { text-decoration-thickness: 2.5px; } .ds-link:focus-visible { outline: 2px solid var(--color-primary, #60815f); outline-offset: 3px; }"
+    },
+    {
+      "name": "Answer Option",
+      "kind": "input",
+      "refersTo": "answer-option",
+      "description": "Multi-select quiz answer; green border, Leaf Wash fill and filled checkbox when pressed.",
+      "html": "<div class=\"ds-answers\"><button class=\"ds-answer\" aria-pressed=\"true\"><span class=\"ds-check\"><svg viewBox=\"0 0 16 16\" fill=\"currentColor\" width=\"15\" height=\"15\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z\" clip-rule=\"evenodd\"/></svg></span><span>Spend a quiet evening together at home</span></button><button class=\"ds-answer\" aria-pressed=\"false\"><span class=\"ds-check\"><svg viewBox=\"0 0 16 16\" fill=\"currentColor\" width=\"15\" height=\"15\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z\" clip-rule=\"evenodd\"/></svg></span><span>Plan a trip somewhere new</span></button></div>",
+      "css": ".ds-answers { display: grid; gap: 10px; } .ds-answer { display: flex; align-items: flex-start; gap: 14px; width: 100%; padding: 16px 18px; border-radius: 16px; border: 1.5px solid rgb(96 129 95 / 0.35); background: #fff; text-align: left; font-family: 'Inter Variable', Inter, sans-serif; font-size: 17px; line-height: 1.45; color: var(--color-ink, #1b211b); cursor: pointer; transition: border-color 160ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-answer:hover { border-color: var(--color-primary, #60815f); } .ds-answer[aria-pressed=true] { border-color: var(--color-primary, #60815f); background: var(--color-base-200, #edf8ea); box-shadow: inset 0 0 0 1px var(--color-primary, #60815f); } .ds-answer:focus-visible { outline: 2px solid var(--color-primary, #60815f); outline-offset: 3px; } .ds-check { display: grid; place-items: center; flex-shrink: 0; width: 22px; height: 22px; margin-top: 1px; border-radius: 7px; border: 1.5px solid var(--color-primary, #60815f); background: #fff; color: transparent; } .ds-answer[aria-pressed=true] .ds-check { background: var(--color-primary, #60815f); color: #fff; }"
+    },
+    {
+      "name": "Link Card",
+      "kind": "card",
+      "refersTo": "link-card",
+      "description": "Outside resource card; white on light green, the name is the link.",
+      "html": "<div class=\"ds-card-ground\"><div class=\"ds-card\"><span class=\"ds-tag\">Podcast</span><a class=\"ds-card-name\" href=\"#\">Screen Strong<span>&nbsp;<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" width=\"14\" height=\"14\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z\" clip-rule=\"evenodd\"/></svg></span></a><p class=\"ds-card-desc\">Practical help for families reducing screen dependency.</p></div></div>",
+      "css": ".ds-card-ground { padding: 24px; background: var(--color-base-200, #edf8ea); } .ds-card { display: grid; align-content: start; gap: 6px; padding: 20px 22px; border-radius: 20px; background: #fff; font-family: 'Inter Variable', Inter, sans-serif; } .ds-tag { justify-self: start; margin-bottom: 4px; padding: 3px 10px; border-radius: 9999px; background: var(--color-base-200, #edf8ea); font-size: 13px; font-weight: 650; color: var(--color-ink, #1b211b); } .ds-card-name { justify-self: start; border-radius: 3px; font-size: 18px; font-weight: 650; line-height: 1.3; color: var(--color-ink, #1b211b); text-decoration: underline; text-decoration-color: rgb(96 129 95 / 0.5); text-decoration-thickness: 1.5px; text-underline-offset: 5px; } .ds-card-name:hover { text-decoration-color: var(--color-primary, #60815f); text-decoration-thickness: 2.5px; } .ds-card-name:focus-visible { outline: 2px solid var(--color-primary, #60815f); outline-offset: 3px; } .ds-card-name svg { color: var(--color-primary, #60815f); vertical-align: -2px; } .ds-card-desc { margin: 0; font-size: 16px; line-height: 1.55; color: var(--color-ink-muted, #3b443b); }"
+    },
+    {
+      "name": "Desktop Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "White header bar with pill nav links; current page underlined in green.",
+      "html": "<header class=\"ds-nav\"><span class=\"ds-brand\">Healthy Tech Balance</span><nav class=\"ds-nav-links\"><a href=\"#\" class=\"ds-nav-link\" aria-current=\"page\">Quiz</a><a href=\"#\" class=\"ds-nav-link\">Results</a><a href=\"#\" class=\"ds-nav-link\">Learn</a><a href=\"#\" class=\"ds-nav-link\">Resources</a></nav></header>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 24px; min-height: 64px; padding: 0 16px; background: #fff; border-bottom: 1px solid rgb(96 129 95 / 0.2); font-family: 'Inter Variable', Inter, sans-serif; } .ds-brand { font-size: 17px; font-weight: 650; letter-spacing: -0.01em; color: var(--color-ink, #1b211b); white-space: nowrap; } .ds-nav-links { display: flex; gap: 4px; margin-left: auto; } .ds-nav-link { padding: 8px 12px; border-radius: 9999px; font-size: 15px; font-weight: 500; color: var(--color-ink-muted, #3b443b); text-decoration: none; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), color 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-nav-link:hover { background: var(--color-base-200, #edf8ea); color: var(--color-ink, #1b211b); } .ds-nav-link[aria-current=page] { color: var(--color-ink, #1b211b); text-decoration: underline; text-decoration-color: var(--color-primary, #60815f); text-decoration-thickness: 2px; text-underline-offset: 9px; } .ds-nav-link:focus-visible { outline: 2px solid var(--color-primary, #60815f); outline-offset: 3px; }"
+    },
+    {
+      "name": "Icon Badge Row",
+      "kind": "custom",
+      "refersTo": "icon-badge",
+      "description": "Heroicons 24/outline in a 52px light green circle leading a value or benefit item.",
+      "html": "<div class=\"ds-icon-row\"><span class=\"ds-badge\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" width=\"26\" height=\"26\" aria-hidden=\"true\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z\"/></svg></span><div><h3 class=\"ds-row-title\">Connection &amp; Love</h3><p class=\"ds-row-body\">Values give you a reason to put the phone down.</p></div></div>",
+      "css": ".ds-icon-row { display: grid; grid-template-columns: 52px 1fr; align-items: start; gap: 18px; font-family: 'Inter Variable', Inter, sans-serif; } .ds-badge { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 9999px; background: var(--color-base-200, #edf8ea); color: var(--color-primary, #60815f); } .ds-row-title { margin: 0 0 8px; font-size: 21px; font-weight: 650; letter-spacing: -0.015em; color: var(--color-ink, #1b211b); } .ds-row-body { margin: 0; font-size: 17px; line-height: 1.6; color: var(--color-ink-muted, #3b443b); }"
+    },
+    {
+      "name": "Quiz Sheet",
+      "kind": "card",
+      "refersTo": "sheet",
+      "description": "White 28px sheet with the soft Sheet shadow on a light green page, holding the quiz and results.",
+      "html": "<div class=\"ds-sheet-ground\"><div class=\"ds-sheet\"><p class=\"ds-count\">4 of 20 questions</p><div class=\"ds-progress\"><span class=\"on\"></span><span class=\"on\"></span><span class=\"on\"></span><span class=\"on\"></span><span class=\"cur\"></span><span></span><span></span><span></span><span></span><span></span></div><h1 class=\"ds-question\">How would you most like to spend a free Saturday?</h1></div></div>",
+      "css": ".ds-sheet-ground { padding: 24px 12px 48px; background: var(--color-base-200, #edf8ea); } .ds-sheet { max-width: 680px; margin: 0 auto; padding: 28px 20px; border-radius: 28px; background: #fff; box-shadow: 0 24px 48px -28px rgb(27 33 27 / 0.35); font-family: 'Inter Variable', Inter, sans-serif; } .ds-count { margin: 0 0 8px; font-size: 14px; font-weight: 600; color: var(--color-ink-muted, #3b443b); font-variant-numeric: tabular-nums; } .ds-progress { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; margin-bottom: 28px; } .ds-progress span { height: 6px; border-radius: 9999px; background: rgb(96 129 95 / 0.18); } .ds-progress span.on { background: var(--color-primary, #60815f); } .ds-progress span.cur { box-shadow: 0 0 0 1.5px var(--color-ink, #1b211b); } .ds-question { margin: 0; font-size: clamp(1.75rem, 5vw, 2.5rem); font-weight: 750; line-height: 1.1; letter-spacing: -0.03em; color: var(--color-ink, #1b211b); text-wrap: balance; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Kitchen-Table Conversation",
+    "overview": "The site reads like a calm talk with one parent who has been through it, held in three fixed brand colours: a muted sage green, a pale leaf green and white. Nothing is loud. Pages are tall stacks of full-bleed bands that alternate white and light green, each holding one idea in a narrow reading column, with heavy, tightly tracked Inter headings doing the work that decoration would do elsewhere. The green itself appears as a solid field only where it asks for something: the hero panel, the quiz callout band, the primary pill button, the filled progress segments.\n\nDepth is soft and low. Surfaces that are \"held\" (the quiz sheet, the hero panel, photos) sit on long, diffuse green-black shadows with a negative spread, so they lift without a hard edge. Everything else is flat and separated by tone, hairline green rules, or a light green fill. Shapes are generously rounded and buttons are always pills, which keeps the tool feeling gentle for visitors who arrive overwhelmed.\n\nThe system rejects the furniture of generic wellness and SaaS sites: no eyebrow or kicker labels over headings, no coloured left-border callouts, no glass or blur panels, no emoji, no unicode arrows standing in for icons.",
+    "keyCharacteristics": [
+      "Three fixed brand colours plus a green-tinted ink ramp; no other hues.",
+      "Alternating white and light green full-bleed sections; a solid green band only for the quiz call to action.",
+      "Inter Variable at weight 750 with negative tracking for every heading; 17px body at 1.65 line height.",
+      "Pill buttons, 20px cards, 28px sheets.",
+      "Long, soft, negative-spread shadows only on held surfaces.",
+      "Heroicons only, tinted green."
+    ],
+    "rules": [
+      { "name": "The Large-White-Only Rule", "body": "White on sage green measures about 4.4:1, so white text on a green field is only ever large: headings, 19px bold body and 19px bold button labels. Never set small or regular-weight text on green; if copy on a green band needs to be longer, keep it 19px bold.", "section": "colors" },
+      { "name": "The Ink-Not-Green Link Rule", "body": "Text links are Deep Ink with a sage green underline (1.5px, offset 5px, thickening to 2.5px on hover). Green is never the colour of running text or link text. There are no exceptions: even display-size labels such as the MAP and LIGHT framework acronyms are set in Deep Ink, and their step letters sit in green-outlined circles like the numbered step markers.", "section": "colors" },
+      { "name": "The Fixed Brand Rule", "body": "Sage green, Leaf Wash and white are binding brand colours. Do not add hues, gradients, or new tints beyond opacity steps of sage green.", "section": "colors" },
+      { "name": "The One-Family Rule", "body": "Inter Variable is the only face. Hierarchy comes from weight (400 / 500 / 600 / 650 / 700 / 750), size and tracking, never a second family or a system display face.", "section": "typography" },
+      { "name": "The Sentence-Case Rule", "body": "No uppercase, no letter-spaced labels. Small labels are sentence case at 13px to 15px and sit inside or below content, never as a kicker above a heading.", "section": "typography" },
+      { "name": "The Held-Surface Rule", "body": "Only sheets, panels, menus and photos cast shadows. Cards, rows and buttons stay flat; state is shown with fill and ring, not elevation.", "section": "elevation" },
+      { "name": "The Pill Rule", "body": "Anything you press is a pill. Rectangles are for content.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do alternate white and light green (#edf8ea) section bands, and end content pages on the green Quiz Callout.",
+      "Do set white text on green only at 19px bold or larger.",
+      "Do make text links Deep Ink with a 1.5px green underline at 5px offset that thickens to 2.5px on hover.",
+      "Do make every pressable control a pill, with a 2px green focus outline at 3px offset.",
+      "Do use Heroicons only: 24/outline in light green circles for value and benefit lists, 16/solid tinted green for UI.",
+      "Do mark external links with the External Arrow, kept on the last word's line.",
+      "Do keep reading columns at 680px to 720px and body text at 17px, 1.65 line height, Muted Ink.",
+      "Do use the gentle ease (cubic-bezier(0.16, 1, 0.3, 1)) at 160ms to 200ms for hover and state changes."
+    ],
+    "donts": [
+      "Don't put small or regular-weight text on sage green, or set running text or links in green.",
+      "Don't introduce colours beyond the fixed green, light green, white and the ink ramp.",
+      "Don't add eyebrow or kicker labels above headings, or uppercase letter-spaced labels anywhere.",
+      "Don't use coloured border-left callouts; use a Leaf Wash note block instead.",
+      "Don't use glass, blur or translucent frosted panels.",
+      "Don't use emoji or unicode arrows as icons.",
+      "Don't give cards, rows or buttons drop shadows; shadows belong to sheets, panels, menus and photos.",
+      "Don't add a second typeface or system display face."
+    ]
+  }
+}

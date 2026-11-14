@@ -1,12 +1,17 @@
-import { useNavigate } from "react-router";
-import { useAtom } from "jotai";
+import { Link } from "react-router";
+import ExternalArrow from "@/components/ui/ExternalArrow.tsx";
+import QuizCallout from "@/components/ui/QuizCallout.tsx";
+import StepPath, { type Step } from "@/components/ui/StepPath.tsx";
 import {
-    currentQuestionIndexAtom,
-    isQuizInProgressAtom,
-} from "@/state/state.ts";
-import { Button } from "@/components/catalyst-ui-kit/button.tsx";
+    bodyText,
+    leadText,
+    pillLink,
+    sectionHeading,
+    sectionIntro,
+    textLink,
+} from "@/components/ui/styles.ts";
 
-const steps = [
+const steps: Step[] = [
     {
         number: "1",
         title: "Distill Your Values",
@@ -28,34 +33,21 @@ const steps = [
 ];
 
 export default function HomeSections() {
-    const navigate = useNavigate();
-    const [isQuizInProgress, setIsQuizInProgress] =
-        useAtom(isQuizInProgressAtom);
-    const [, setCurrentQuestionIndex] = useAtom(currentQuestionIndexAtom);
-
-    function handleStartQuiz() {
-        if (!isQuizInProgress) {
-            setIsQuizInProgress(true);
-            setCurrentQuestionIndex(0);
-        }
-        navigate("/quiz");
-    }
-
     return (
         <>
-            {/* Section 3 — Families in Crisis */}
-            <section className="bg-white py-16 px-6">
-                <div className="max-w-2xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold mb-6">
+            {/* Families in crisis */}
+            <section className="bg-white px-6 py-20">
+                <div className="max-w-[680px] mx-auto">
+                    <h2 className={`mb-5 ${sectionHeading}`}>
                         When It Feels Like You're Losing Them
                     </h2>
-                    <p className="text-lg text-gray-700 mb-6">
+                    <p className={`mb-4.5 ${leadText}`}>
                         If someone in your home — a child, teenager, or adult —
                         is so consumed by screens that they are sacrificing
                         relationship connections and personal development, it's
                         time for a reboot.
                     </p>
-                    <p className="text-lg text-gray-700 mb-8">
+                    <p className={`mb-8 ${bodyText}`}>
                         This isn't about tips and tricks. It's about tackling
                         the roots: avoidance, dependency, and the deeper
                         patterns that keep people disconnected. I have
@@ -66,51 +58,36 @@ export default function HomeSections() {
                         href="https://healthytechbalance.com/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary font-medium hover:underline"
+                        className={pillLink}
                     >
-                        Work with me →
+                        Work with me
+                        <ExternalArrow />
                     </a>
                 </div>
             </section>
 
-            {/* Section 1 — 3-Step Process */}
-            <section className="bg-base-200 py-16 px-6">
-                <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold mb-3">
-                        A Three-Step Approach
+            {/* Three-step process */}
+            <section className="bg-base-200 px-6 py-20">
+                <div className="max-w-[1040px] mx-auto">
+                    <h2 className={`mb-3 ${sectionHeading}`}>
+                        A <span className="whitespace-nowrap">Three-Step</span>{" "}
+                        Approach
                     </h2>
-                    <p className="text-lg text-gray-600 mb-12">
+                    <p className={`mb-12 ${sectionIntro}`}>
                         Living in healthy balance with technology is a process,
                         not a quick fix.
                     </p>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {steps.map((step) => (
-                            <div
-                                key={step.number}
-                                className="flex flex-col items-center text-center p-6 bg-white rounded-2xl border border-gray-100 shadow-sm"
-                            >
-                                <span className="text-5xl font-bold text-primary mb-4">
-                                    {step.number}
-                                </span>
-                                <h3 className="text-xl font-semibold mb-2">
-                                    {step.title}
-                                </h3>
-                                <p className="text-gray-600">
-                                    {step.description}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
+                    <StepPath steps={steps} />
                 </div>
             </section>
 
-            {/* Section 2 — Accessible Resources / Mission */}
-            <section className="bg-white py-16 px-6">
-                <div className="max-w-2xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold mb-6">
+            {/* Accessible resources */}
+            <section className="bg-white px-6 py-20">
+                <div className="max-w-[680px] mx-auto mb-12">
+                    <h2 className={`mb-4 ${sectionHeading}`}>
                         Helpful Resources, Easily Accessible
                     </h2>
-                    <p className="text-lg text-gray-700 mb-8">
+                    <p className={`mb-5 ${bodyText}`}>
                         As a parent, I know what it feels like to be overwhelmed
                         and not know where to turn. That's why I'm committed to
                         offering resources that are genuinely helpful and easily
@@ -121,68 +98,65 @@ export default function HomeSections() {
                         href="https://healthytechbalance.com/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary font-medium hover:underline"
+                        className={textLink}
                     >
-                        Learn more about consulting at Healthy Tech Balance →
+                        Learn more about consulting at Healthy Tech Balance
+                        <ExternalArrow />
                     </a>
-                    <div className="mt-10 max-w-2xl mx-auto text-left">
-                        <img
-                            src="/images/Screen Time Guidelines.png"
-                            alt="Screen Time Guidelines chart showing recommended daily screen time by age group"
-                            className="w-full rounded-2xl shadow-md"
-                        />
-                        <a
-                            href="/learn#screen-time-guidelines"
-                            className="block text-center text-lg font-bold text-gray-900 mt-4 mb-10 hover:text-primary"
+                </div>
+                <figure className="max-w-[880px] mx-auto">
+                    <img
+                        src="/images/Screen Time Guidelines.png"
+                        alt="Screen Time Guidelines chart showing recommended daily screen time by age group"
+                        width={1056}
+                        height={816}
+                        loading="lazy"
+                        className="block w-full h-auto rounded-2xl shadow-photo"
+                    />
+                    <figcaption className="flex flex-wrap justify-between gap-x-6 gap-y-3 mt-4 text-[15px] text-ink-muted">
+                        <span>
+                            Recommended daily screen time by age, from WHO, CDC,
+                            AAP and APA.
+                        </span>
+                        <Link
+                            to="/learn#screen-time-guidelines"
+                            className={textLink}
                         >
-                            Printable Download
-                        </a>
-
-                        <div className="border-l-4 border-primary pl-6">
-                            <h3 className="text-2xl font-bold mb-3">
-                                Resource Library
-                            </h3>
-                            <p className="text-gray-600 mb-6">
-                                Orgs, articles, books, podcasts, and
-                                documentaries curated to help every family
-                                navigate technology with intention.
-                            </p>
-                            <Button
-                                href="/resources"
-                                color="primary"
-                                className="w-full justify-center text-sm"
-                            >
-                                Browse Resources →
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Section 4 — Core Values Quiz CTA */}
-            <section className="bg-primary py-16 px-6">
-                <div className="max-w-2xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold text-white mb-6">
-                        Start with Step 1: The Core Values Quiz
-                    </h2>
-                    <p className="text-lg text-primary-content mb-10">
-                        Living in healthy balance with technology begins with
-                        getting clear on your values. You can take this quiz for
-                        yourself — or as a whole family. If you have a teenager,
-                        have them take it too. In the teen years, people begin
-                        developing their own values, and comparing results can
-                        open up powerful conversations.
+                            Printable download
+                        </Link>
+                    </figcaption>
+                </figure>
+                <div className="grid justify-items-start gap-4 max-w-[680px] mx-auto mt-14 p-7 rounded-[20px] bg-base-200">
+                    <h3 className="text-[22px] font-[650] tracking-[-0.015em] text-ink">
+                        Resource Library
+                    </h3>
+                    <p className={bodyText}>
+                        Orgs, articles, books, podcasts, and documentaries
+                        curated to help every family navigate technology with
+                        intention.
                     </p>
-                    <Button
-                        color="white"
-                        className="px-8 py-3 text-base border-white text-white hover:bg-white hover:text-primary"
-                        onClick={handleStartQuiz}
-                    >
-                        {isQuizInProgress ? "Continue" : "Take"} the Core Values
-                        Quiz
-                    </Button>
+                    <Link to="/resources" className={pillLink}>
+                        Browse resources
+                    </Link>
                 </div>
             </section>
+
+            <QuizCallout
+                heading={
+                    <>
+                        Start with{" "}
+                        <span className="whitespace-nowrap">Step 1:</span> The
+                        Core Values Quiz
+                    </>
+                }
+            >
+                Living in healthy balance with technology begins with getting
+                clear on your values. You can take this quiz for yourself — or
+                as a whole family. If you have a teenager, have them take it
+                too. In the teen years, people begin developing their own
+                values, and comparing results can open up powerful
+                conversations.
+            </QuizCallout>
         </>
     );
 }

@@ -1,26 +1,12 @@
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 import Healthy_tech_social_icon from "@/assets/Healthy_tech_social_icon.webp";
-import { useAtom } from "jotai";
-import {
-    currentQuestionIndexAtom,
-    isQuizInProgressAtom,
-} from "@/state/state.ts";
-import { Button } from "@/components/catalyst-ui-kit/button.tsx";
+import { useStartQuiz } from "@/state/useStartQuiz.ts";
+
+const heroButton =
+    "inline-flex items-center justify-center min-h-13 px-6.5 py-3 rounded-full border-2 border-white text-[19px] font-bold cursor-pointer transition-colors duration-180 ease-gentle focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-white";
 
 export default function HomeHero() {
-    const navigate = useNavigate();
-    const logoIcon = Healthy_tech_social_icon;
-    const [isQuizInProgress, setIsQuizInProgress] =
-        useAtom(isQuizInProgressAtom);
-    const [, setCurrentQuestionIndex] = useAtom(currentQuestionIndexAtom);
-
-    function handleStartQuiz() {
-        if (!isQuizInProgress) {
-            setIsQuizInProgress(true);
-            setCurrentQuestionIndex(0);
-        }
-        navigate("/quiz");
-    }
+    const { startQuiz } = useStartQuiz();
 
     return (
         <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
@@ -33,34 +19,33 @@ export default function HomeHero() {
             />
             {/* Green brand overlay */}
             <div className="absolute inset-0 bg-primary/40" />
-            {/* Content */}
-            <div className="relative z-10 text-center py-20 px-6 flex flex-col items-center">
-                <h1 className="text-5xl font-bold text-white drop-shadow-md">
+            {/* Content panel */}
+            <div className="relative z-10 flex flex-col items-center w-[min(calc(100vw-32px),640px)] my-12 px-7 py-12 rounded-[28px] bg-primary text-center shadow-panel">
+                <img
+                    src={Healthy_tech_social_icon}
+                    alt=""
+                    className="size-16 mb-5 rounded-2xl shadow-[0_0_0_2px_rgb(255_255_255/0.85)]"
+                />
+                <h1 className="mb-3.5 text-[clamp(2.5rem,7vw,4rem)] font-[750] leading-[1.02] tracking-[-0.035em] text-white text-balance">
                     Healthy Tech Balance
                 </h1>
-                <img
-                    src={logoIcon}
-                    alt="Healthy Tech Balance logo"
-                    className="h-20 w-20 rounded-xl shadow-2xl my-6 object-contain"
-                />
-                <p className="text-2xl font-semibold text-white drop-shadow-md max-w-lg">
+                <p className="max-w-[24ch] mb-8 text-[clamp(1.5rem,3vw,1.75rem)] font-medium leading-[1.3] text-white text-balance">
                     Take back your relationships, your joy, and your life.
                 </p>
-                <div className="flex flex-wrap justify-center gap-3 mt-10">
-                    <Button
-                        color={"white"}
-                        href="/learn"
-                        className="px-8 py-3 text-base text-white border-white hover:bg-white/10"
+                <div className="flex flex-wrap justify-center gap-3">
+                    <Link
+                        to="/learn"
+                        className={`${heroButton} bg-transparent text-white hover:bg-white/12`}
                     >
                         Learn More
-                    </Button>
-                    <Button
-                        color="primary"
-                        className="px-8 py-3 text-base"
-                        onClick={handleStartQuiz}
+                    </Link>
+                    <button
+                        type="button"
+                        onClick={startQuiz}
+                        className={`${heroButton} bg-white text-ink hover:bg-base-200 hover:border-base-200`}
                     >
                         Start Here
-                    </Button>
+                    </button>
                 </div>
             </div>
         </div>

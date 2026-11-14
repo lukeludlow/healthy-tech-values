@@ -3,12 +3,14 @@ import AnswerOptions from "@/components/quiz/question/AnswerOptions.tsx";
 import { useAtom } from "jotai";
 import { answersAtom, currentQuestionIndexAtom } from "@/state/state.ts";
 import { QUESTION_DATA } from "@/data/questionData.ts";
-import { Button } from "@/components/catalyst-ui-kit/button.tsx";
-import { FaAngleRight } from "react-icons/fa";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { useNavigate } from "react-router";
+import { focusRing, primaryButton } from "@/components/ui/styles.ts";
 
 export default function QuizQuestion() {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useAtom(currentQuestionIndexAtom);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useAtom(
+        currentQuestionIndexAtom,
+    );
     const [selectedChoices] = useAtom(answersAtom);
     const navigate = useNavigate();
 
@@ -27,22 +29,46 @@ export default function QuizQuestion() {
         }
     }
 
+    function handleBack() {
+        if (currentQuestionIndex === 0) {
+            navigate("/");
+        } else {
+            setCurrentQuestionIndex(currentQuestionIndex - 1);
+        }
+    }
+
     return (
-        <div className="flex flex-col gap-4 p-4 md:px-6 max-w-xl mx-auto w-full">
+        <div>
             <Scenario />
-            <div className="italic text-sm text-primary/60 text-center">
+            <p className="mt-3 text-[15px] leading-[1.55] text-ink-muted">
                 {QUESTION_DATA.instructions}
-            </div>
+            </p>
             <AnswerOptions />
-            <Button
-                color="primary"
-                className="w-full mt-2"
-                disabled={!isCurrentQuestionAnswered}
-                onClick={handleNext}
-            >
-                {isLastQuestion ? "See My Results" : "Next Question"}
-                <FaAngleRight />
-            </Button>
+            <div className="flex items-center justify-between gap-3 mt-7">
+                <button
+                    type="button"
+                    onClick={handleBack}
+                    className={`inline-flex items-center gap-1 min-h-11 py-2.5 pl-2 pr-3.5 rounded-full text-base font-semibold text-ink cursor-pointer hover:bg-base-200 ${focusRing}`}
+                >
+                    <ChevronLeftIcon
+                        aria-hidden="true"
+                        className="size-[18px] text-primary"
+                    />
+                    Back
+                </button>
+                <button
+                    type="button"
+                    disabled={!isCurrentQuestionAnswered}
+                    onClick={handleNext}
+                    className={primaryButton}
+                >
+                    {isLastQuestion ? "See My Results" : "Next Question"}
+                    <ChevronRightIcon
+                        aria-hidden="true"
+                        className="size-[18px]"
+                    />
+                </button>
+            </div>
         </div>
     );
 }

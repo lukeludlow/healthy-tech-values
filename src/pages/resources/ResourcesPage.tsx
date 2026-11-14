@@ -1,11 +1,26 @@
-import { useNavigate } from "react-router";
-import { useAtom } from "jotai";
-import {
-    currentQuestionIndexAtom,
-    isQuizInProgressAtom,
-} from "@/state/state.ts";
-import { Button } from "@/components/catalyst-ui-kit/button.tsx";
+import { Link } from "react-router";
 import Seo from "@/components/seo/Seo.tsx";
+import ExternalArrow from "@/components/ui/ExternalArrow.tsx";
+import LinkCard from "@/components/ui/LinkCard.tsx";
+import QuizCallout from "@/components/ui/QuizCallout.tsx";
+import {
+    onGreenButton,
+    pageHeading,
+    sectionHeading,
+    sectionIntro,
+    textLink,
+} from "@/components/ui/styles.ts";
+import { useStartQuiz } from "@/state/useStartQuiz.ts";
+
+const pageSections = [
+    { id: "quizzes", title: "Quizzes & Self-Assessments" },
+    { id: "organizations", title: "Organizations & Websites" },
+    { id: "articles", title: "Articles" },
+    { id: "books", title: "Books" },
+    { id: "podcasts-and-documentaries", title: "Podcasts & Documentaries" },
+    { id: "social-accounts", title: "Social Accounts to Follow" },
+    { id: "framework", title: "The Healthy Tech Balance Framework" },
+];
 
 const orgs = [
     {
@@ -13,8 +28,8 @@ const orgs = [
         url: "https://screentimeclinic.com/jessica-ludlow/",
         description:
             "Resources, speaking, consulting, coaching, and guided detoxes.",
-        featured: true,
-        featuredLabel: "Author's Profile",
+        highlighted: true,
+        tag: "Author's Profile",
     },
     {
         name: "JoinRaise.org",
@@ -27,7 +42,8 @@ const orgs = [
         url: "https://screenstrong.org/",
         description:
             "Nonprofit. Great resources tab, Facebook parent support group, and podcast.",
-        extraUrl: "https://drive.google.com/file/d/1KKCETTmzi7JkRGsWsLCiL4cbEsefD3zf/view?usp=sharing",
+        extraUrl:
+            "https://drive.google.com/file/d/1KKCETTmzi7JkRGsWsLCiL4cbEsefD3zf/view?usp=sharing",
         extraLabel: "Free 5-tip one-sheeter",
     },
     {
@@ -80,7 +96,8 @@ const mentalHealthOrgs = [
         url: "https://parentguidance.org/",
         description:
             "Nonprofit. Phenomenal and FREE mental health and relationship resources.",
-        extraUrl: "https://parentguidance.org/mhs-topic/effects-of-screen-time-childrens-mental-health/",
+        extraUrl:
+            "https://parentguidance.org/mhs-topic/effects-of-screen-time-childrens-mental-health/",
         extraLabel: "Course: Effects of Screen Time & Children's Mental Health",
     },
     {
@@ -351,7 +368,10 @@ const documentaries = [
 ];
 
 const socials = [
-    { handle: "@protectyoungeyes", note: "Weekly tech updates and full app/game reviews" },
+    {
+        handle: "@protectyoungeyes",
+        note: "Weekly tech updates and full app/game reviews",
+    },
     { handle: "@healthyscreenhabits" },
     { handle: "@betterscreentime" },
     { handle: "@mindfulfamilytech" },
@@ -364,14 +384,20 @@ const socials = [
     },
 ];
 
-const mapSteps = [
+type FrameworkStep = {
+    letter: string;
+    word: string;
+    description: string;
+    linkLabel?: string;
+};
+
+const mapSteps: FrameworkStep[] = [
     {
         letter: "M",
         word: "Meaning",
         description:
             "Determine your core values. I built a free quiz right here to help with this.",
-        linkLabel: "Take the quiz →",
-        linkTo: "/",
+        linkLabel: "Take the quiz",
     },
     {
         letter: "A",
@@ -386,24 +412,51 @@ const mapSteps = [
     },
 ];
 
-const lightSteps = [
-    { letter: "L", word: "Learn", description: "Start by identifying your values." },
-    { letter: "I", word: "Identify", description: "Clarify goals that reflect your values." },
-    { letter: "G", word: "Goal-set", description: "Create clear, measurable steps." },
-    { letter: "H", word: "Harness", description: "Educate yourself about the right tech tools." },
-    { letter: "T", word: "Transform", description: "Use tech to turn goals into reality." },
+const lightSteps: FrameworkStep[] = [
+    {
+        letter: "L",
+        word: "Learn",
+        description: "Start by identifying your values.",
+    },
+    {
+        letter: "I",
+        word: "Identify",
+        description: "Clarify goals that reflect your values.",
+    },
+    {
+        letter: "G",
+        word: "Goal-set",
+        description: "Create clear, measurable steps.",
+    },
+    {
+        letter: "H",
+        word: "Harness",
+        description: "Educate yourself about the right tech tools.",
+    },
+    {
+        letter: "T",
+        word: "Transform",
+        description: "Use tech to turn goals into reality.",
+    },
+];
+
+const frameworks = [
+    { name: "MAP", subtitle: "Meaning · Aim · Power", steps: mapSteps },
+    {
+        name: "LIGHT",
+        subtitle: "Learn · Identify · Goal-set · Harness · Transform",
+        steps: lightSteps,
+    },
 ];
 
 const secondaryQuizzes = [
     {
-        emoji: "❤️",
         name: "Love Languages Quiz",
         description:
             "Discover your primary love language and how you best give and receive love.",
         url: "https://5lovelanguages.com/quizzes/love-language",
     },
     {
-        emoji: "🤝",
         name: "Apology Languages Quiz",
         description:
             "Learn which type of apology resonates most deeply with you and the people you love.",
@@ -411,74 +464,20 @@ const secondaryQuizzes = [
     },
 ];
 
-function OrgCard({
-    name,
-    url,
-    description,
-    featured = false,
-    featuredLabel,
-    extraUrl,
-    extraLabel,
-}: {
-    name: string;
-    url: string;
-    description: string;
-    featured?: boolean;
-    featuredLabel?: string;
-    extraUrl?: string;
-    extraLabel?: string;
-}) {
-    return (
-        <div
-            className={`flex flex-col p-5 rounded-2xl border shadow-sm ${
-                featured
-                    ? "border-primary bg-base-200"
-                    : "border-gray-100 bg-white"
-            }`}
-        >
-            {featured && featuredLabel && (
-                <span className="inline-block text-xs font-semibold text-primary uppercase tracking-wide mb-2">
-                    {featuredLabel}
-                </span>
-            )}
-            <h3 className="font-bold text-base mb-1">{name}</h3>
-            <p className="text-sm text-gray-600 leading-relaxed mb-3 flex-1">
-                {description}
-            </p>
-            <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-primary font-medium hover:underline"
-            >
-                Visit site →
-            </a>
-            {extraUrl && extraLabel && (
-                <a
-                    href={extraUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-primary font-medium hover:underline mt-2"
-                >
-                    {extraLabel} →
-                </a>
-            )}
-        </div>
-    );
-}
+const featuredOrg = orgs.find((org) => org.highlighted);
+
+const orgGroups = [
+    {
+        title: "Screen Time & Families",
+        items: orgs.filter((org) => !org.highlighted),
+    },
+    { title: "Schools & Education", items: schoolOrgs },
+    { title: "Online Safety & Pornography Prevention", items: safetyOrgs },
+    { title: "Mental Health", items: mentalHealthOrgs },
+];
 
 export default function ResourcesPage() {
-    const navigate = useNavigate();
-    const [isQuizInProgress, setIsQuizInProgress] = useAtom(isQuizInProgressAtom);
-    const [, setCurrentQuestionIndex] = useAtom(currentQuestionIndexAtom);
-
-    function handleStartQuiz() {
-        if (!isQuizInProgress) {
-            setIsQuizInProgress(true);
-            setCurrentQuestionIndex(0);
-        }
-        navigate("/quiz");
-    }
+    const { isQuizInProgress, startQuiz } = useStartQuiz();
 
     return (
         <div className="w-full">
@@ -488,81 +487,114 @@ export default function ResourcesPage() {
                 path="/resources"
             />
             {/* Section 1 — Hero */}
-            <section className="bg-base-200 py-20 px-6">
-                <div className="max-w-2xl mx-auto text-center">
-                    <h1 className="text-4xl font-bold mb-6">Resources</h1>
-                    <p className="text-xl text-gray-700 leading-relaxed mb-5">
-                        A curated collection of organizations, articles, books, podcasts, and
-                        documentaries from{" "}
-                        <a
-                            href="https://healthytechbalance.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-primary font-medium hover:underline"
-                        >
-                            Healthy Tech Balance
-                        </a>{" "}
-                        to help families navigate technology with intention.
-                    </p>
-                    <p className="text-lg text-gray-600 leading-relaxed">
-                        The latest studies show that until nearly age 25, even{" "}
-                        <strong className="text-gray-800">20 minutes a day</strong> of screen
-                        activity produces visible physical changes in the brain. We are seeing
-                        record numbers of young people suffering from decreased resilience,
-                        depression, anxiety, ADHD, self-harm, and suicide as a result of
-                        unhealthy technology use. We have compiled these resources to educate
-                        and empower families to create the healthiest possible environment for
-                        their children.
-                    </p>
+            <section className="bg-base-200 px-6 pt-22 pb-18">
+                <div className="grid gap-10 min-[900px]:grid-cols-[1fr_300px] min-[900px]:gap-16 min-[900px]:items-start max-w-[1040px] mx-auto">
+                    <div>
+                        <h1 className={`mb-5 ${pageHeading}`}>Resources</h1>
+                        <p className="mb-4 text-[clamp(1.25rem,2.6vw,1.5rem)] font-medium leading-[1.45] text-ink text-pretty">
+                            A curated collection of organizations, articles,
+                            books, podcasts, and documentaries from{" "}
+                            <a
+                                href="https://healthytechbalance.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={textLink}
+                            >
+                                Healthy Tech Balance
+                            </a>{" "}
+                            to help families navigate technology with intention.
+                        </p>
+                        <p className="text-lg leading-[1.65] text-ink-muted text-pretty">
+                            The latest studies show that until nearly age 25,
+                            even{" "}
+                            <strong className="font-bold text-ink">
+                                20 minutes a day
+                            </strong>{" "}
+                            of screen activity produces visible physical changes
+                            in the brain. We are seeing record numbers of young
+                            people suffering from decreased resilience,
+                            depression, anxiety, ADHD, self-harm, and suicide as
+                            a result of unhealthy technology use. We have
+                            compiled these resources to educate and empower
+                            families to create the healthiest possible
+                            environment for their children.
+                        </p>
+                    </div>
+                    <nav
+                        aria-label="On this page"
+                        className="self-start px-6 py-[22px] rounded-[20px] bg-white"
+                    >
+                        <p className="mb-2.5 text-sm font-[650] text-ink">
+                            On this page
+                        </p>
+                        <ul className="grid gap-0.5">
+                            {pageSections.map(({ id, title }) => (
+                                <li key={id}>
+                                    <a
+                                        href={`#${id}`}
+                                        className="block -mx-2.5 px-2.5 py-2 rounded-[10px] text-[15px] font-medium leading-[1.4] text-ink transition-colors duration-160 ease-gentle hover:bg-base-200 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
+                                    >
+                                        {title}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
                 </div>
             </section>
 
             {/* Section 2 — Quizzes */}
-            <section className="bg-base-200 py-16 px-6">
-                <div className="max-w-3xl mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-3">
+            <section id="quizzes" className="bg-white px-6 py-20">
+                <div className="max-w-[1040px] mx-auto">
+                    <h2 className={`mb-3 ${sectionHeading}`}>
                         Quizzes &amp; Self-Assessments
                     </h2>
-                    <p className="text-lg text-gray-600 text-center mb-10">
-                        Free tools to help you and your family understand yourselves and each other better.
+                    <p className={sectionIntro}>
+                        Free tools to help you and your family understand
+                        yourselves and each other better.
                     </p>
 
                     {/* Featured: Core Values Quiz */}
-                    <div className="rounded-2xl bg-primary p-8 mb-6 text-center">
-                        <span className="inline-block text-xs font-semibold text-white/70 uppercase tracking-widest mb-3">
-                            Available right here
-                        </span>
-                        <h3 className="text-2xl font-bold text-white mb-3">
+                    <div className="grid justify-items-start gap-[18px] mt-10 px-7 py-10 md:p-12 rounded-[28px] bg-primary shadow-panel">
+                        <h3 className="text-[clamp(2rem,4.5vw,2.75rem)] font-[750] leading-[1.05] tracking-[-0.03em] text-white">
                             Core Values Quiz
                         </h3>
-                        <p className="text-primary-content text-base leading-relaxed mb-6 max-w-lg mx-auto">
-                            Discover the values that drive your decisions, shape your relationships, and
-                            define how technology should — and shouldn't — fit into your life.
+                        <p className="max-w-[52ch] text-[19px] font-bold leading-[1.5] text-white">
+                            Discover the values that drive your decisions, shape
+                            your relationships, and define how technology should
+                            — and shouldn't — fit into your life.
                         </p>
-                        <Button color="white" className="px-8 py-3 text-base" onClick={handleStartQuiz}>
-                            {isQuizInProgress ? "Continue" : "Take"} the Core Values Quiz
-                        </Button>
+                        <button
+                            type="button"
+                            onClick={startQuiz}
+                            className={`mt-1.5 ${onGreenButton}`}
+                        >
+                            {isQuizInProgress ? "Continue" : "Take"} the Core
+                            Values Quiz
+                        </button>
                     </div>
 
                     {/* Secondary quizzes */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div className="grid gap-x-14 mt-10 md:grid-cols-2">
                         {secondaryQuizzes.map((quiz) => (
                             <div
                                 key={quiz.name}
-                                className="flex flex-col p-6 rounded-2xl border border-gray-100 shadow-sm"
+                                className="py-6 border-t border-primary/35"
                             >
-                                <span className="text-3xl mb-3">{quiz.emoji}</span>
-                                <h3 className="font-bold text-base mb-1">{quiz.name}</h3>
-                                <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-1">
+                                <h3 className="mb-1.5 text-xl font-[650] tracking-[-0.015em] text-ink">
+                                    {quiz.name}
+                                </h3>
+                                <p className="mb-3 text-base leading-[1.55] text-ink-muted">
                                     {quiz.description}
                                 </p>
                                 <a
                                     href={quiz.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-sm text-primary font-medium hover:underline"
+                                    className={`text-[15px] ${textLink}`}
                                 >
-                                    Take the quiz →
+                                    Take the quiz
+                                    <ExternalArrow />
                                 </a>
                             </div>
                         ))}
@@ -571,280 +603,230 @@ export default function ResourcesPage() {
             </section>
 
             {/* Section 3 — Organizations & Websites */}
-            <section className="bg-white py-16 px-6">
-                <div className="max-w-5xl mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-12">
+            <section id="organizations" className="bg-base-200 px-6 py-20">
+                <div className="max-w-[1040px] mx-auto">
+                    <h2 className={`${sectionHeading}`}>
                         Organizations &amp; Websites
                     </h2>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
-                        {orgs.map((org) => (
-                            <OrgCard key={org.name} {...org} />
-                        ))}
-                    </div>
-
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
-                        Schools &amp; Education
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
-                        {schoolOrgs.map((org) => (
-                            <OrgCard key={org.name} {...org} />
-                        ))}
-                    </div>
-
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
-                        Online Safety &amp; Pornography Prevention
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
-                        {safetyOrgs.map((org) => (
-                            <OrgCard key={org.name} {...org} />
-                        ))}
-                    </div>
-
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
-                        Mental Health
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        {mentalHealthOrgs.map((org) => (
-                            <OrgCard key={org.name} {...org} />
-                        ))}
-                    </div>
+                    {orgGroups.map((group, groupIndex) => (
+                        <div key={group.title} className="mt-11">
+                            <h3 className="text-[22px] font-bold leading-[1.2] tracking-[-0.015em] text-ink">
+                                {group.title}
+                            </h3>
+                            <div className="grid gap-3 mt-4 md:grid-cols-2">
+                                {groupIndex === 0 && featuredOrg && (
+                                    <LinkCard {...featuredOrg} />
+                                )}
+                                {group.items.map((org) => (
+                                    <LinkCard key={org.name} {...org} />
+                                ))}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </section>
 
             {/* Section 3 — Articles */}
-            <section className="bg-base-200 py-16 px-6">
-                <div className="max-w-3xl mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-3">Articles</h2>
-                    <p className="text-lg text-gray-600 text-center mb-10">
-                        Research and perspectives from leading health, education, and science publications.
+            <section id="articles" className="bg-white px-6 py-20">
+                <div className="max-w-[760px] mx-auto">
+                    <h2 className={`mb-3 ${sectionHeading}`}>Articles</h2>
+                    <p className={sectionIntro}>
+                        Research and perspectives from leading health,
+                        education, and science publications.
                     </p>
-                    <div className="rounded-2xl border border-primary bg-white p-5 flex flex-col sm:flex-row items-center gap-4 mb-10">
+                    <div className="grid items-center gap-[18px] sm:grid-cols-[200px_1fr] mt-8 p-5 sm:p-6 rounded-[20px] bg-base-200">
                         <img
                             src="/images/Screen Time Guidelines.png"
-                            alt="Screen Time Guidelines"
-                            className="w-32 rounded-lg shrink-0"
+                            alt="Screen Time Guidelines chart"
+                            width={1056}
+                            height={816}
+                            loading="lazy"
+                            className="w-full max-w-[220px] h-auto rounded-xl shadow-photo"
                         />
                         <div>
-                            <p className="font-semibold text-gray-800 mb-1">
+                            <h3 className="mb-1.5 text-xl font-bold tracking-[-0.015em] text-ink">
                                 Screen Time Guidelines (WHO, CDC, APA)
+                            </h3>
+                            <p className="mb-3 text-base leading-[1.55] text-ink-muted">
+                                Quick-reference chart of age-appropriate daily
+                                screen time recommendations — printable and
+                                downloadable.
                             </p>
-                            <p className="text-sm text-gray-600 mb-3">
-                                Quick-reference chart of age-appropriate daily screen time recommendations — printable and downloadable.
-                            </p>
-                            <a
-                                href="/learn#screen-time-guidelines"
-                                className="text-sm text-primary font-medium hover:underline"
+                            <Link
+                                to="/learn#screen-time-guidelines"
+                                className="rounded-[3px] text-[15px] font-semibold text-ink underline decoration-primary decoration-[1.5px] underline-offset-4 hover:decoration-[2.5px] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
                             >
-                                View, download &amp; print →
-                            </a>
+                                View, download &amp; print
+                            </Link>
                         </div>
                     </div>
-                    <ul className="space-y-5">
+                    <ul className="mt-9">
                         {articles.map((article) => (
                             <li
                                 key={article.url + article.title}
-                                className="flex flex-col gap-0.5"
+                                className="grid gap-1 py-4 border-t border-primary/25"
                             >
                                 <a
                                     href={article.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-primary font-medium hover:underline leading-snug"
+                                    className="justify-self-start rounded-[3px] text-[17px] font-semibold leading-[1.4] text-ink underline decoration-primary/45 decoration-[1.5px] underline-offset-4 hover:decoration-primary hover:decoration-[2.5px] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
                                 >
                                     {article.title}
+                                    <ExternalArrow className="size-[13px]" />
                                 </a>
-                                <span className="text-sm text-gray-500">{article.source}</span>
+                                <span className="text-[15px] leading-[1.4] text-ink-muted">
+                                    {article.source}
+                                </span>
                             </li>
                         ))}
                     </ul>
                 </div>
             </section>
 
-            {/* Section 4 — Books */}
-            <section className="bg-white py-16 px-6">
-                <div className="max-w-5xl mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-3">Books</h2>
-                    <p className="text-lg text-gray-600 text-center mb-12">
-                        Recommended reading for understanding and addressing technology's impact on families.
+            {/* Books */}
+            <section id="books" className="bg-base-200 px-6 py-20">
+                <div className="max-w-[1040px] mx-auto">
+                    <h2 className={`mb-3 ${sectionHeading}`}>Books</h2>
+                    <p className={sectionIntro}>
+                        Recommended reading for understanding and addressing
+                        technology's impact on families.
                     </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div className="grid gap-3 mt-10 md:grid-cols-2">
                         {books.map((book) => (
-                            <div
+                            <LinkCard
                                 key={book.title}
-                                className="flex flex-col p-5 rounded-2xl border border-gray-100 shadow-sm"
-                            >
-                                <a
-                                    href={book.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="font-bold text-base text-primary hover:underline mb-1"
-                                >
-                                    {book.title}
-                                </a>
-                                <p className="text-sm text-gray-600 leading-relaxed flex-1">
-                                    {book.note}
-                                </p>
-                                {book.extraUrl && (
-                                    <a
-                                        href={book.extraUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-sm text-primary font-medium hover:underline mt-2"
-                                    >
-                                        {book.extraLabel} →
-                                    </a>
-                                )}
-                            </div>
+                                name={book.title}
+                                url={book.url}
+                                description={book.note}
+                                extraUrl={book.extraUrl}
+                                extraLabel={book.extraLabel}
+                            />
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Section 5 — Podcasts & Documentaries */}
-            <section className="bg-base-200 py-16 px-6">
-                <div className="max-w-5xl mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-12">
+            {/* Podcasts & documentaries */}
+            <section
+                id="podcasts-and-documentaries"
+                className="bg-white px-6 py-20"
+            >
+                <div className="max-w-[1040px] mx-auto">
+                    <h2 className={sectionHeading}>
                         Podcasts &amp; Documentaries
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div className="grid gap-3 mt-10 md:grid-cols-2">
                         {[...podcasts, ...documentaries].map((item) => (
-                            <div
+                            <LinkCard
                                 key={item.title}
-                                className="flex flex-col p-5 rounded-2xl border border-gray-100 bg-white shadow-sm"
-                            >
-                                <span className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">
-                                    {item.type}
-                                </span>
-                                <a
-                                    href={item.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="font-bold text-base hover:underline text-gray-900 mb-2 leading-snug"
-                                >
-                                    {item.title}
-                                </a>
-                                <p className="text-sm text-gray-600 leading-relaxed">
-                                    {item.description}
-                                </p>
-                            </div>
+                                name={item.title}
+                                url={item.url}
+                                description={item.description}
+                                tag={item.type}
+                                tone="tint"
+                            />
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Section 6 — Social Accounts */}
-            <section className="bg-white py-16 px-6">
-                <div className="max-w-3xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold mb-3">
+            {/* Social accounts */}
+            <section id="social-accounts" className="bg-base-200 px-6 py-20">
+                <div className="max-w-[1040px] mx-auto">
+                    <h2 className={`mb-3 ${sectionHeading}`}>
                         Social Accounts to Follow
                     </h2>
-                    <p className="text-lg text-gray-600 mb-10">
-                        Primarily on Instagram. Worth a follow for ongoing updates and resources.
+                    <p className={sectionIntro}>
+                        Primarily on Instagram. Worth a follow for ongoing
+                        updates and resources.
                     </p>
-                    <div className="flex flex-wrap justify-center gap-3">
+                    <ul className="grid items-start gap-3 mt-10 sm:grid-cols-2 lg:grid-cols-4">
                         {socials.map((s) => (
-                            <div key={s.handle} className="flex flex-col items-center gap-1">
-                                <span className="inline-block bg-base-200 text-primary font-semibold text-sm px-4 py-2 rounded-full">
+                            <li
+                                key={s.handle}
+                                className="grid content-start gap-1 px-5 py-4 rounded-[18px] bg-white"
+                            >
+                                <span className="text-[17px] font-[650] text-ink break-words">
                                     {s.handle}
                                 </span>
                                 {s.note && (
-                                    <span className="text-xs text-gray-500 max-w-[180px] text-center leading-tight">
+                                    <span className="text-[15px] leading-[1.45] text-ink-muted">
                                         {s.note}
                                     </span>
                                 )}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </section>
+
+            {/* MAP & LIGHT frameworks */}
+            <section id="framework" className="bg-white px-6 py-20">
+                <div className="max-w-[1040px] mx-auto">
+                    <h2 className={`mb-3 ${sectionHeading}`}>
+                        The Healthy Tech Balance Framework
+                    </h2>
+                    <p className={sectionIntro}>
+                        Two complementary frameworks for using technology as a
+                        tool — not a distraction.
+                    </p>
+                    <div className="grid gap-4 mt-10 md:grid-cols-2">
+                        {frameworks.map((framework) => (
+                            <div
+                                key={framework.name}
+                                className="p-7 md:p-9 rounded-[28px] bg-base-200"
+                            >
+                                <h3 className="text-[clamp(2rem,4vw,2.5rem)] font-[750] leading-none tracking-[-0.02em] text-ink">
+                                    {framework.name}
+                                </h3>
+                                <p className="mt-2 text-[15px] font-semibold text-ink-muted">
+                                    {framework.subtitle}
+                                </p>
+                                <ol className="grid gap-4 mt-7">
+                                    {framework.steps.map((step) => (
+                                        <li
+                                            key={step.letter}
+                                            className="grid grid-cols-[36px_1fr] items-start gap-3.5"
+                                        >
+                                            <span
+                                                aria-hidden="true"
+                                                className="grid place-items-center size-9 -mt-1.5 rounded-full border-2 border-primary bg-white text-base font-bold text-ink"
+                                            >
+                                                {step.letter}
+                                            </span>
+                                            <p className="text-base leading-[1.55] text-ink-muted">
+                                                <span className="font-[650] text-ink">
+                                                    {step.word}:
+                                                </span>{" "}
+                                                {step.description}
+                                                {step.linkLabel && (
+                                                    <>
+                                                        {" "}
+                                                        <button
+                                                            type="button"
+                                                            onClick={startQuiz}
+                                                            className={`cursor-pointer ${textLink}`}
+                                                        >
+                                                            {step.linkLabel}
+                                                        </button>
+                                                    </>
+                                                )}
+                                            </p>
+                                        </li>
+                                    ))}
+                                </ol>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Section 7 — MAP & LIGHT Frameworks */}
-            <section className="bg-base-200 py-16 px-6">
-                <div className="max-w-5xl mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-3">
-                        The Healthy Tech Balance Framework
-                    </h2>
-                    <p className="text-lg text-gray-600 text-center mb-12">
-                        Two complementary frameworks for using technology as a tool — not a distraction.
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {/* MAP */}
-                        <div className="flex flex-col p-6 rounded-2xl border border-gray-100 bg-white shadow-sm">
-                            <h3 className="text-2xl font-bold text-primary mb-1">MAP</h3>
-                            <p className="text-sm text-gray-500 mb-5">
-                                Meaning · Aim · Power
-                            </p>
-                            <div className="space-y-4">
-                                {mapSteps.map((step) => (
-                                    <div key={step.letter} className="flex gap-3">
-                                        <span className="text-xl font-bold text-primary w-6 shrink-0">
-                                            {step.letter}
-                                        </span>
-                                        <div>
-                                            <span className="font-semibold">{step.word}: </span>
-                                            <span className="text-sm text-gray-600">
-                                                {step.description}
-                                            </span>
-                                            {step.linkLabel && step.linkTo && (
-                                                <button
-                                                    onClick={handleStartQuiz}
-                                                    className="ml-1 text-sm text-primary font-medium hover:underline"
-                                                >
-                                                    {step.linkLabel}
-                                                </button>
-                                            )}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* LIGHT */}
-                        <div className="flex flex-col p-6 rounded-2xl border border-gray-100 bg-white shadow-sm">
-                            <h3 className="text-2xl font-bold text-primary mb-1">LIGHT</h3>
-                            <p className="text-sm text-gray-500 mb-5">
-                                Learn · Identify · Goal-set · Harness · Transform
-                            </p>
-                            <div className="space-y-4">
-                                {lightSteps.map((step) => (
-                                    <div key={step.letter} className="flex gap-3">
-                                        <span className="text-xl font-bold text-primary w-6 shrink-0">
-                                            {step.letter}
-                                        </span>
-                                        <div>
-                                            <span className="font-semibold">{step.word}: </span>
-                                            <span className="text-sm text-gray-600">
-                                                {step.description}
-                                            </span>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Section 8 — Quiz CTA */}
-            <section className="bg-primary py-16 px-6">
-                <div className="max-w-2xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold text-white mb-6">
-                        Ready to Discover Your Values?
-                    </h2>
-                    <p className="text-lg text-primary-content mb-10 leading-relaxed">
-                        The quiz takes about 5 minutes and is the first step in the MAP and LIGHT
-                        frameworks. Take it for yourself — or as a whole family.
-                    </p>
-                    <Button
-                        color="white"
-                        className="px-8 py-3 text-base"
-                        onClick={handleStartQuiz}
-                    >
-                        {isQuizInProgress ? "Continue" : "Take"} the Core Values Quiz
-                    </Button>
-                </div>
-            </section>
+            <QuizCallout heading="Ready to Discover Your Values?">
+                The quiz takes about 5 minutes and is the first step in the MAP
+                and LIGHT frameworks. Take it for yourself — or as a whole
+                family.
+            </QuizCallout>
         </div>
     );
 }

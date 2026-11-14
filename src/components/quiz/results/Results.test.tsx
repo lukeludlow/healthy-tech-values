@@ -25,7 +25,7 @@ test("ranks values by frequency, highest first, with correct point counts", asyn
         .toBeInTheDocument();
     await expect.element(getByText("3 pts")).toBeInTheDocument();
     await expect.element(getByText("2 pts")).toBeInTheDocument();
-    await expect.element(getByText("1 pts")).toBeInTheDocument();
+    await expect.element(getByText("1 pt")).toBeInTheDocument();
 
     const text = container.textContent ?? "";
     const harmonyIndex = text.indexOf("Health & Harmony");
@@ -51,4 +51,19 @@ test("clicking a value card reveals its suggested goals, and clicking again hide
 
     await getByText("Health & Harmony").click();
     await expect.element(getByText(goalText)).not.toBeInTheDocument();
+});
+
+test("with no answers yet, shows a prompt to take the quiz instead of an empty list", async () => {
+    const { getByText, getByRole } = await renderWithProviders(<Results />, {
+        initialAtomValues: [[answersAtom, []]],
+    });
+
+    await expect
+        .element(
+            getByText("Answer the quiz questions to see your ranked values."),
+        )
+        .toBeInTheDocument();
+    await expect
+        .element(getByRole("link", { name: "Take the Core Values Quiz" }))
+        .toHaveAttribute("href", "/quiz");
 });

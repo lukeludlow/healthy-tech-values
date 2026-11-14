@@ -6,14 +6,10 @@ export default function AnswerOptions() {
     const [currentQuestion] = useAtom(currentQuestionAtom);
 
     return (
-        <div>
-            <div className={"flex flex-col gap-2"}>
-                {currentQuestion.options.map((option) => (
-                    <div key={JSON.stringify(option)}>
-                        <AnswerOptionButton option={option} />
-                    </div>
-                ))}
-            </div>
+        <div className="grid gap-2.5 mt-7">
+            {currentQuestion.options.map((option) => (
+                <AnswerOptionButton key={option.text} option={option} />
+            ))}
         </div>
     );
 }

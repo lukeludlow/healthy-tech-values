@@ -1,15 +1,22 @@
 import { VALUE_GOALS } from "@/data/goalsData.ts";
 
-export default function ValueDetails({ value }: { value: string }) {
+type Props = {
+    value: string;
+    /** True when the goals sit inside a light green (top value) row. */
+    onTint?: boolean;
+};
+
+export default function ValueDetails({ value, onTint = false }: Props) {
     const goals = VALUE_GOALS[value] ?? [];
     return (
-        <ul className="mt-2 flex flex-col gap-1.5 pl-1">
+        <ul className="grid gap-2 sm:grid-cols-2">
             {goals.map((goal) => (
                 <li
                     key={goal}
-                    className="flex items-start gap-2 text-sm text-base-content/80"
+                    className={`px-3.5 py-3 rounded-xl text-[15px] leading-[1.45] text-ink ${
+                        onTint ? "bg-white" : "bg-base-200"
+                    }`}
                 >
-                    <span className="text-primary mt-0.5 shrink-0">→</span>
                     {goal}
                 </li>
             ))}

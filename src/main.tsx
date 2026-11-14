@@ -33,7 +33,7 @@ createRoot(document.getElementById("root")!).render(
                         <div className="print:hidden">
                             <TopNavBar />
                         </div>
-                        <div className={"flex-1"}>
+                        <div className={"flex-1 flex flex-col"}>
                             <Routes>
                                 <Route path={"/"} element={<HomePage />} />
                                 <Route

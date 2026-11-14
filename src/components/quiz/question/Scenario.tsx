@@ -5,10 +5,8 @@ export default function Scenario() {
     const [currentQuestion] = useAtom(currentQuestionAtom);
 
     return (
-        <div className="flex flex-col gap-2 py-4">
-            <div className="text-3xl font-bold text-center text-primary leading-tight">
-                {currentQuestion.question}
-            </div>
-        </div>
+        <h1 className="text-[clamp(1.75rem,5vw,2.5rem)] font-[750] leading-[1.1] tracking-[-0.03em] text-ink text-balance">
+            {currentQuestion.question}
+        </h1>
     );
 }

@@ -1,35 +1,61 @@
-import { useNavigate, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import { useEffect } from "react";
-import { useAtom } from "jotai";
+import { ArrowDownTrayIcon, PrinterIcon } from "@heroicons/react/16/solid";
+import ExternalArrow from "@/components/ui/ExternalArrow.tsx";
+import QuizCallout from "@/components/ui/QuizCallout.tsx";
+import StepPath, { type Step } from "@/components/ui/StepPath.tsx";
 import {
-    currentQuestionIndexAtom,
-    isQuizInProgressAtom,
-} from "@/state/state.ts";
-import { Button } from "@/components/catalyst-ui-kit/button.tsx";
-import { FaDownload, FaPrint } from "react-icons/fa";
+    bodyText,
+    leadText,
+    pageHeading,
+    pillLink,
+    sectionHeading,
+    sectionIntro,
+    textLink,
+} from "@/components/ui/styles.ts";
 import Seo from "@/components/seo/Seo.tsx";
+import {
+    AcademicCapIcon,
+    GlobeAmericasIcon,
+    HandRaisedIcon,
+    HeartIcon,
+    KeyIcon,
+    MapIcon,
+    ScaleIcon,
+    ShieldCheckIcon,
+    SunIcon,
+    TrophyIcon,
+    UserGroupIcon,
+} from "@heroicons/react/24/outline";
+
+function valueSlug(name: string) {
+    return name
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "-");
+}
 
 const whyValues = [
     {
-        icon: "🧭",
+        Icon: MapIcon,
         title: "Clarity & Direction",
         description:
             "Values act as a compass when life feels uncertain. When you know what you stand for, decisions become clearer and less exhausting.",
     },
     {
-        icon: "✅",
+        Icon: ScaleIcon,
         title: "Aligned Decisions",
         description:
             "They help you say yes to what matters and no to what doesn't. Every boundary you set becomes easier when it's rooted in something real.",
     },
     {
-        icon: "🤝",
+        Icon: UserGroupIcon,
         title: "Stronger Relationships",
         description:
             "Living authentically by your values builds trust. People around you — especially your kids — sense the difference between words and lived convictions.",
     },
     {
-        icon: "🌟",
+        Icon: SunIcon,
         title: "Life Satisfaction",
         description:
             "Research consistently shows that people who live in alignment with their core values report higher fulfillment and resilience in hard seasons.",
@@ -38,7 +64,7 @@ const whyValues = [
 
 const coreValues = [
     {
-        emoji: "🛡️",
+        Icon: ShieldCheckIcon,
         name: "Stability & Security",
         description:
             "You find peace in predictability. Safety, routine, and financial security aren't just preferences — they're foundational to how you thrive. You plan ahead so that the people who depend on you can count on you.",
@@ -46,7 +72,7 @@ const coreValues = [
             "Technology should protect your family, not expose it. From digital privacy settings to screen-time guardrails, honoring this value means building a stable, secure digital environment at home.",
     },
     {
-        emoji: "🌿",
+        Icon: HeartIcon,
         name: "Health & Harmony",
         description:
             "Wellbeing — physical, emotional, and relational — is your priority. Balance and a calm household matter deeply to you. When your body and environment are in order, everything else flows more naturally.",
@@ -54,7 +80,7 @@ const coreValues = [
             "Devices that disrupt sleep or amplify stress work against this value. Protecting your calm means choosing when and how technology enters your space.",
     },
     {
-        emoji: "🏆",
+        Icon: TrophyIcon,
         name: "Achievement & Influence",
         description:
             "You're motivated by excellence, recognition, and meaningful impact. You want to reach your potential and earn respect by doing hard things well. Goals and milestones energize you.",
@@ -62,7 +88,7 @@ const coreValues = [
             "Social media comparison and passive scrolling steal hours from real progress. Use technology as a lever for genuine achievement — not a substitute for it.",
     },
     {
-        emoji: "📚",
+        Icon: AcademicCapIcon,
         name: "Growth & Mastery",
         description:
             "Learning is core to who you are. Whether it's developing a skill, deepening expertise, or pursuing wisdom, you believe in continuous improvement. You want your mind sharpened, not dulled.",
@@ -70,7 +96,7 @@ const coreValues = [
             "The internet holds extraordinary learning resources — and extraordinary distractions. Protect deep focus time and use educational platforms with intention.",
     },
     {
-        emoji: "🧭",
+        Icon: GlobeAmericasIcon,
         name: "Adventure & Exploration",
         description:
             "You're drawn to novelty, discovery, and the thrill of new experiences. Routine can feel like a cage. You want life to feel expansive, energized by trying things most people wouldn't dare.",
@@ -78,7 +104,7 @@ const coreValues = [
             "Technology can unlock the world — or keep you endlessly scrolling a simulation of it. Use it to plan and connect you to real experiences, not replace them.",
     },
     {
-        emoji: "❤️",
+        Icon: UserGroupIcon,
         name: "Connection & Love",
         description:
             "Relationships are at the center of what makes life meaningful to you. Empathy, intimacy, and belonging aren't just nice to have — they're what you live for. You show up for the people who matter.",
@@ -86,7 +112,7 @@ const coreValues = [
             "Devices at the dinner table and midnight phone checks chip away at the connection you value most. Use technology to deepen relationships — not interrupt them.",
     },
     {
-        emoji: "⚖️",
+        Icon: ScaleIcon,
         name: "Integrity & Ethics",
         description:
             "You hold yourself to a high standard of honesty, fairness, and responsibility. You want your actions to align with your principles, and you model that for those around you. Character counts more than convenience.",
@@ -94,7 +120,7 @@ const coreValues = [
             "Practice digital citizenship — be as honest and thoughtful online as you are in person. The integrity you model offline shapes how your family shows up online.",
     },
     {
-        emoji: "🗽",
+        Icon: KeyIcon,
         name: "Independence & Freedom",
         description:
             "Autonomy is non-negotiable. You want to make your own choices, think for yourself, and resist becoming dependent on people or systems that don't have your best interests at heart. Privacy matters to you.",
@@ -102,7 +128,7 @@ const coreValues = [
             "Algorithms and notification loops are engineered to reduce your independence. Protect your privacy, limit data exposure, and stay in control of your own attention.",
     },
     {
-        emoji: "🤝",
+        Icon: HandRaisedIcon,
         name: "Contribution & Service",
         description:
             "You find purpose in giving back. Whether through volunteering, advocacy, or simply showing up for others, making a positive difference in your community is deeply meaningful.",
@@ -110,7 +136,7 @@ const coreValues = [
             "Technology can multiply your impact — amplifying causes and enabling collaboration at scale. Channel screen time toward meaningful contribution, not mindless consumption.",
     },
     {
-        emoji: "🕊️",
+        Icon: SunIcon,
         name: "Tradition & Spirituality",
         description:
             "Your faith, heritage, and cultural roots ground you. Rituals, sacred practices, and the wisdom passed down through generations provide meaning that transcends the moment. You want to preserve and transmit what matters.",
@@ -119,7 +145,7 @@ const coreValues = [
     },
 ];
 
-const steps = [
+const steps: Step[] = [
     {
         number: "1",
         title: "Take the Quiz",
@@ -141,11 +167,7 @@ const steps = [
 ];
 
 export default function LearnPage() {
-    const navigate = useNavigate();
     const { hash } = useLocation();
-    const [isQuizInProgress, setIsQuizInProgress] = useAtom(isQuizInProgressAtom);
-    const [, setCurrentQuestionIndex] = useAtom(currentQuestionIndexAtom);
-
     useEffect(() => {
         if (!hash) return;
         const el = document.querySelector(hash);
@@ -154,7 +176,7 @@ export default function LearnPage() {
 
     function handlePrint() {
         const img = document.querySelector(
-            ".screen-time-guidelines-printable img"
+            ".screen-time-guidelines-printable img",
         ) as HTMLImageElement;
         if (!img) return;
         const win = window.open("", "_blank", "width=800,height=600");
@@ -175,14 +197,6 @@ export default function LearnPage() {
         win.document.close();
     }
 
-    function handleStartQuiz() {
-        if (!isQuizInProgress) {
-            setIsQuizInProgress(true);
-            setCurrentQuestionIndex(0);
-        }
-        navigate("/quiz");
-    }
-
     return (
         <div className="w-full">
             <Seo
@@ -191,21 +205,26 @@ export default function LearnPage() {
                 path="/learn"
             />
             {/* Section 1 — Hero */}
-            <section className="bg-base-200 py-20 px-6">
-                <div className="max-w-2xl mx-auto text-center">
-                    <h1 className="text-4xl font-bold mb-6">
+            <section className="bg-base-200 px-6 pt-22 pb-20">
+                <div className="max-w-[720px] mx-auto">
+                    <h1 className={`mb-5 ${pageHeading}`}>
                         What Are Core Values?
                     </h1>
-                    <p className="text-xl text-gray-700 leading-relaxed">
-                        Core values are the fundamental principles that guide your decisions, priorities, and sense of purpose. They're not goals you chase — they're the person you already are at your best.
+                    <p className="mb-4 text-[clamp(1.25rem,2.6vw,1.5rem)] font-medium leading-[1.45] text-ink text-pretty">
+                        Core values are the fundamental principles that guide
+                        your decisions, priorities, and sense of purpose.
+                        They're not goals you chase — they're the person you
+                        already are at your best.
                     </p>
-                    <p className="text-lg text-gray-600 mt-4 leading-relaxed">
-                        When you know your values, technology becomes a tool you choose rather than a current that carries you. This is the foundation of everything at{" "}
+                    <p className="text-lg leading-[1.65] text-ink-muted text-pretty">
+                        When you know your values, technology becomes a tool you
+                        choose rather than a current that carries you. This is
+                        the foundation of everything at{" "}
                         <a
                             href="https://healthytechbalance.com/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-primary font-medium hover:underline"
+                            className={textLink}
                         >
                             Healthy Tech Balance
                         </a>
@@ -215,170 +234,201 @@ export default function LearnPage() {
             </section>
 
             {/* Section 2 — Why Values Matter */}
-            <section className="bg-white py-16 px-6">
-                <div className="max-w-4xl mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-3">
+            <section id="why-values-matter" className="bg-white px-6 py-20">
+                <div className="max-w-[1040px] mx-auto">
+                    <h2 className={`mb-3 ${sectionHeading}`}>
                         Why Knowing Your Values Matters
                     </h2>
-                    <p className="text-lg text-gray-600 text-center mb-12">
-                        Values aren't just feel-good language. They're a practical operating system for your life.
+                    <p className={sectionIntro}>
+                        Values aren't just feel-good language. They're a
+                        practical operating system for your life.
                     </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {whyValues.map((item) => (
+                    <div className="grid gap-x-14 gap-y-9 mt-12 md:grid-cols-2">
+                        {whyValues.map(({ Icon, title, description }) => (
                             <div
-                                key={item.title}
-                                className="flex flex-col p-6 rounded-2xl border border-gray-100 shadow-sm"
+                                key={title}
+                                className="grid grid-cols-[52px_1fr] items-start gap-[18px]"
                             >
-                                <span className="text-3xl mb-3">{item.icon}</span>
-                                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                                <p className="text-gray-600 text-sm leading-relaxed">
-                                    {item.description}
-                                </p>
+                                <span
+                                    aria-hidden="true"
+                                    className="grid place-items-center size-13 rounded-full bg-base-200 text-primary"
+                                >
+                                    <Icon className="size-[26px]" />
+                                </span>
+                                <div>
+                                    <h3 className="mb-2 text-[21px] font-[650] tracking-[-0.015em] text-ink">
+                                        {title}
+                                    </h3>
+                                    <p className="text-[17px] leading-[1.6] text-ink-muted text-pretty">
+                                        {description}
+                                    </p>
+                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Section 3 — Values & Technology Bridge */}
-            <section className="bg-base-200 py-16 px-6">
-                <div className="max-w-2xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold mb-6">
+            {/* Values & technology */}
+            <section id="values-and-tech" className="bg-base-200 px-6 py-20">
+                <div className="max-w-[680px] mx-auto">
+                    <h2 className={`mb-5 ${sectionHeading}`}>
                         Values Guide Intentional Tech Use
                     </h2>
-                    <p className="text-lg text-gray-700 mb-5 leading-relaxed">
-                        Technology is neutral — your values determine whether it serves you or consumes you. The same smartphone can connect a family across continents or silently fracture one sitting in the same room.
+                    <p className={`mb-4.5 ${leadText}`}>
+                        Technology is neutral — your values determine whether it
+                        serves you or consumes you. The same smartphone can
+                        connect a family across continents or silently fracture
+                        one sitting in the same room.
                     </p>
-                    <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                        When your values are clear, every tech decision gets easier: which apps deserve your attention, when screens belong at the table, what your kids should see you doing with your phone. You stop reacting and start choosing.
+                    <p className={`mb-6 ${bodyText}`}>
+                        When your values are clear, every tech decision gets
+                        easier: which apps deserve your attention, when screens
+                        belong at the table, what your kids should see you doing
+                        with your phone. You stop reacting and start choosing.
                     </p>
                     <a
                         href="https://healthytechbalance.com/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary font-medium hover:underline"
+                        className={textLink}
                     >
-                        Learn how consulting at Healthy Tech Balance works →
+                        Learn how consulting at Healthy Tech Balance works
+                        <ExternalArrow />
                     </a>
                 </div>
             </section>
 
-            {/* Section 4 — The 10 Core Values */}
-            <section id="core-values" className="bg-white py-16 px-6">
-                <div className="max-w-5xl mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-3">
+            <section id="core-values" className="bg-white px-6 py-20">
+                <div className="max-w-[1040px] mx-auto">
+                    <h2 className={`mb-3 ${sectionHeading}`}>
                         The 10 Core Values
                     </h2>
-                    <p className="text-lg text-gray-600 text-center mb-12">
-                        These are the values measured in the quiz — and the lens through which healthy tech balance is built.
+                    <p className={sectionIntro}>
+                        These are the values measured in the quiz — and the lens
+                        through which healthy tech balance is built.
                     </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <ul
+                        aria-label="Jump to a value"
+                        className="flex flex-wrap gap-2 mt-7"
+                    >
                         {coreValues.map((value) => (
-                            <div
-                                key={value.name}
-                                className="flex flex-col p-6 rounded-2xl border border-gray-100 shadow-sm"
-                            >
-                                <div className="flex items-center gap-3 mb-3">
-                                    <span className="text-3xl">{value.emoji}</span>
-                                    <h3 className="text-lg font-bold text-primary">
-                                        {value.name}
-                                    </h3>
-                                </div>
-                                <p className="text-gray-700 text-sm leading-relaxed mb-4">
-                                    {value.description}
-                                </p>
-                                <div className="mt-auto rounded-xl bg-base-200 px-4 py-3">
-                                    <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">
-                                        In tech terms
-                                    </p>
-                                    <p className="text-sm text-gray-600 leading-relaxed">
-                                        {value.techNote}
-                                    </p>
-                                </div>
-                            </div>
+                            <li key={value.name}>
+                                <a
+                                    href={`#${valueSlug(value.name)}`}
+                                    className="inline-flex px-3.5 py-1.5 rounded-full border-[1.5px] border-primary/40 text-sm font-semibold text-ink transition-colors duration-160 ease-gentle hover:border-primary hover:bg-base-200 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
+                                >
+                                    {value.name}
+                                </a>
+                            </li>
                         ))}
+                    </ul>
+                    <div className="mt-10">
+                        {coreValues.map(
+                            ({ Icon, name, description, techNote }) => (
+                                <article
+                                    key={name}
+                                    id={valueSlug(name)}
+                                    className="grid gap-4 min-[900px]:grid-cols-[320px_1fr] min-[900px]:gap-12 py-8 border-t border-primary/30 scroll-mt-6"
+                                >
+                                    <div className="flex items-center gap-4 self-start">
+                                        <span
+                                            aria-hidden="true"
+                                            className="grid place-items-center shrink-0 size-13 rounded-full bg-base-200 text-primary"
+                                        >
+                                            <Icon className="size-[26px]" />
+                                        </span>
+                                        <h3 className="text-[22px] font-bold leading-[1.2] tracking-[-0.015em] text-ink">
+                                            {name}
+                                        </h3>
+                                    </div>
+                                    <div className="grid gap-4">
+                                        <p className="text-[17px] leading-[1.6] text-ink-muted text-pretty">
+                                            {description}
+                                        </p>
+                                        <div className="px-[18px] py-4 rounded-2xl bg-base-200">
+                                            <p className="mb-1 text-sm font-[650] text-ink">
+                                                In tech terms
+                                            </p>
+                                            <p className="text-base leading-[1.55] text-ink-soft text-pretty">
+                                                {techNote}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </article>
+                            ),
+                        )}
                     </div>
                 </div>
             </section>
 
-            {/* Section 5 — Screen Time Guidelines */}
-            <section id="screen-time-guidelines" className="bg-base-200 py-16 px-6">
-                <div className="max-w-3xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold mb-3">
+            {/* Screen time guidelines */}
+            <section
+                id="screen-time-guidelines"
+                className="bg-base-200 px-6 py-20"
+            >
+                <div className="max-w-[880px] mx-auto">
+                    <h2 className={`mb-3 ${sectionHeading}`}>
                         Screen Time Guidelines
                     </h2>
-                    <p className="text-lg text-gray-600 mb-10">
-                        Age-appropriate recommendations from the WHO, CDC, and APA — a practical reference for every family.
+                    <p className={`mb-10 ${sectionIntro}`}>
+                        Age-appropriate recommendations from the WHO, CDC, and
+                        APA — a practical reference for every family.
                     </p>
                     <div className="screen-time-guidelines-printable">
                         <img
                             src="/images/Screen Time Guidelines.png"
                             alt="Screen Time Guidelines chart showing recommended daily screen time by age group"
-                            className="w-full rounded-2xl shadow-md mb-8"
+                            width={1056}
+                            height={816}
+                            loading="lazy"
+                            className="block w-full h-auto rounded-2xl shadow-photo"
                         />
                     </div>
-                    <div className="flex flex-wrap justify-center gap-4 print:hidden">
+                    <div className="flex flex-wrap gap-2.5 mt-6 print:hidden">
                         <a
                             href="/images/Screen Time Guidelines.png"
                             download="Screen Time Guidelines.png"
-                            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg border border-primary text-primary font-semibold text-sm hover:bg-primary hover:text-white transition-colors"
+                            className={pillLink}
                         >
-                            <FaDownload />
+                            <ArrowDownTrayIcon
+                                aria-hidden="true"
+                                className="size-4 text-primary"
+                            />
                             Download
                         </a>
                         <button
+                            type="button"
                             onClick={handlePrint}
-                            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg border border-gray-300 text-gray-700 font-semibold text-sm hover:bg-gray-50 transition-colors"
+                            className={pillLink}
                         >
-                            <FaPrint />
+                            <PrinterIcon
+                                aria-hidden="true"
+                                className="size-4 text-primary"
+                            />
                             Print
                         </button>
                     </div>
                 </div>
             </section>
 
-            {/* Section 6 — How to Start */}
-            <section className="bg-base-200 py-16 px-6">
-                <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold mb-3">How to Start</h2>
-                    <p className="text-lg text-gray-600 mb-12">
-                        Knowing your values is one thing. Honoring them is another. Here's where to begin.
+            {/* How to start */}
+            <section id="how-to-start" className="bg-white px-6 py-20">
+                <div className="max-w-[1040px] mx-auto">
+                    <h2 className={`mb-3 ${sectionHeading}`}>How to Start</h2>
+                    <p className={`mb-12 ${sectionIntro}`}>
+                        Knowing your values is one thing. Honoring them is
+                        another. Here's where to begin.
                     </p>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {steps.map((step) => (
-                            <div
-                                key={step.number}
-                                className="flex flex-col items-center text-center p-6 rounded-2xl border border-gray-100 bg-white shadow-sm"
-                            >
-                                <span className="text-5xl font-bold text-primary mb-4">
-                                    {step.number}
-                                </span>
-                                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                                <p className="text-gray-600">{step.description}</p>
-                            </div>
-                        ))}
-                    </div>
+                    <StepPath steps={steps} />
                 </div>
             </section>
 
-            {/* Section 7 — Quiz CTA */}
-            <section className="bg-primary py-16 px-6">
-                <div className="max-w-2xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold text-white mb-6">
-                        Ready to Discover Your Values?
-                    </h2>
-                    <p className="text-lg text-primary-content mb-10 leading-relaxed">
-                        The quiz takes about 5 minutes. You can take it for yourself, or as a whole family. If you have a teenager, have them take it too — comparing results opens powerful conversations.
-                    </p>
-                    <Button
-                        color="white"
-                        className="px-8 py-3 text-base"
-                        onClick={handleStartQuiz}
-                    >
-                        {isQuizInProgress ? "Continue" : "Take"} the Core Values Quiz
-                    </Button>
-                </div>
-            </section>
+            <QuizCallout heading="Ready to Discover Your Values?">
+                The quiz takes about 5 minutes. You can take it for yourself, or
+                as a whole family. If you have a teenager, have them take it too
+                — comparing results opens powerful conversations.
+            </QuizCallout>
         </div>
     );
 }

@@ -8,23 +8,36 @@
         margin: 2cm;
     }
 
-    html, body, #root {
+    html,
+    body,
+    #root {
         height: auto !important;
         overflow: visible !important;
     }
-
-
 }
 
 @theme {
-    --font-sans: Inter, sans-serif;
-    --font-sans--font-feature-settings: 'cv11';
+    --font-sans: "Inter Variable", Inter, sans-serif;
+    --font-sans--font-feature-settings: "cv11";
     --color-base-100: #ffffff;
     --color-base-200: #edf8ea;
     --color-base-300: oklch(95% 0 0);
     --color-base-content: oklch(21% 0.006 285.885);
     --color-primary: #60815f;
     --color-primary-content: oklch(93% 0.034 272.788);
+
+    /* Ink: the green-tinted text colours used across the site */
+    --color-ink: #1b211b;
+    --color-ink-soft: #2c342c;
+    --color-ink-muted: #3b443b;
+
+    /* Motion */
+    --ease-gentle: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Depth */
+    --shadow-sheet: 0 24px 48px -28px rgb(27 33 27 / 0.35);
+    --shadow-panel: 0 30px 60px -30px rgb(27 33 27 / 0.6);
+    --shadow-photo: 0 18px 40px -18px rgb(27 33 27 / 0.4);
     --color-secondary: oklch(65% 0.241 354.308);
     --color-secondary-content: oklch(94% 0.028 342.258);
     --color-accent: oklch(77% 0.152 181.912);
@@ -39,4 +52,22 @@
     --color-warning-content: oklch(41% 0.112 45.904);
     --color-error: oklch(71% 0.194 13.428);
     --color-error-content: oklch(27% 0.105 12.094);
+}
+
+@layer base {
+    html {
+        color: var(--color-ink);
+        accent-color: var(--color-primary);
+        caret-color: var(--color-primary);
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    ::selection {
+        background: rgb(96 129 95 / 0.28);
+        color: var(--color-ink);
+    }
+
+    :target {
+        scroll-margin-top: 24px;
+    }
 }

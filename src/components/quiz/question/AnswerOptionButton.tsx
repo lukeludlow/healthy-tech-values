@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
+import { CheckIcon } from "@heroicons/react/16/solid";
 import { answersAtom } from "@/state/state.ts";
 import { type AnswerOption } from "@/data/questionData.ts";
-import { Button } from "@/components/catalyst-ui-kit/button.tsx";
 
 type Props = {
     option: AnswerOption;
@@ -16,15 +16,20 @@ export default function AnswerOptionButton({ option }: Props) {
     );
 
     return (
-        // @ts-expect-error ignore plain
-        <Button
-            color={isSelected ? "primary" : undefined}
-            outline={!isSelected || undefined}
-            className="rounded-2xl h-auto w-full p-3"
+        <button
+            type="button"
+            aria-pressed={isSelected}
             onClick={handleButtonClick}
+            className="group flex items-start gap-3.5 w-full px-[18px] py-4 rounded-2xl border-[1.5px] border-primary/35 bg-white text-left text-[17px] leading-[1.45] text-ink cursor-pointer transition-colors duration-160 ease-gentle hover:border-primary aria-pressed:border-primary aria-pressed:bg-base-200 aria-pressed:shadow-[inset_0_0_0_1px_var(--color-primary)] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
         >
-            <span className={"px-5 py-2"}>{option.text}</span>
-        </Button>
+            <span
+                aria-hidden="true"
+                className="grid place-items-center shrink-0 size-[22px] mt-px rounded-[7px] border-[1.5px] border-primary bg-white text-transparent transition-colors duration-160 group-aria-pressed:bg-primary group-aria-pressed:text-white"
+            >
+                <CheckIcon className="size-[15px]" />
+            </span>
+            <span>{option.text}</span>
+        </button>
     );
 
     function handleButtonClick() {

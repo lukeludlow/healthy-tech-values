@@ -41,12 +41,12 @@ The method has one premise: you can't use tech intentionally until you know what
 - **Privacy:** right now the quiz is free, needs no signup and stores nothing on a server (localStorage only). This is a **current fact, not a permanent promise**. A future version may add accounts, email capture or booking. Don't claim "never" in copy.
 - **Stack:** React 19, TypeScript, Vite, Tailwind CSS 4, the Catalyst/Headless UI kit, jotai, deployed on Vercel.
 - **Layout:** mobile-first. Check at 390, 768 and 1440px, with no horizontal scroll (per CLAUDE.md).
-- The logo mark and current brand green are **not** committed identity. They may change.
 
 ## Brand Commitments
 
 - **First-person voice is binding.** The site speaks as Jessica: warm, personal, direct, one parent to another ("As a parent, I know what it feels like to be overwhelmed…"). Never institutional or clinical-corporate.
 - The name "Healthy Tech Balance" and the tagline "Take back your relationships, your joy, and your life."
+- **The brand colours are fixed.** Primary green `#60815f`, light green `#edf8ea` and white stay as they are. A new design system can change type, layout, components and imagery, but it keeps these colours.
 
 ## Evidence on Hand
 
