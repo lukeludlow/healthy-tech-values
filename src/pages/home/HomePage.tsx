@@ -3,6 +3,7 @@ import {
     organizationJsonLd,
     websiteJsonLd,
 } from "@/data/organizationJsonLd.ts";
+import HomeBio from "@/pages/home/HomeBio.tsx";
 import HomeHero from "@/pages/home/HomeHero.tsx";
 import HomeSections from "@/pages/home/HomeSections.tsx";
 
@@ -16,6 +17,7 @@ export default function HomePage() {
                 jsonLd={[organizationJsonLd, websiteJsonLd]}
             />
             <HomeHero />
+            <HomeBio />
             <HomeSections />
         </div>
     );
