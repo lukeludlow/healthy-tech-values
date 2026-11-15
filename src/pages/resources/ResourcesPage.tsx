@@ -250,6 +250,11 @@ const articles = [
 
 const books = [
     {
+        title: "iGen",
+        url: "https://www.amazon.com/dp/1501151983",
+        note: "By Jean Twenge. Research-driven look at how smartphones are reshaping the first generation to grow up with them.",
+    },
+    {
         title: "Glow Kids",
         url: "https://a.co/d/9ypyvp7",
         note: "A great starting point for understanding tech's effect on children.",
