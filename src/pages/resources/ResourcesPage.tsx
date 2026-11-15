@@ -3,6 +3,7 @@ import Seo from "@/components/seo/Seo.tsx";
 import ExternalArrow from "@/components/ui/ExternalArrow.tsx";
 import LinkCard from "@/components/ui/LinkCard.tsx";
 import QuizCallout from "@/components/ui/QuizCallout.tsx";
+import SectionJumpMenu from "@/pages/resources/SectionJumpMenu.tsx";
 import {
     onGreenButton,
     pageHeading,
@@ -493,8 +494,8 @@ export default function ResourcesPage() {
             />
             {/* Section 1 — Hero */}
             <section className="bg-base-200 px-6 pt-22 pb-18">
-                <div className="grid gap-10 min-[900px]:grid-cols-[1fr_300px] min-[900px]:gap-16 min-[900px]:items-start max-w-[1040px] mx-auto">
-                    <div>
+                <div className="max-w-[1040px] mx-auto">
+                    <div className="max-w-[720px]">
                         <h1 className={`mb-5 ${pageHeading}`}>Resources</h1>
                         <p className="mb-4 text-[clamp(1.25rem,2.6vw,1.5rem)] font-medium leading-[1.45] text-ink text-pretty">
                             A curated collection of organizations, articles,
@@ -525,31 +526,13 @@ export default function ResourcesPage() {
                             environment for their children.
                         </p>
                     </div>
-                    <nav
-                        aria-label="On this page"
-                        className="self-start px-6 py-[22px] rounded-[20px] bg-white"
-                    >
-                        <p className="mb-2.5 text-sm font-[650] text-ink">
-                            On this page
-                        </p>
-                        <ul className="grid gap-0.5">
-                            {pageSections.map(({ id, title }) => (
-                                <li key={id}>
-                                    <a
-                                        href={`#${id}`}
-                                        className="block -mx-2.5 px-2.5 py-2 rounded-[10px] text-[15px] font-medium leading-[1.4] text-ink transition-colors duration-160 ease-gentle hover:bg-base-200 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
-                                    >
-                                        {title}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
                 </div>
             </section>
 
+            <SectionJumpMenu sections={pageSections} />
+
             {/* Section 2 — Quizzes */}
-            <section id="quizzes" className="bg-white px-6 py-20">
+            <section id="quizzes" className="scroll-mt-16 bg-white px-6 py-20">
                 <div className="max-w-[1040px] mx-auto">
                     <h2 className={`mb-3 ${sectionHeading}`}>
                         Quizzes &amp; Self-Assessments
@@ -608,7 +591,7 @@ export default function ResourcesPage() {
             </section>
 
             {/* Section 3 — Organizations & Websites */}
-            <section id="organizations" className="bg-base-200 px-6 py-20">
+            <section id="organizations" className="scroll-mt-16 bg-base-200 px-6 py-20">
                 <div className="max-w-[1040px] mx-auto">
                     <h2 className={`${sectionHeading}`}>
                         Organizations &amp; Websites
@@ -632,7 +615,7 @@ export default function ResourcesPage() {
             </section>
 
             {/* Section 3 — Articles */}
-            <section id="articles" className="bg-white px-6 py-20">
+            <section id="articles" className="scroll-mt-16 bg-white px-6 py-20">
                 <div className="max-w-[760px] mx-auto">
                     <h2 className={`mb-3 ${sectionHeading}`}>Articles</h2>
                     <p className={sectionIntro}>
@@ -690,7 +673,7 @@ export default function ResourcesPage() {
             </section>
 
             {/* Books */}
-            <section id="books" className="bg-base-200 px-6 py-20">
+            <section id="books" className="scroll-mt-16 bg-base-200 px-6 py-20">
                 <div className="max-w-[1040px] mx-auto">
                     <h2 className={`mb-3 ${sectionHeading}`}>Books</h2>
                     <p className={sectionIntro}>
@@ -715,7 +698,7 @@ export default function ResourcesPage() {
             {/* Podcasts & documentaries */}
             <section
                 id="podcasts-and-documentaries"
-                className="bg-white px-6 py-20"
+                className="scroll-mt-16 bg-white px-6 py-20"
             >
                 <div className="max-w-[1040px] mx-auto">
                     <h2 className={sectionHeading}>
@@ -737,7 +720,7 @@ export default function ResourcesPage() {
             </section>
 
             {/* Social accounts */}
-            <section id="social-accounts" className="bg-base-200 px-6 py-20">
+            <section id="social-accounts" className="scroll-mt-16 bg-base-200 px-6 py-20">
                 <div className="max-w-[1040px] mx-auto">
                     <h2 className={`mb-3 ${sectionHeading}`}>
                         Social Accounts to Follow
@@ -767,7 +750,7 @@ export default function ResourcesPage() {
             </section>
 
             {/* MAP & LIGHT frameworks */}
-            <section id="framework" className="bg-white px-6 py-20">
+            <section id="framework" className="scroll-mt-16 bg-white px-6 py-20">
                 <div className="max-w-[1040px] mx-auto">
                     <h2 className={`mb-3 ${sectionHeading}`}>
                         The Healthy Tech Balance Framework

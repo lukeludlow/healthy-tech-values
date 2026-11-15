@@ -228,7 +228,7 @@ Mobile-first, checked at 390px, 768px and 1440px, with no horizontal scroll. Pag
 
 Sections alternate white and light green down the page, and pages end on the green quiz callout. The quiz and results pages instead set a single white sheet (max 680px, 28px corners) on a light green ground with 12px outer gutters, 24px top space (48px from md) and 96px below.
 
-Grids collapse to one column on mobile. Two-column card and icon-list grids open at md (768px); the step path turns horizontal at md; label-plus-body rows (core values, Resources intro with its jump list) open at 900px; the social grid reaches four columns at lg. Desktop nav links appear at lg (1024px); below that the header shows the hamburger menu.
+Grids collapse to one column on mobile. Two-column card and icon-list grids open at md (768px); the step path turns horizontal at md; label-plus-body rows (core values) open at 900px; the social grid reaches four columns at lg. Desktop nav links appear at lg (1024px); below that the header shows the hamburger menu.
 
 Vertical rhythm inside a section: heading to intro 12px, intro to content 40px to 48px, card gaps 12px, list rows separated by 16px to 32px with hairline green rules.
 
@@ -248,7 +248,7 @@ A hybrid system. Most of the page is flat and layered by tone (white on light gr
 
 ## Shapes
 
-Soft, consistent rounding that grows with the size of the surface: 3px on inline links (so focus outlines curve), 7px on answer checkboxes, 10px on nav and jump-list items, 12px on goal tiles, 16px on answer options, menus and figures, 18px on value rows and social tiles, 20px on cards and the portrait, 28px on sheets, the hero panel and framework cards. Every button, chip, nav link, tag, progress segment and icon badge is a full pill or circle. Borders are 1.5px sage green (often at reduced opacity); dividers are 1px sage green at 20% to 35%.
+Soft, consistent rounding that grows with the size of the surface: 3px on inline links (so focus outlines curve), 7px on answer checkboxes, 10px on nav items, 12px on goal tiles, 16px on answer options, menus and figures, 18px on value rows and social tiles, 20px on cards and the portrait, 28px on sheets, the hero panel and framework cards. Every button, chip, nav link, tag, progress segment and icon badge is a full pill or circle. Borders are 1.5px sage green (often at reduced opacity); dividers are 1px sage green at 20% to 35%.
 
 **The Pill Rule.** Anything you press is a pill. Rectangles are for content.
 
@@ -280,6 +280,7 @@ Calm, chunky and unmistakable.
 - **Header:** White bar, minimum 64px, 1px green rule at 20% below. Logo plus 17px 650 wordmark on the left.
 - **Desktop (lg and up):** 15px medium Muted Ink pill links; hover Leaf Wash and Deep Ink; current page in Deep Ink with a 2px green underline at 9px offset. A green-outlined "Work with Jessica" pill with an external arrow closes the row.
 - **Mobile (below lg):** A 44px outlined circular menu button (Bars3 / XMark) opens a 240px white menu with 16px corners, Sheet shadow, a 20% green ring, and 16px items whose current page is semibold on Leaf Wash. It scales in from 95% over 160ms.
+- **Section Jump Menu (Resources):** Replaces an in-hero table of contents on long pages. A solid white bar, exactly 64px tall with the 1px green rule at 20% below, sits directly under the hero and sticks to the top of the viewport (z-30, under the Contact Tab; hidden in print). It is flat: no shadow, no blur. Inside the 1040px column, a 44px secondary pill names where the reader is: "On this page" in Muted Ink, a 1px green divider at 30%, then the current section in Deep Ink, with a green ChevronDown that turns 180 degrees when open. Below sm the pill shows only the current section ("On this page" stays as screen-reader text); before the first section it reads "On this page". It opens a 320px panel styled like the mobile menu, listing every section; the current one is semibold on Leaf Wash (`aria-current="location"`). Each target section carries a 64px scroll margin so a jump lands flush under the bar.
 
 ### Contact Tab
 A floating pill fixed to the bottom-right corner of every page (16px from the edges, clearing the safe area; 24px from md), above content at z-40 and hidden in print. White fill, 1.5px sage green border, Sheet shadow so it reads over white, Leaf Wash and the green Quiz Callout alike. From sm it shows a green Heroicons envelope and a 15px semibold "Contact" label at 52px tall; below sm it is a 52px icon-only circle so it covers as little as possible. Hover and open fill Leaf Wash; when open the envelope becomes an XMark. It opens a 320px panel styled like the mobile menu (16px corners, Sheet shadow, 20% green ring, scale-in from 95% over 160ms) holding a first-person line, the email as a text link (mailto) and a secondary "Copy email" pill that turns to "Copied" with a check for two seconds.
