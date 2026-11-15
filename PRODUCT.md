@@ -54,7 +54,7 @@ The method has one premise: you can't use tech intentionally until you know what
 - Has been a fierce advocate for better-quality mental health access for nearly three decades.
 - Studied Psychology and Nursing at UNR and BYU.
 - Has worked in the medical, educational and tech fields around the world.
-- Is raising four neurodivergent children with her husband of 31 years.
+- Is raising four neurodivergent children with her husband of over 30 years.
 - Specializes in Screen Addiction Treatment and Prevention.
 - Was recently featured in *Women to Know in Utah*.
 - Is currently director of Accepted Therapy, helping people heal from traumas and addictions.

@@ -10,14 +10,24 @@ export default function HomeBio() {
             className="bg-base-200 px-6 py-18"
         >
             <div className="max-w-[1040px] mx-auto flex flex-col items-center gap-10 md:flex-row md:gap-14">
-                <img
-                    src="/images/Jessica.webp"
-                    alt="Jessica Ludlow"
-                    width={399}
-                    height={533}
-                    loading="lazy"
-                    className="w-[min(72vw,288px)] h-auto aspect-[3/4] object-cover rounded-[20px] shadow-photo md:shrink-0"
-                />
+                <picture className="contents">
+                    <source
+                        type="image/avif"
+                        srcSet="/images/jessica-576.avif 576w, /images/jessica-864.avif 864w"
+                        sizes="min(72vw, 288px)"
+                    />
+                    <img
+                        src="/images/jessica-576.jpg"
+                        srcSet="/images/jessica-576.jpg 576w, /images/jessica-864.jpg 864w"
+                        sizes="min(72vw, 288px)"
+                        alt="Jessica Ludlow"
+                        width={576}
+                        height={768}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-[min(72vw,288px)] h-auto aspect-[3/4] object-cover rounded-[20px] shadow-photo md:shrink-0"
+                    />
+                </picture>
                 <div className="max-w-[62ch]">
                     <h2 id="meet-jessica" className={`mb-3 ${sectionHeading}`}>
                         Hi, I'm Jessica Ludlow
@@ -32,8 +42,8 @@ export default function HomeBio() {
                         </span>
                     </p>
                     <p className="mb-5 text-[22px] font-medium leading-[1.45] text-ink text-pretty">
-                        My husband of 31 years and I are raising four beautiful,
-                        neurodivergent children.
+                        My husband of over 30 years and I are raising four
+                        beautiful, neurodivergent children.
                     </p>
                     <p className={bodyText}>
                         For nearly three decades, I've been a fierce advocate
