@@ -144,6 +144,15 @@ components:
     textColor: "{colors.primary}"
     rounded: "{rounded.pill}"
     size: "52px"
+  contact-tab:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.ink}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "0 20px"
+    height: "52px"
+  contact-tab-hover:
+    backgroundColor: "{colors.light-green}"
 ---
 
 # Design System: Healthy Tech Balance
@@ -235,7 +244,7 @@ A hybrid system. Most of the page is flat and layered by tone (white on light gr
 
 ### Named Rules
 
-**The Held-Surface Rule.** Only sheets, panels, menus and photos cast shadows. Cards, rows and buttons stay flat; state is shown with fill and ring, not elevation.
+**The Held-Surface Rule.** Only sheets, panels, menus, photos and the floating Contact Tab cast shadows. Cards, rows and buttons stay flat; state is shown with fill and ring, not elevation.
 
 ## Shapes
 
@@ -271,6 +280,9 @@ Calm, chunky and unmistakable.
 - **Header:** White bar, minimum 64px, 1px green rule at 20% below. Logo plus 17px 650 wordmark on the left.
 - **Desktop (lg and up):** 15px medium Muted Ink pill links; hover Leaf Wash and Deep Ink; current page in Deep Ink with a 2px green underline at 9px offset. A green-outlined "Work with Jessica" pill with an external arrow closes the row.
 - **Mobile (below lg):** A 44px outlined circular menu button (Bars3 / XMark) opens a 240px white menu with 16px corners, Sheet shadow, a 20% green ring, and 16px items whose current page is semibold on Leaf Wash. It scales in from 95% over 160ms.
+
+### Contact Tab
+A floating pill fixed to the bottom-right corner of every page (16px from the edges, clearing the safe area; 24px from md), above content at z-40 and hidden in print. White fill, 1.5px sage green border, Sheet shadow so it reads over white, Leaf Wash and the green Quiz Callout alike. From sm it shows a green Heroicons envelope and a 15px semibold "Contact" label at 52px tall; below sm it is a 52px icon-only circle so it covers as little as possible. Hover and open fill Leaf Wash; when open the envelope becomes an XMark. It opens a 320px panel styled like the mobile menu (16px corners, Sheet shadow, 20% green ring, scale-in from 95% over 160ms) holding a first-person line, the email as a text link (mailto) and a secondary "Copy email" pill that turns to "Copied" with a check for two seconds.
 
 ### Step Path
 Numbered 48px white circles with a 2px green border and 20px bold tabular figures, joined by a 2px green line at 45%: vertical on mobile, horizontal from md. Each step has a 21px 650 title and 17px body.

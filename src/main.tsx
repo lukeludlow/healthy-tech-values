@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import HomePage from "@/pages/home/HomePage.tsx";
 import { PrimeReactProvider } from "primereact/api";
 import TopNavBar from "@/components/navbar/TopNavBar.tsx";
+import ContactTab from "@/components/contact/ContactTab.tsx";
 import QuizPage from "@/pages/quiz/QuizPage.tsx";
 import LearnPage from "@/pages/learn/LearnPage.tsx";
 import ResultsPage from "@/pages/results/ResultsPage.tsx";
@@ -27,9 +28,7 @@ createRoot(document.getElementById("root")!).render(
         <PrimeReactProvider value={{ ripple: true }}>
             <div className={"bg-E5F0FF"}>
                 <BrowserRouter>
-                    <div
-                        className={"flex flex-col min-h-screen w-full"}
-                    >
+                    <div className={"flex flex-col min-h-screen w-full"}>
                         <div className="print:hidden">
                             <TopNavBar />
                         </div>
@@ -52,6 +51,7 @@ createRoot(document.getElementById("root")!).render(
                             </Routes>
                         </div>
                     </div>
+                    <ContactTab />
                     <Analytics />
                 </BrowserRouter>
             </div>
