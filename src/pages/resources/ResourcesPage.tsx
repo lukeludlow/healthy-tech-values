@@ -247,6 +247,23 @@ const articles = [
         source: "Sleep Foundation",
         url: "https://www.sleepfoundation.org/teens-and-sleep/screen-time-and-insomnia-for-teens",
     },
+    {
+        title: "15 Prompts for Balancing Tech Use at Home and in Our Lives",
+        source: "Liahona — Alyssa Bradford, Mar. 2024",
+        url: "https://www.churchofjesuschrist.org/study/liahona/2024/03/digital-only/15-prompts-for-balancing-tech-use-at-home-and-in-our-lives?lang=eng",
+    },
+    {
+        title: "Technology Tips",
+        source: "Friend — Noelle Barrus, Mar. 2022",
+        url: "https://www.churchofjesuschrist.org/study/friend/2022/03/technology-tips?lang=eng",
+    },
+    {
+        title: "Purpose — Taking Charge of Technology",
+        source: "The Church of Jesus Christ of Latter-day Saints — Youth manual",
+        url: "https://www.churchofjesuschrist.org/study/manual/taking-charge-of-technology/02-purpose?lang=eng",
+        videoUrl:
+            "https://players.brightcove.net/1241706627001/bi4qWa4xw_default/index.html?videoId=6328562466112",
+    },
 ];
 
 const books = [
@@ -666,6 +683,18 @@ export default function ResourcesPage() {
                                 <span className="text-[15px] leading-[1.4] text-ink-muted">
                                     {article.source}
                                 </span>
+                                {article.videoUrl && (
+                                    <div className="mt-3 w-full overflow-hidden rounded-xl bg-base-200 shadow-photo aspect-video">
+                                        <iframe
+                                            src={article.videoUrl}
+                                            title={`Video: ${article.title}`}
+                                            loading="lazy"
+                                            allow="encrypted-media; fullscreen; picture-in-picture"
+                                            allowFullScreen
+                                            className="size-full border-0"
+                                        />
+                                    </div>
+                                )}
                             </li>
                         ))}
                     </ul>
