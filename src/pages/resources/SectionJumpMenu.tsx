@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
-import { pillLink } from "@/components/ui/styles.ts";
+import { focusRing } from "@/components/ui/styles.ts";
 
 export type PageSection = { id: string; title: string };
 
@@ -59,8 +59,9 @@ const itemClass =
     "flex items-center px-3.5 py-2.5 rounded-xl text-base font-medium text-ink data-focus:bg-base-200 aria-[current=location]:font-semibold aria-[current=location]:bg-base-200";
 
 /**
- * Sticky "On this page" bar: a pill that names the current section and opens
- * a menu of every section, so readers can jump from anywhere on a long page.
+ * Sticky "On this page" bar: the current section's name leads and opens a
+ * menu of every section, with quiz-style progress segments showing how far
+ * down the page the reader is.
  */
 export default function SectionJumpMenu({
     sections,
@@ -69,36 +70,22 @@ export default function SectionJumpMenu({
 }) {
     const [ids] = useState(() => sections.map((s) => s.id));
     const activeId = useActiveSection(ids);
-    const active = sections.find((s) => s.id === activeId);
+    const activeIndex = sections.findIndex((s) => s.id === activeId);
+    const active = sections[activeIndex];
 
     return (
         <nav
             aria-label="On this page"
             className="sticky top-0 z-30 flex items-center h-16 px-6 bg-white border-b border-primary/20 print:hidden"
         >
-            <div className="w-full max-w-[1040px] mx-auto">
+            <div className="w-full max-w-[1040px] mx-auto flex items-center gap-4">
                 <Menu>
                     <MenuButton
-                        className={`group min-h-11 max-w-full data-open:bg-base-200 ${pillLink}`}
+                        className={`group min-w-0 -ml-3 inline-flex items-center gap-2 min-h-11 px-3 rounded-full text-left cursor-pointer transition-colors duration-160 ease-gentle hover:bg-base-200 data-open:bg-base-200 ${focusRing}`}
                     >
-                        <span
-                            className={
-                                active
-                                    ? "sr-only sm:not-sr-only font-medium text-ink-muted"
-                                    : undefined
-                            }
-                        >
-                            On this page
+                        <span className="min-w-0 truncate text-[17px] font-[650] tracking-[-0.01em] text-ink">
+                            {active ? active.title : "On this page"}
                         </span>
-                        {active && (
-                            <>
-                                <span
-                                    aria-hidden="true"
-                                    className="hidden sm:block self-stretch w-px my-0.5 mx-1 bg-primary/30"
-                                />
-                                <span className="min-w-0 truncate">{active.title}</span>
-                            </>
-                        )}
                         <ChevronDownIcon
                             aria-hidden="true"
                             className="shrink-0 size-4 text-primary transition-transform duration-160 ease-gentle group-data-open:rotate-180 motion-reduce:transition-none"
@@ -124,6 +111,28 @@ export default function SectionJumpMenu({
                         ))}
                     </MenuItems>
                 </Menu>
+                <div className="ml-auto flex shrink-0 items-center gap-3">
+                    <span className="hidden sm:inline text-[15px] font-semibold text-ink-muted tabular-nums">
+                        {active ? (
+                            <>
+                                {activeIndex + 1} of {sections.length}
+                                <span className="sr-only"> sections</span>
+                            </>
+                        ) : (
+                            `${sections.length} sections`
+                        )}
+                    </span>
+                    <ol aria-hidden="true" className="flex items-center gap-1">
+                        {sections.map(({ id }, i) => (
+                            <li
+                                key={id}
+                                className={`h-1.5 w-3 sm:w-6 rounded-full transition-colors duration-200 ease-gentle ${
+                                    i <= activeIndex ? "bg-primary" : "bg-primary/18"
+                                } ${i === activeIndex ? "outline-[1.5px] outline-solid outline-ink outline-offset-1" : ""}`}
+                            />
+                        ))}
+                    </ol>
+                </div>
             </div>
         </nav>
     );
