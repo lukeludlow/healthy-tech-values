@@ -122,9 +122,18 @@ export default function HomeSections() {
                             to="/learn#screen-time-guidelines"
                             className={textLink}
                         >
-                            Printable download
+                            Free printable download
                         </Link>
                     </figcaption>
+                    <p className="mt-5 text-[15px] text-ink-muted">
+                        Ready to put it into practice?{" "}
+                        <Link
+                            to="/learn#healthy-tech-plan"
+                            className={textLink}
+                        >
+                            Get the free healthy tech plan template
+                        </Link>
+                    </p>
                 </figure>
                 <div className="grid justify-items-start gap-4 max-w-[680px] mx-auto mt-14 p-7 rounded-[20px] bg-base-200">
                     <h3 className="text-[22px] font-[650] tracking-[-0.015em] text-ink">

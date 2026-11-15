@@ -126,6 +126,71 @@ const mentalHealthOrgs = [
     },
 ];
 
+type FeaturedDownload = {
+    title: string;
+    description: string;
+    to: string;
+    image: { src: string; alt: string; width: number; height: number };
+};
+
+const featuredDownloads: FeaturedDownload[] = [
+    {
+        title: "Screen Time Guidelines (WHO, CDC, APA)",
+        description:
+            "Quick-reference chart of age-appropriate daily screen time recommendations — free to print and download.",
+        to: "/learn#screen-time-guidelines",
+        image: {
+            src: "/images/Screen Time Guidelines.png",
+            alt: "Screen Time Guidelines chart",
+            width: 1056,
+            height: 816,
+        },
+    },
+    {
+        title: "Our Healthy Tech Plan (Free Template)",
+        description:
+            "A values-first, fill-in-the-blank workbook for individuals, couples, or families — with a one-page Fridge Plan to post at home.",
+        to: "/learn#healthy-tech-plan",
+        image: {
+            src: "/images/healthy-tech-plan-cover.jpg",
+            alt: "Cover page of the Our Healthy Tech Plan template",
+            width: 800,
+            height: 1035,
+        },
+    },
+];
+
+function FeaturedDownloadCard({
+    title,
+    description,
+    to,
+    image,
+}: FeaturedDownload) {
+    return (
+        <div className="grid items-center gap-[18px] sm:grid-cols-[200px_1fr] p-5 sm:p-6 rounded-[20px] bg-base-200">
+            <img
+                {...image}
+                loading="lazy"
+                className={`w-full h-auto rounded-xl shadow-photo ${image.height > image.width ? "max-w-[150px]" : "max-w-[220px]"}`}
+            />
+            <div>
+                <h3 className="mb-1.5 text-xl font-bold tracking-[-0.015em] text-ink">
+                    {title}
+                </h3>
+                <p className="mb-3 text-base leading-[1.55] text-ink-muted">
+                    {description}
+                </p>
+                <Link
+                    to={to}
+                    className="rounded-[3px] text-[15px] font-semibold text-ink underline decoration-primary decoration-[1.5px] underline-offset-4 hover:decoration-[2.5px] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
+                >
+                    View, free download &amp; print
+                </Link>
+            </div>
+        </div>
+    );
+}
+
 const articles = [
     {
         title: "10 Ways to Protect the Brain from Daily Screen Time",
@@ -639,31 +704,10 @@ export default function ResourcesPage() {
                         Research and perspectives from leading health,
                         education, and science publications.
                     </p>
-                    <div className="grid items-center gap-[18px] sm:grid-cols-[200px_1fr] mt-8 p-5 sm:p-6 rounded-[20px] bg-base-200">
-                        <img
-                            src="/images/Screen Time Guidelines.png"
-                            alt="Screen Time Guidelines chart"
-                            width={1056}
-                            height={816}
-                            loading="lazy"
-                            className="w-full max-w-[220px] h-auto rounded-xl shadow-photo"
-                        />
-                        <div>
-                            <h3 className="mb-1.5 text-xl font-bold tracking-[-0.015em] text-ink">
-                                Screen Time Guidelines (WHO, CDC, APA)
-                            </h3>
-                            <p className="mb-3 text-base leading-[1.55] text-ink-muted">
-                                Quick-reference chart of age-appropriate daily
-                                screen time recommendations — printable and
-                                downloadable.
-                            </p>
-                            <Link
-                                to="/learn#screen-time-guidelines"
-                                className="rounded-[3px] text-[15px] font-semibold text-ink underline decoration-primary decoration-[1.5px] underline-offset-4 hover:decoration-[2.5px] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
-                            >
-                                View, download &amp; print
-                            </Link>
-                        </div>
+                    <div className="grid gap-3 mt-8">
+                        {featuredDownloads.map((item) => (
+                            <FeaturedDownloadCard key={item.to} {...item} />
+                        ))}
                     </div>
                     <ul className="mt-9">
                         {articles.map((article) => (

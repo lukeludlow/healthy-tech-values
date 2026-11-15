@@ -20,9 +20,7 @@ test("shows 'Continue the Core Values Quiz' when a quiz is already in progress",
     });
 
     await expect
-        .element(
-            getByRole("button", { name: "Continue the Core Values Quiz" }),
-        )
+        .element(getByRole("button", { name: "Continue the Core Values Quiz" }))
         .toBeInTheDocument();
 });
 
@@ -40,4 +38,27 @@ test("clicking the quiz CTA navigates to /quiz", async () => {
 
     await getByRole("button", { name: "Take the Core Values Quiz" }).click();
     await expect.element(getByText("Quiz stand-in")).toBeInTheDocument();
+});
+
+test("offers the healthy tech plan template as a free download and print", async () => {
+    const { getByRole } = await renderWithProviders(<LearnPage />, {
+        initialAtomValues: [[isQuizInProgressAtom, false]],
+    });
+
+    const pdf = "/images/Our%20Healthy%20Tech%20Plan%20Template.pdf";
+    const section = getByRole("region", { name: "Our Healthy Tech Plan" });
+
+    const download = section.getByRole("link", { name: "Free Download" });
+    await expect
+        .element(download)
+        .toHaveAttribute("download", "Our Healthy Tech Plan.pdf");
+    expect((download.element() as HTMLAnchorElement).href).toMatch(
+        new RegExp(`${pdf}$`),
+    );
+
+    const print = section.getByRole("link", { name: "Print" });
+    await expect.element(print).toHaveAttribute("target", "_blank");
+    expect((print.element() as HTMLAnchorElement).href).toMatch(
+        new RegExp(`${pdf}$`),
+    );
 });

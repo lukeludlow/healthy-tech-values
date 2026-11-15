@@ -166,6 +166,16 @@ const steps: Step[] = [
     },
 ];
 
+const techPlanPdf = "/images/Our Healthy Tech Plan Template.pdf";
+
+const techPlanContents = [
+    "Your top values and what they look like at home",
+    "A weekly plan built around sleep, meals, movement, and connection",
+    "Screen time limits, tech-free zones, and content choices",
+    "Safety guidelines and agreements everyone signs",
+    "A one-page Fridge Plan to post where everyone sees it",
+];
+
 export default function LearnPage() {
     const { hash } = useLocation();
     useEffect(() => {
@@ -201,7 +211,7 @@ export default function LearnPage() {
         <div className="w-full">
             <Seo
                 title="What Are Core Values? A Guide to Tech Balance | HTB"
-                description="Learn what core values are, why they matter, explore the 10 core values, and see age-based screen time guidelines from the WHO, CDC, and APA."
+                description="Learn what core values are, why they matter, explore the 10 core values, see age-based screen time guidelines from the WHO, CDC, and APA, and download a free healthy tech plan template."
                 path="/learn"
             />
             {/* Section 1 — Hero */}
@@ -395,7 +405,7 @@ export default function LearnPage() {
                                 aria-hidden="true"
                                 className="size-4 text-primary"
                             />
-                            Download
+                            Free Download
                         </a>
                         <button
                             type="button"
@@ -412,8 +422,80 @@ export default function LearnPage() {
                 </div>
             </section>
 
+            {/* Healthy tech plan template */}
+            <section
+                id="healthy-tech-plan"
+                aria-labelledby="healthy-tech-plan-heading"
+                className="bg-white px-6 py-20"
+            >
+                <div className="max-w-[880px] mx-auto">
+                    <h2
+                        id="healthy-tech-plan-heading"
+                        className={`mb-3 ${sectionHeading}`}
+                    >
+                        Our Healthy Tech Plan
+                    </h2>
+                    <p className={`mb-10 ${sectionIntro}`}>
+                        A free, values-first template for you, your partner, or
+                        your whole family. Ten guided steps help you decide how
+                        technology will serve your physical, mental, and
+                        spiritual health at home.
+                    </p>
+                    <div className="grid items-start gap-8 md:grid-cols-[280px_1fr] md:gap-12">
+                        <img
+                            src="/images/healthy-tech-plan-cover.jpg"
+                            alt="Cover page of the Our Healthy Tech Plan template"
+                            width={800}
+                            height={1035}
+                            loading="lazy"
+                            className="block w-full max-w-[280px] h-auto rounded-2xl border border-primary/15 shadow-photo"
+                        />
+                        <div>
+                            <h3 className="mb-3 text-[21px] font-[650] tracking-[-0.015em] text-ink">
+                                What's inside
+                            </h3>
+                            <ul className="grid gap-2.5 mb-8 pl-5 list-disc marker:text-primary">
+                                {techPlanContents.map((item) => (
+                                    <li key={item} className={bodyText}>
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+                            <div className="flex flex-wrap items-center gap-2.5">
+                                <a
+                                    href={techPlanPdf}
+                                    download="Our Healthy Tech Plan.pdf"
+                                    className={pillLink}
+                                >
+                                    <ArrowDownTrayIcon
+                                        aria-hidden="true"
+                                        className="size-4 text-primary"
+                                    />
+                                    Free Download
+                                </a>
+                                <a
+                                    href={techPlanPdf}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={pillLink}
+                                >
+                                    <PrinterIcon
+                                        aria-hidden="true"
+                                        className="size-4 text-primary"
+                                    />
+                                    Print
+                                </a>
+                                <span className="text-sm text-ink-muted">
+                                    PDF · 10 pages
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* How to start */}
-            <section id="how-to-start" className="bg-white px-6 py-20">
+            <section id="how-to-start" className="bg-base-200 px-6 py-20">
                 <div className="max-w-[1040px] mx-auto">
                     <h2 className={`mb-3 ${sectionHeading}`}>How to Start</h2>
                     <p className={`mb-12 ${sectionIntro}`}>
